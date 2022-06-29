@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Hoth",
+        "industryPointsMultiplier": 2, 
+        "sciencePointsMultiplier": 1,
+        "size": 3,
+        "xCord": 10,
+        "yCord": 10, 
+        "owner": 1
+    },
+    {
+        "name": "Naboo",
+        "industryPointsMultiplier": 2, 
+        "sciencePointsMultiplier": 3,
+        "size": 2,
+        "xCord": -10,
+        "yCord": 20, 
+        "owner": 2
+    },
+    {
+        "name": "Tatooine",
+        "industryPointsMultiplier": 3, 
+        "sciencePointsMultiplier": 1,
+        "size": 1,
+        "xCord": 40,
+        "yCord": 32, 
+        "owner": 3
+    },
+    {
+        "name": "Mustafar",
+        "industryPointsMultiplier": 3, 
+        "sciencePointsMultiplier": 1,
+        "size": 2,
+        "xCord": 30,
+        "yCord": -39, 
+        "owner": 1
+    }
+]
