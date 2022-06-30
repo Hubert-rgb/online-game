@@ -1,0 +1,24 @@
+package HubertRoszyk.company;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ConfigOperator {
+    public static int galaxyNum;
+    public static String websiteLink;
+    public static int planetsNum,
+            randomVariablesSum,
+            planetsSizes,
+            period;
+    public ConfigOperator() throws IOException {
+        BufferedReader configReader = new BufferedReader(new FileReader("config.cfg"));
+        websiteLink = configReader.readLine().split("=")[1];
+        planetsNum = Integer.parseInt(configReader.readLine().split("=")[1]);
+        randomVariablesSum = Integer.parseInt(configReader.readLine().split("=")[1]);
+        planetsSizes = Integer.parseInt(configReader.readLine().split("=")[1]);
+        period = Integer.parseInt(configReader.readLine().split("=")[1]);
+        //System.out.println(websiteLink);
+    }
+}

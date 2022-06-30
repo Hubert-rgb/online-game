@@ -12,7 +12,9 @@ public class ListManager {
         }
         return instance;
     }
-    public List<Planet> planets = new ArrayList<>();
+    public List<List<Planet>> galaxies = new ArrayList<>();
     public List<User> users = new ArrayList<>();
+    public List<Planet> planets = new ArrayList<>();
     HashMap<Integer, List<Integer>> usersPlanetsHashMap = new HashMap<>();
+    HashMap<Integer, Integer> userGalaxy = new HashMap<>();
 }

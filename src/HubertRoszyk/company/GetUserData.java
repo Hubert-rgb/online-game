@@ -13,7 +13,7 @@ public class GetUserData {
         return new User(1, "n", 0, 0);
     }
     public User creatingNewUser() throws IOException {
-        URL url = new URL("Link");
+        URL url = new URL(ConfigOperator.websiteLink);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
@@ -33,6 +33,7 @@ public class GetUserData {
         }
         userData.split(";");
 
+        //JSON operation
         String name = "n";
         String password = "p";
         return new User(listManager.users.size() + 1, name, 0, 0);

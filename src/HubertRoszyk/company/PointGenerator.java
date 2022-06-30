@@ -26,6 +26,6 @@ public class PointGenerator {
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 0, 30000);
+        timer.schedule(task, 0, ConfigOperator.period);
     }
 }
