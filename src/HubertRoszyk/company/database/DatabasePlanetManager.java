@@ -1,6 +1,7 @@
 package HubertRoszyk.company.database;
 
 import HubertRoszyk.company.Planet;
+import HubertRoszyk.company.PlanetLocation;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ public class DatabasePlanetManager {
         Statement statement = connection.createStatement();
 
         String SQLInertionStatement = "INSERT INTO planets VALUES ( \"" + planet.id + "\", \"" + planet.industryPointsMultiplier + "\", \"" + planet.sciencePointsMultiplier + "\", \""
-                + planet.size + "\", \"" + planet.xLocation + "\", \"" + planet.yLocation + "\", \"" + planet.industryPointsProduce + "\", \"" + planet.sciencePointsProduce + "\", \"" + planet.galaxyNum + "\")";
+                + planet.size + "\", \"" + planet.planetLocation.xPosition + "\", \"" + planet.planetLocation.yPosition + "\", \"" + planet.industryPointsProduce + "\", \"" + planet.sciencePointsProduce + "\", \"" + planet.galaxyNum + "\")";
         statement.executeUpdate(SQLInertionStatement);
     }
     public static List<Planet> getPlanetsFromDatabase() throws SQLException {
@@ -55,7 +56,9 @@ public class DatabasePlanetManager {
             sciencePointsProduce = planetsResultSet.getInt("sciencePointsProduce");
             galaxyNum = planetsResultSet.getInt("galaxyNum");
 
-            Planet planet = new Planet(id, industryPointsMultiplier, sciencePointsMultiplier, planetSize, xLocation, yLocation, industryPointsProduce, sciencePointsProduce, galaxyNum);
+            PlanetLocation planetLocation = new PlanetLocation(xLocation, yLocation);
+
+            Planet planet = new Planet(id, industryPointsMultiplier, sciencePointsMultiplier, planetSize, planetLocation, industryPointsProduce, sciencePointsProduce, galaxyNum);
 
             planets.add(planet);
         }

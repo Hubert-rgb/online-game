@@ -20,6 +20,7 @@ public class Main {
         listManager.planets = planetsFromDatabase;
 
         new GalaxyInit(ConfigOperator.planetsNum, ConfigOperator.randomVariablesSum);
+
         for (Planet planet :listManager.galaxies.get(listManager.galaxies.size() - 1)) {
             DatabasePlanetManager.addPlanetToDatabase(planet);
         }
@@ -31,6 +32,9 @@ public class Main {
         listManager.usersPlanetsHashMap.put(1, list);
         listManager.userGalaxy.put(1, 1);
         user1.getTotalIndustryIncome();
+
+        //GetUserData.creatingNewUser();
+        System.out.println(galaxies.get(galaxies.size() - 1).get(3).planetLocation.xPosition);
         PointGenerator.generatePoints();
 
     }

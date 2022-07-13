@@ -1,4 +1,4 @@
 package HubertRoszyk.company;
 
-public class BuildingsManager {
+public class BuildingsManager { //dodaje, updatuje i usuwa budynki
 }
