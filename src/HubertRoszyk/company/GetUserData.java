@@ -1,19 +1,12 @@
 package HubertRoszyk.company;
 
-import net.maritimecloud.internal.core.javax.json.Json;
-import net.maritimecloud.internal.core.javax.json.JsonObject;
-import net.maritimecloud.internal.core.javax.json.JsonReader;
-import net.maritimecloud.internal.core.javax.json.JsonReaderFactory;
-import org.json.simple.JSONObject;
+import HubertRoszyk.company.ClassToInstance.User;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.http.HttpResponse;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class GetUserData {
@@ -22,7 +15,7 @@ public class GetUserData {
         return new User(1, "n", 0, 0);
     }
     public static User creatingNewUser() throws IOException {
-        URL url = new URL("https://late-waterfall-81813.pktriot.net/Game/User.json");
+        URL url = new URL("https://late-waterfall-81813.pktriot.net/Game/User.json"); //wysyła json, więc nie może to byc główna strona, ten co wysyła robi requesta
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
 

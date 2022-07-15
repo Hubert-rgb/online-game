@@ -1,4 +1,6 @@
-package HubertRoszyk.company;
+package HubertRoszyk.company.ClassToInstance;
+
+import java.util.List;
 
 public class Planet {
     public Planet(int id, int industryPointsMultiplier, int sciencePointsMultiplier, int size, PlanetLocation planetLocation, int industryPointsProduce, int sciencePointsProduce, int galaxyNum){
@@ -19,5 +21,5 @@ public class Planet {
     public int industryPointsProduce = 1,
             sciencePointsProduce = 1;
     public PlanetLocation planetLocation;
-
+    public List<Integer> buildingList;
 }

@@ -1,5 +1,8 @@
 package HubertRoszyk.company;
 
+import HubertRoszyk.company.ClassToInstance.Planet;
+import HubertRoszyk.company.ClassToInstance.PlanetLocation;
+
 import java.util.ArrayList;
 import java.util.List;
 

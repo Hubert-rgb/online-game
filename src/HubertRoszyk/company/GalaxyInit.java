@@ -1,5 +1,8 @@
 package HubertRoszyk.company;
 
+import HubertRoszyk.company.ClassToInstance.Planet;
+import HubertRoszyk.company.ClassToInstance.PlanetLocation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +38,10 @@ public class GalaxyInit {
         }
         List<Planet> validatedPlanets = PlanetDataValidator.validatePlanetPositionInGalaxy(planets);
         listManager.galaxies.add(validatedPlanets);
+
+        for (Planet planet : validatedPlanets) {
+            listManager.planets.add(planet);
+        }
     }
 }
 

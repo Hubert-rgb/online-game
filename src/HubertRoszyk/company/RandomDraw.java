@@ -1,5 +1,7 @@
 package HubertRoszyk.company;
 
+import HubertRoszyk.company.ClassToInstance.PlanetLocation;
+
 import java.util.Random;
 
 public class RandomDraw {

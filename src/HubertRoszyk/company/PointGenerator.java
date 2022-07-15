@@ -1,5 +1,7 @@
 package HubertRoszyk.company;
 
+import HubertRoszyk.company.ClassToInstance.User;
+
 import java.util.Timer;
 import java.util.TimerTask;
 

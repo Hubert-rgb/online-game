@@ -1,4 +1,7 @@
-package HubertRoszyk.company;
+package HubertRoszyk.company.ClassToInstance;
+
+import HubertRoszyk.company.ClassToInstance.Planet;
+import HubertRoszyk.company.ListManager;
 
 import java.util.List;
 

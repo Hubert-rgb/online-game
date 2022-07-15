@@ -1,6 +1,6 @@
-package HubertRoszyk.company;
+package HubertRoszyk.company.ClassToInstance;
 
-public class PlanetLocation {
+final public class PlanetLocation {
     public int xPosition,
     yPosition;
     public PlanetLocation(int xPosition, int yPosition) {

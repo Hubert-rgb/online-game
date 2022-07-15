@@ -1,9 +1,10 @@
 package HubertRoszyk.company;
 
+import HubertRoszyk.company.ClassToInstance.Planet;
+import HubertRoszyk.company.ClassToInstance.User;
 import HubertRoszyk.company.database.DatabasePlanetManager;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +12,12 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws SQLException, IOException {
+        DatabasePlanetManager.removePlanetData();
         ConfigOperator configOperator = new ConfigOperator();
         ListManager listManager = ListManager.getInstance();
 
         List<Planet> planetsFromDatabase = DatabasePlanetManager.getPlanetsFromDatabase();
+
         List<List<Planet>> galaxies = SortPlanetsToGalaxies.sortPlanetsToGalaxies(planetsFromDatabase);
         listManager.galaxies = galaxies;
         listManager.planets = planetsFromDatabase;
@@ -32,9 +35,8 @@ public class Main {
         listManager.usersPlanetsHashMap.put(1, list);
         listManager.userGalaxy.put(1, 1);
         user1.getTotalIndustryIncome();
-
         //GetUserData.creatingNewUser();
-        System.out.println(galaxies.get(galaxies.size() - 1).get(3).planetLocation.xPosition);
+
         PointGenerator.generatePoints();
 
     }

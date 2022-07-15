@@ -1,7 +1,7 @@
 package HubertRoszyk.company.database;
 
-import HubertRoszyk.company.Planet;
-import HubertRoszyk.company.PlanetLocation;
+import HubertRoszyk.company.ClassToInstance.Planet;
+import HubertRoszyk.company.ClassToInstance.PlanetLocation;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,7 +16,8 @@ public class DatabasePlanetManager {
         Statement statement = connection.createStatement();
 
         String SQLInertionStatement = "INSERT INTO planets VALUES ( \"" + planet.id + "\", \"" + planet.industryPointsMultiplier + "\", \"" + planet.sciencePointsMultiplier + "\", \""
-                + planet.size + "\", \"" + planet.planetLocation.xPosition + "\", \"" + planet.planetLocation.yPosition + "\", \"" + planet.industryPointsProduce + "\", \"" + planet.sciencePointsProduce + "\", \"" + planet.galaxyNum + "\")";
+                + planet.size + "\", \"" + planet.planetLocation.xPosition + "\", \"" + planet.planetLocation.yPosition + "\", \"" + planet.industryPointsProduce + "\", \"" +
+                planet.sciencePointsProduce + "\", \"" + planet.galaxyNum + "\")";
         statement.executeUpdate(SQLInertionStatement);
     }
     public static List<Planet> getPlanetsFromDatabase() throws SQLException {
@@ -63,5 +64,22 @@ public class DatabasePlanetManager {
             planets.add(planet);
         }
         return planets;
+    }
+    public static void updatePlanetInDatabase(Planet planet) throws SQLException {
+        Connection connection = DatabaseConnection.connect();
+        Statement statement = connection.createStatement();
+
+        String SQLInertionStatement = "UPDATE planets SET idPlanet =" + planet.id + ", industryPointsMultiplier =" + planet.industryPointsMultiplier + ", sciencePointsMultiplier = " + planet.sciencePointsMultiplier +
+                ", size = " + planet.size + ", xLocation =" + planet.planetLocation.xPosition + ", yLocation" + planet.planetLocation.yPosition + ", industryPointsProduce = " + planet.industryPointsProduce +
+                ", sciencePointsProduce = " + planet.sciencePointsProduce + ", galaxyNum = " + planet.galaxyNum + "WHERE idPlanet = " + planet.id; //tu chyba trzeba toString zrobić
+        System.out.println(SQLInertionStatement);
+        statement.executeUpdate(SQLInertionStatement);
+    }
+    public static void removePlanetData() throws SQLException {
+        Connection connection = DatabaseConnection.connect();
+        Statement statement = connection.createStatement();
+
+        String SQLInertionStatement = "DELETE FROM planets";
+        statement.executeUpdate(SQLInertionStatement);
     }
 }
