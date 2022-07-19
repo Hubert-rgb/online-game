@@ -4,7 +4,6 @@ import HubertRoszyk.company.ClassToInstance.Building;
 import HubertRoszyk.company.ClassToInstance.BuildingsType;
 import HubertRoszyk.company.ClassToInstance.Planet;
 
-
 import java.sql.SQLException;
 
 public class BuildingsManager { //dodaje, updatuje i usuwa budynki
@@ -16,7 +15,9 @@ public class BuildingsManager { //dodaje, updatuje i usuwa budynki
         planet.buildingList.add(building.id);
         listManager.buildings.add(building);
 
-        listManager.users.get(userId - 1).industryPoints -= building.buildingPrice;
+        listManager.users.get(userId - 1).setIndustryPoints(
+                listManager.users.get(userId - 1).getIndustryPoints() - building.buildingPrice
+        );
 
         listManager.updatePlanet(planetId - 1, planet);
         //add to db
@@ -24,7 +25,9 @@ public class BuildingsManager { //dodaje, updatuje i usuwa budynki
     public static void upgradeBuilding(int userId, int buildingId) {
         listManager.buildings.get(buildingId - 1).buildingLevel ++;
 
-        listManager.users.get(userId - 1).industryPoints -= listManager.buildings.get(buildingId - 1).buildingPrice;
+        listManager.users.get(userId - 1).setIndustryPoints(
+                listManager.users.get(userId - 1).getIndustryPoints() - listManager.buildings.get(buildingId - 1).buildingPrice
+        );
         //update in db
     }
 }

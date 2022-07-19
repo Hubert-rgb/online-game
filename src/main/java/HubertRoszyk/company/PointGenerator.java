@@ -20,11 +20,19 @@ public class PointGenerator {
             public void run() {
                 ListManager listManager = ListManager.getInstance();
                 for (User user: listManager.users) {
-                    user.industryPoints += user.industryPointsIncome;
-                    user.sciencePoints += user.sciencePointsIncome;
+
+                    int userIndustryPoints = user.getIndustryPoints();
+                    int userSciencePoints = user.getSciencePoints();
+
+                    userIndustryPoints += user.getIndustryPointsIncome();
+                    userSciencePoints += user.getSciencePointsIncome();
+
+
+                    user.setIndustryPoints(userIndustryPoints);
+                    user.setSciencePoints(userSciencePoints);
                 }
-                System.out.println(listManager.users.get(0).industryPoints + "i");
-                System.out.println(listManager.users.get(0).sciencePoints + "s");
+                System.out.println(listManager.users.get(0).getIndustryPoints() + "i");
+                System.out.println(listManager.users.get(0).getSciencePoints() + "s");
             }
         };
         Timer timer = new Timer();

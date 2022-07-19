@@ -1,21 +1,30 @@
 package HubertRoszyk.company.ClassToInstance;
 
 import HubertRoszyk.company.ListManager;
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table
 public class User {
-    public User(int id, String Name, String password, int industryPoints, int sciencePoints){
-        this.id = id;
-        this.name = Name;
-        this.password = password;
-        this.industryPoints = industryPoints;
-        this.sciencePoints = sciencePoints;
-    }
 
-    public int id, industryPoints, sciencePoints;
-    public String name, password;
-    public int industryPointsIncome = 0, sciencePointsIncome = 0;
+    @Id
+    private int id;
+    private int industryPoints;
+    private int sciencePoints;
+    private String name;
+    private String password;
+    private int industryPointsIncome;
+    private int sciencePointsIncome;
 
     public void getTotalIndustryIncome() {
         ListManager listManager = ListManager.getInstance();

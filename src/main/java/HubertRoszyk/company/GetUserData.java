@@ -23,7 +23,7 @@ public class GetUserData {
 
         User currentUser = null;
         for (User user : listManager.users) {
-            if(user.name.equals(name) && user.password.equals(password)) {
+            if(user.getName().equals(name) && user.getPassword().equals(password)) {
                 currentUser = user;
 
             }
@@ -33,17 +33,17 @@ public class GetUserData {
         }
         //JSONObject jsonResponseBody = new JSONObject(jsonResponseString);
 
-        return "{\"id\":\"" + currentUser.id + "\",\"name\":\"" + currentUser.name + "\",\"password\":\"" + currentUser.password + "\",\"industryPoints\":\"" +
-                currentUser.industryPoints + "\",\"sciencePoints\":\"" + currentUser.sciencePoints + "\"}"; //zwraca json
+        return "{\"id\":\"" + currentUser.getId() + "\",\"name\":\"" + currentUser.getName() + "\",\"password\":\"" + currentUser.getPassword() + "\",\"industryPoints\":\"" +
+                currentUser.getIndustryPoints() + "\",\"sciencePoints\":\"" + currentUser.getSciencePoints() + "\"}"; //zwraca json
     }
 
     public static User createUser(String name, String password) {
-        User user = new User(listManager.users.size() + 1, name, password, 0, 0);
+        User user = new User(listManager.users.size() + 1, 0, 0, name, password, 0, 0);
         listManager.users.add(user);
         DatabaseUserManager.addUserToDatabase(user);
 
         GalaxyInit galaxyInit = new GalaxyInit();
-        listManager.userGalaxy.put(user.id, listManager.galaxies.size());
+        listManager.userGalaxy.put(user.getId(), listManager.galaxies.size());
         //System.out.println(listManager.galaxies.get(listManager.userGalaxy.get(user.id) - 1));
         return user;
     }
