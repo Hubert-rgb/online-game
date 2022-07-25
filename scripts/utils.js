@@ -11,4 +11,9 @@ function planetCoordinatesGenerator(planets) {
         }  
 }
 
-export {planetCoordinatesGenerator};
+function showThePlanet() {
+    console.log("ok")
+}
+
+
+export {planetCoordinatesGenerator, showThePlanet};

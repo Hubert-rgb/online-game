@@ -1,9 +1,9 @@
 .planets {
+    cursor: pointer;
     border: 1px solid;
     height: 20px;
     width: 20px;
     background-color: red;
-    margin: 50px;
 }
 
 #p1 {

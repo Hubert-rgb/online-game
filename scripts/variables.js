@@ -1,4 +1,3 @@
-import { planetCoordinatesGenerator } from './PlanetsPosition.js';
 const planets= 
         `[
             {
@@ -7,7 +6,7 @@ const planets=
                 "sciencePointsMultiplier": 1,
                 "size": 3,
                 "xCord": 150,
-                "yCord": 1000, 
+                "yCord": 100, 
                 "owner": 1
             },
             {
@@ -38,5 +37,4 @@ const planets=
                 "owner": 1
             }
         ]`
-planetCoordinatesGenerator(planets)
-
+export {planets};
