@@ -1,24 +1,7 @@
-const apiUrl = 'https://jsonplaceholder.typicode.com';
-async function fetchUsers(){
-    try {
-        const response = await fetch(`${apiUrl}/posts`);
-        if (!response.ok){
-            throw new Error('Failed to fetck posts: $response.status');
-        }
-        return response.json();
-    }   catch (e) {
-        console.log(e);
-    }
-}
-//list of existing users
-function listUsers(){
-    fetchUsers().then(users =>{
-        
-    }).catch(error=> {
-        console.error(error);
-    });
-}
 
+
+
+/*
 //logging
 function login(){
     const username = document.getElementById('username').value;
@@ -56,19 +39,21 @@ function login(){
     const message = document.getElementById('message');
     message.textContent = "Incorrect username or password";
 }
-
+*/
 
 const myForm = document.getElementById('myFrom')
 myForm.addEventListener('submit', e => {
     e.preventDefault();
-    login();
     test();
 });
 
+
 function test(){
     const data = new FormData();
-    data.append("name", "Hubert");
-    data.append("password", "tymonJestSuper");
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value; 
+    data.append("name", username);
+    data.append("password", password);
 
     const xhr = new XMLHttpRequest();
     //xhr.withCredentials = true;
