@@ -1,4 +1,4 @@
-package HubertRoszyk.company.ClassToInstance;
+package HubertRoszyk.company.EntitiClass;
 
 import HubertRoszyk.company.ConfigOperator;
 

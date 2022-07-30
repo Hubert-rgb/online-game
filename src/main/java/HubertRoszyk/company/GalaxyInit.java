@@ -1,7 +1,7 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.ClassToInstance.Planet;
-import HubertRoszyk.company.ClassToInstance.PlanetLocation;
+import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.EntitiClass.PlanetLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class GalaxyInit {
         int lastPlanetId = 0;
         if (galaxiesNum > 0) {
             List<Planet> lastGalaxyPlanets = listManager.galaxies.get(galaxiesNum - 1);
-            lastPlanetId = lastGalaxyPlanets.get(lastGalaxyPlanets.size() - 1).id;
+            lastPlanetId = lastGalaxyPlanets.get(lastGalaxyPlanets.size() - 1).getId();
 
         }
         for(int i = 0; i < planetsNum; i++){
@@ -35,7 +35,7 @@ public class GalaxyInit {
             PlanetLocation planetLocation = RandomDraw.locationDraw();
             //validator
 
-            Planet planet = new Planet(id, industryPointsMultiplier,sciencePointsMultiplier, size, planetLocation, 1, 1, galaxyID);
+            Planet planet = new Planet(id, industryPointsMultiplier, sciencePointsMultiplier, size, 1, 1, 1, planetLocation);
             planets.add(planet);
         }
         List<Planet> validatedPlanets = PlanetDataValidator.validatePlanetPositionInGalaxy(planets);

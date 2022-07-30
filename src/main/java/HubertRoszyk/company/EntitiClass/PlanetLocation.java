@@ -1,4 +1,4 @@
-package HubertRoszyk.company.ClassToInstance;
+package HubertRoszyk.company.EntitiClass;
 
 
 final public class PlanetLocation {

@@ -1,7 +1,7 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.ClassToInstance.Planet;
-import HubertRoszyk.company.ClassToInstance.PlanetLocation;
+import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.EntitiClass.PlanetLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +12,18 @@ public class PlanetDataValidator {
         validatedGalaxy.add(galaxy.get(0));
 
         for (int i = 1; i < galaxy.size(); i++) {
-            PlanetLocation previousPlanetLocation = galaxy.get(i - 1).planetLocation;
-            PlanetLocation currentPlanetLocation = galaxy.get(i).planetLocation;
+            PlanetLocation previousPlanetLocation = galaxy.get(i - 1).getPlanetLocation();
+            PlanetLocation currentPlanetLocation = galaxy.get(i).getPlanetLocation();
 
             PlanetLocation validatePlanetLocation  = validatePlanetPosition(previousPlanetLocation, currentPlanetLocation);
 
             Planet validatedPlanet = galaxy.get(i);
-            validatedPlanet.planetLocation = validatePlanetLocation;
+
+            PlanetLocation planetLocation;
+            planetLocation = validatedPlanet.getPlanetLocation();
+            planetLocation = validatePlanetLocation;
+            validatedPlanet.setPlanetLocation(planetLocation);
+
             validatedGalaxy.add(validatedPlanet);
         }
         return validatedGalaxy;

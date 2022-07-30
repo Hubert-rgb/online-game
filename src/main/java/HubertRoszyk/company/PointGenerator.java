@@ -1,10 +1,5 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.ClassToInstance.User;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class PointGenerator {
 
     private static PointGenerator instance;
@@ -14,7 +9,7 @@ public class PointGenerator {
         }
         return instance;
     }
-    public static void generatePoints() {
+    /*public static void generatePoints() {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -37,5 +32,5 @@ public class PointGenerator {
         };
         Timer timer = new Timer();
         timer.schedule(task, 0, ConfigOperator.period);
-    }
+    }*/
 }

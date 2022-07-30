@@ -1,6 +1,6 @@
 package HubertRoszyk.company.service;
 
-import HubertRoszyk.company.ClassToInstance.User;
+import HubertRoszyk.company.EntitiClass.User;
 import HubertRoszyk.company.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService{
     @Autowired
     private UserRepository repository;
 
@@ -32,10 +32,10 @@ public class UserService {
         User existingUser = repository.findById(user.getId()).orElse(null);
         existingUser.setName(user.getName());
         existingUser.setPassword(user.getPassword());
-        existingUser.setIndustryPoints(user.getIndustryPoints());
+        /*existingUser.setIndustryPoints(user.getIndustryPoints());
         existingUser.setSciencePoints(user.getSciencePoints());
         existingUser.setIndustryPointsIncome(user.getIndustryPointsIncome());
-        existingUser.setSciencePointsIncome(user.getSciencePointsIncome());
+        existingUser.setSciencePointsIncome(user.getSciencePointsIncome());*/
 
         return repository.save(existingUser);
     }

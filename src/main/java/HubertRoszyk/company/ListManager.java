@@ -1,11 +1,9 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.ClassToInstance.Building;
-import HubertRoszyk.company.ClassToInstance.Planet;
-import HubertRoszyk.company.ClassToInstance.User;
-import HubertRoszyk.company.database.DatabasePlanetManager;
+import HubertRoszyk.company.EntitiClass.Building;
+import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.EntitiClass.User;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,23 +24,23 @@ public class ListManager {
     public HashMap<Integer, Integer> userGalaxy = new HashMap<>();
     public List<Building> buildings = new ArrayList<>();
 
-    public void updatePlanet(int id, Planet planet) throws SQLException {
+    /*public void updatePlanet(int id, Planet planet) throws SQLException {
         planets.set(id - 1, planet);
 
-        List<Planet> galaxy = galaxies.get(planet.galaxyNum - 1);
+        List<Planet> galaxy = galaxies.get(planet.getGalaxyNum() - 1);
         galaxy.set(id - 1, planet);
-        galaxies.set(planet.galaxyNum - 1, galaxy);
+        galaxies.set(planet.getGalaxyNum() - 1, galaxy);
 
         DatabasePlanetManager.updatePlanetInDatabase(planet);
-    }
-    public void getDataFromDatabase() throws SQLException {
+    }*/
+    /*public void getDataFromDatabase() throws SQLException {
         getPlanetsFormDatabase();
-    }
-    public void getPlanetsFormDatabase() throws SQLException {
+    }*/
+    /*public void getPlanetsFormDatabase() throws SQLException {
         List<Planet> planetsFromDatabase = DatabasePlanetManager.getPlanetsFromDatabase();
 
         List<List<Planet>> galaxies = SortPlanetsToGalaxies.sortPlanetsToGalaxies(planetsFromDatabase);
         this.galaxies = galaxies;
         this.planets = planetsFromDatabase;
-    }
+    }*/
 }

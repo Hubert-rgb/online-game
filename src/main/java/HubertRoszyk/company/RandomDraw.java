@@ -1,6 +1,6 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.ClassToInstance.PlanetLocation;
+import HubertRoszyk.company.EntitiClass.PlanetLocation;
 
 import java.util.Random;
 

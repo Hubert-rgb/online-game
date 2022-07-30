@@ -1,4 +1,5 @@
-package HubertRoszyk.company.ClassToInstance;
+package HubertRoszyk.company.EntitiClass;
+
 
 public enum BuildingsType {
     INDUSTRY_POINTS_FACTORY(10, 10),
