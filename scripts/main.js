@@ -38,10 +38,10 @@ openModalButtons.forEach(button=> {
     })
 })
 
-closeModalButtons.forEach(button=> {
+closeModalButtons.forEach(button => {
     button.addEventListener('click', () => {
         planetInsideGenerator();
-        const modal = button.closest('.modal');
+        const modal = button.closest('.modal.active');
         closeModal(modal);
     })
 })

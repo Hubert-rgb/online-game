@@ -1,8 +1,8 @@
-//const apiUrl = 'https://jsonplaceholder.typicode.com';
+const apiUrl = 'https://jsonplaceholder.typicode.com';
 //checking password confirmation
 function checkPassword(){
     const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirm-password").value;    
+    const confirmPassword = document.getElementById("confirmPassword").value;    
     if (password.lenght!=0){
         if (password==confirmPassword){
             return true;
@@ -14,7 +14,7 @@ function checkPassword(){
 }
 
 //posting new user to the DB
-const myForm = document.getElementById('myFrom')
+const myForm = document.getElementById('myFrom');
 myForm.addEventListener('submit', e => {
     e.preventDefault();
     const username = document.getElementById('username').value;
@@ -27,8 +27,7 @@ myForm.addEventListener('submit', e => {
         username: username,
         password: password
     }
-//    fetch(`${apiUrl}/posts`, {
-    fetch('../users.html', {
+    fetch(`${apiUrl}/posts`, {
         method: 'post', 
         headers:{'Content-Type': 'application/json'},
         body: JSON.stringify(user)
@@ -38,15 +37,14 @@ myForm.addEventListener('submit', e => {
         console.log(text);
     }).catch(error => {
         console.error(error);
-    });
-    fetch('../users.html')
+    }).then ( i => {
+    fetch(`${apiUrl}/posts`)
     .then(response => {
         return response.text();
-    });
-    // .then(text => {
-    //     console.log(text);
-    // });
-    }
+    })
+    .then(text => {
+        console.log(text);
+    });});}
     else{
         const message = document.getElementById('message');
         message.textContent = "Password don't match";

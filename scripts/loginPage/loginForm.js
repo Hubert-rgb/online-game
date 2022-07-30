@@ -37,7 +37,7 @@ function login(){
         },
         {
             "id": 3,
-            "username": "Wysok",
+            "username": "wysok",
             "password": "krzeslo"
         },
         {
@@ -49,7 +49,7 @@ function login(){
     for (i = 0; i < users.length; i ++){
         if (username == users[i].username && password == users[i].password){
             console.log("you are logged in");
-            window.open('index.html')
+            window.open('menu.html', self)
             return; 
         }
     }
@@ -62,4 +62,26 @@ const myForm = document.getElementById('myFrom')
 myForm.addEventListener('submit', e => {
     e.preventDefault();
     login();
+    test();
 });
+
+function test(){
+    const data = new FormData();
+    data.append("name", "Hubert");
+    data.append("password", "tymonJestSuper");
+
+    const xhr = new XMLHttpRequest();
+    //xhr.withCredentials = true;
+    
+
+    xhr.addEventListener("readystatechange", function() {
+      if(this.readyState === 4) {
+        console.log(this.responseText);
+        alert(xhr.responseText);
+      }
+    });
+
+    xhr.open("POST", "http://localhost:8080/loginUser");
+    //xhr.withCredentials = true;
+    xhr.send(data);
+}

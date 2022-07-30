@@ -1,19 +1,21 @@
 function planetInsideGenerator() {
+    const planetOutside = document.getElementById("p1");
+    
     const planetInside = document.createElement("div");
     planetInside.setAttribute("class", "modal");
     planetInside.setAttribute("id", "planet1");
-    const planetOutside = document.getElementById("p1");
+    planetInside.setAttribute("style", "cursor: default");
     
     const header = document.createElement("div");
     header.setAttribute("class", "modalHeader");
 
-    const planetName = document.createElement("div"), 
-    quit = document.createElement("button");
+    const planetName = document.createElement("div"); 
+    const quit = document.createElement("button");
     planetName.setAttribute("class", "title");
     planetName.innerHTML = "Hoth";
 
+    quit.setAttribute("id", "overlay");
     quit.setAttribute("class", "closeButton");
-    quit.setAttribute("data", `[data-close-button]`);
     quit.innerHTML = `&times;`;
     header.appendChild(planetName);
     header.appendChild(quit);
