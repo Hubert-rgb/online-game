@@ -1,14 +1,31 @@
-package HubertRoszyk.company;
+package HubertRoszyk.company.controller;
 
+import HubertRoszyk.company.EntitiClass.Galaxy;
+import HubertRoszyk.company.ConfigOperator;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.EntitiClass.PlanetLocation;
+import HubertRoszyk.company.ListManager;
+import HubertRoszyk.company.PlanetDataValidator;
+import HubertRoszyk.company.RandomDraw;
+import HubertRoszyk.company.service.GalaxyService;
+import HubertRoszyk.company.service.PlanetService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RestController
 public class GalaxyInit {
+    @Autowired
+    PlanetService planetService;
 
-    public GalaxyInit(){ //do przeanalizowania bo nie wygląda za ładnie
+    @Autowired
+    GalaxyService galaxyService;
+    @GetMapping("/createGalaxy")
+    public List<Planet> galaxyInit(@RequestParam int userId){ //do przeanalizowania bo nie wygląda za ładnie
+        Galaxy galaxy = new Galaxy();
+
         List<Planet> planets = new ArrayList<>();
         ListManager listManager = ListManager.getInstance();
 
@@ -35,15 +52,24 @@ public class GalaxyInit {
             PlanetLocation planetLocation = RandomDraw.locationDraw();
             //validator
 
-            Planet planet = new Planet(id, industryPointsMultiplier, sciencePointsMultiplier, size, 1, 1, 1, planetLocation);
+            Planet planet = new Planet(id, industryPointsMultiplier, sciencePointsMultiplier, size, planetLocation.xLocation, planetLocation.yLocation, planetLocation);
+            planet.asignGalaxy(galaxy);
             planets.add(planet);
         }
         List<Planet> validatedPlanets = PlanetDataValidator.validatePlanetPositionInGalaxy(planets);
-        listManager.galaxies.add(validatedPlanets);
+        //listManager.galaxies.add(validatedPlanets);
 
-        for (Planet planet : validatedPlanets) {
-            listManager.planets.add(planet);
-        }
+        //UserToGalaxyBind binder = new UserToGalaxyBind();
+        //binder.bindGalaxyToUser(userId, galaxiesNum + 1);
+
+        planetService.savePlanetsList(validatedPlanets);
+        //listManager.planets.addAll(validatedPlanets);
+
+        galaxyService.saveGalaxy(galaxy);
+
+
+
+        return validatedPlanets;
     }
 }
 

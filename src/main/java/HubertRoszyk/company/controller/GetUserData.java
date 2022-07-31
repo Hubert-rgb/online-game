@@ -1,6 +1,7 @@
-package HubertRoszyk.company;
+package HubertRoszyk.company.controller;
 
 import HubertRoszyk.company.EntitiClass.User;
+import HubertRoszyk.company.ListManager;
 import HubertRoszyk.company.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class GetUserData {
     public User createUser(String name, String password) {
         User user = new User(listManager.users.size() + 1, name, password);
         listManager.users.add(user);
+
 
         userService.saveUser(user);
         return user;

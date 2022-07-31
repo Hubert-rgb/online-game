@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SortPlanetsToGalaxies {
-    public static List<List<Planet>> sortPlanetsToGalaxies(List<Planet> planetsList){
+    /*public static List<List<Planet>> sortPlanetsToGalaxies(List<Planet> planetsList){
         List<List<Planet>> galaxies = new ArrayList<>();
         if (planetsList.size() != 0) {
             List<Planet> planetsInGalaxy = new ArrayList<>();
@@ -23,5 +23,5 @@ public class SortPlanetsToGalaxies {
             galaxies.add(planetsInGalaxy);
         }
         return galaxies;
-    }
+    }*/
 }

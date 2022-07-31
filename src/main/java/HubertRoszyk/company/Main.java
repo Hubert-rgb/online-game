@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 @SpringBootApplication
 @RestController
+@EnableJpaRepositories
 public class Main {
     //TODO database managment
     //TODO binding users, planets and galaxies properly
@@ -24,9 +25,7 @@ public class Main {
         SpringApplication.run(Main.class, args);
         ConfigOperator configOperator = new ConfigOperator();
 
-//        User user = new User(1, 0, 0, "Name", "Password", 0, 0);
-//        UserService userService = new UserService();
-//        userService.saveUser(user);
-//        System.out.println("zapisano");
+        ListManager listManager = ListManager.getInstance();
+        //listManager.getDataFromDatabase();
     }
 }

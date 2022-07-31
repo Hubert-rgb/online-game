@@ -1,26 +1,46 @@
 package HubertRoszyk.company.EntitiClass;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
 public class User {
 
     @Id
-    private final int id;
+    @NonNull
+    @Column(name = "userId")
+    private int id;
     //private int industryPoints;
     //private int sciencePoints;
     @NonNull
     private String name;
     @NonNull
     private String password;
+
+    @JsonIgnore //jak to działa?
+    @OneToMany(mappedBy = "user")
+    private Set<Planet> enrolledPlanets = new HashSet<>();
+
+
+    @ManyToMany()
+    @JoinTable (
+            name = "userGalaxies",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "galaxyId")
+    )
+    private Set<Galaxy> galaxies = new HashSet<>();
     //private int industryPointsIncome;
     //private int sciencePointsIncome;
 
@@ -39,4 +59,8 @@ public class User {
         }
 
     }*/
+    /*public void addGalaxy(int galaxyId) {
+        galaxies.add(galaxyId);
+    }*/
+
 }

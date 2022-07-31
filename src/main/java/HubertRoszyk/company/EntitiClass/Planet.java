@@ -2,26 +2,34 @@ package HubertRoszyk.company.EntitiClass;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table
 public class Planet {
 
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonNull
-    private final int id;
-    private final int industryPointsMultiplier;
-    private final int sciencePointsMultiplier;
-    private final int size;
-    private final int galaxyNum; //przydałoby się coś rzeby nie dało się tego zmienić, może buildier pattern
+    @Column(name = "planetId")
+    private int id;
+    @NonNull
+    private int industryPointsMultiplier;
+    @NonNull
+    private int sciencePointsMultiplier;
+    @NonNull
+    private int size;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "galaxyId", referencedColumnName = "id")
+    private Galaxy galaxy; //przydałoby się coś rzeby nie dało się tego zmienić, może buildier pattern
 
     @NonNull
     private int industryPointsProduce = 1;
@@ -33,9 +41,22 @@ public class Planet {
     @NonNull
     private int planetLocationY;
 
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private User user;
+
     @Transient
     @NonNull
     private PlanetLocation planetLocation;
     @Transient
     private List<Integer> buildingList;
+
+    public void asignUser(User user) {
+        this.user = user;
+    }
+
+    public void asignGalaxy(Galaxy galaxy) {
+        this.galaxy = galaxy;
+    }
 }

@@ -1,16 +1,22 @@
-package HubertRoszyk.company;
+package HubertRoszyk.company.controller;
 
 import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.ListManager;
+import HubertRoszyk.company.SortPlanetsToGalaxies;
+import HubertRoszyk.company.service.PlanetService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class GetGalaxy {
+    @Autowired
+    PlanetService planetService;
     private final static ListManager listManager = ListManager.getInstance();
-    @GetMapping("/getUserGalaxy")
+    /*@GetMapping("/getUserGalaxy")
     public static JSONArray getUserGalaxy(@RequestParam int userId) {
         int galaxyId = listManager.userGalaxy.get(userId);
         List<Planet> galaxy = listManager.galaxies.get(galaxyId - 1);
@@ -29,26 +35,12 @@ public class GetGalaxy {
             jsonArray.add(jsonObject);
         }
         return jsonArray;
-    }
-    @GetMapping("/getGalaxies")
-    public static JSONArray getGalaxies() {
-        JSONArray galaxiesJsonArray = new JSONArray();
-        for (List<Planet> planets : listManager.galaxies) {
-            JSONArray planetsJsonArray = new JSONArray();
-            for (Planet planet : planets) {
-                JSONObject planetJsonObject = new JSONObject();
-                planetJsonObject.put("id", planet.getId());
-                planetJsonObject.put("industryPointsMultiplier", planet.getIndustryPointsMultiplier());
-                planetJsonObject.put("sciencePointsMultiplier", planet.getSciencePointsMultiplier());
-                planetJsonObject.put("size", planet.getSize());
-                planetJsonObject.put("xLocation", planet.getPlanetLocation().xLocation);
-                planetJsonObject.put("yLocation", planet.getPlanetLocation().yLocation);
-                planetJsonObject.put("industryPointsProduce", planet.getIndustryPointsProduce());
-                planetJsonObject.put("sciencePointsProduce", planet.getSciencePointsProduce());
-                planetsJsonArray.add(planetJsonObject);
-            }
-            galaxiesJsonArray.add(planetsJsonArray);
-        }
-        return galaxiesJsonArray;
-    }
+    }*/
+    /*@GetMapping("/getGalaxies")
+    public List<List<Planet>> getGalaxies() {
+        List<Planet> planets = planetService.getPlanetsList();
+        *//*List<List<Planet>> galaxies = SortPlanetsToGalaxies.sortPlanetsToGalaxies(planets);*//*
+
+        return galaxies;
+    }*/
 }

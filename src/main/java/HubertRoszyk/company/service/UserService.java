@@ -3,11 +3,13 @@ package HubertRoszyk.company.service;
 import HubertRoszyk.company.EntitiClass.User;
 import HubertRoszyk.company.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Configurable
 public class UserService{
     @Autowired
     private UserRepository repository;
