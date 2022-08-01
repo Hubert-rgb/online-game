@@ -1,6 +1,3 @@
-
-
-
 /*
 //logging
 function login(){
@@ -44,16 +41,17 @@ function login(){
 const myForm = document.getElementById('myFrom')
 myForm.addEventListener('submit', e => {
     e.preventDefault();
-    test();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    login(username, password);
 });
 
 
-function test(){
-    const data = new FormData();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value; 
-    data.append("name", username);
-    data.append("password", password);
+function login(username, password){
+    const data = `{
+            "username": ${username},
+            "password": ${password}       
+    }`;
 
     const xhr = new XMLHttpRequest();
     //xhr.withCredentials = true;
@@ -66,7 +64,7 @@ function test(){
       }
     });
 
-    xhr.open("POST", "http://localhost:8080/loginUser");
+    xhr.open("POST", "http://localhost:8080/loginUser", true);
     //xhr.withCredentials = true;
     xhr.send(data);
 }

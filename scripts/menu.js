@@ -5,7 +5,7 @@ logOutButton.addEventListener('click', () => {
 });
 //
 
-//list of all galaxies (InF: function JSON => array of objects)
+/* preset list of all galaxies
 const galaxyListJSON = [
     {
         "id": 1,
@@ -28,12 +28,49 @@ const galaxyListJSON = [
         "players": 8 
     }
 ]
+*/
+
+
+function listGalaxies(){
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", () => {
+      if(this.readyState === 4) {
+        console.log(this.responseText);
+        return JSON.parse(this.xhr.responseText);
+      }
+    });
+
+    xhr.open("GET", "http://localhost:8080/getGalaxies", true);
+    xhr.send();
+
+}
 //
 
 
+
+
+//adding new galaxy
+/*function newGalaxy(){
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", () => {
+      if(this.readyState === 4) {
+        console.log(this.responseText);
+        alert(xhr.responseText);
+      }
+    });
+
+    xhr.open("POST", "http://localhost:8080/getGalaxies", true);
+    xhr.send();
+}
+*/
+//
+
+
+//generating the list of galaxies 
 //1st option
 function galaxyList(){
     const list = document.getElementById('galaxyList');
+    const galaxyListJSON = listGalaxies();
     galaxyListJSON.forEach( function(e) {
         const li = document.createElement('li');
         li.innerText = `${e.name}`;
@@ -62,8 +99,6 @@ function galaxyList(){
 galaxyList();
 
 /* 2nd option
-
-//generating the list of galaxies 
 function galaxyList(){
     const list = document.getElementById('galaxyList');
     galaxyListJSON.forEach( function(e) {
@@ -106,6 +141,7 @@ listButton.forEach(listHeader => {
         }
     });
 });
+
 */
 //
 

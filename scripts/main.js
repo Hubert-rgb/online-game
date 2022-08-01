@@ -1,8 +1,8 @@
-import { planetCoordinatesGenerator, showThePlanet } from './utils.js';
 import * as variables from './variables.js';
 import {planetInsideGenerator} from './planetInsideGenerator.js';
+import {generatePlanets} from './galaxyGeneration.js';
 
-planetCoordinatesGenerator(variables.planets)
+generatePlanets(variables.planets)
 
 /*
 const tClass = "modal", tId="planet1";
