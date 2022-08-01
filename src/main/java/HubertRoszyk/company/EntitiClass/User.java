@@ -34,12 +34,13 @@ public class User {
     private Set<Planet> enrolledPlanets = new HashSet<>();
 
 
-    @ManyToMany()
+    /*@ManyToMany()
     @JoinTable (
             name = "userGalaxies",
             joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "galaxyId")
-    )
+    )*/
+    @ManyToMany(mappedBy = "users")
     private Set<Galaxy> galaxies = new HashSet<>();
     //private int industryPointsIncome;
     //private int sciencePointsIncome;
@@ -59,8 +60,8 @@ public class User {
         }
 
     }*/
-    /*public void addGalaxy(int galaxyId) {
-        galaxies.add(galaxyId);
-    }*/
+    public void addGalaxy(Galaxy galaxy) {
+        galaxies.add(galaxy);
+    }
 
 }

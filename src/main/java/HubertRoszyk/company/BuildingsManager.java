@@ -1,7 +1,6 @@
 package HubertRoszyk.company;
 
 public class BuildingsManager { //dodaje, updatuje i usuwa budynki
-    private static ListManager listManager = ListManager.getInstance();
     /*public static void addBuilding(int planetId, int userId, BuildingsType buildingsType) throws SQLException {
         Planet planet =  listManager.planets.get(planetId - 1);
 

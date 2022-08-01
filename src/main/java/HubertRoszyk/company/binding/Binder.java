@@ -8,11 +8,13 @@ import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Controller
 public class Binder {
     @Autowired
     UserService userService;
@@ -23,31 +25,27 @@ public class Binder {
     @Autowired
     GalaxyService galaxyService;
 
-    private static final ListManager listManage = ListManager.getInstance();
     @PostMapping("/bindPlanetToUser")
     Planet bindPlanetToUser(@RequestParam int userId, int planetId) {
-        /*List<Integer> userPlanets = listManage.usersPlanetsHashMap.get(userId);
-        userPlanets.add(planetId);
-        listManage.usersPlanetsHashMap.put(userId, userPlanets);*/
-
         User user = userService.getUserById(userId);
         Planet planet = planetService.getPlanetById(planetId);
 
         planet.asignUser(user);
 
         return planetService.savePlanet(planet);
-        //update in db
     }
 
-    /*@PostMapping("/bindGalaxyToUser")
-    public User bindGalaxyToUser(@RequestParam int userId, int galaxyId) {
+   // @PostMapping("/bindGalaxyToUser")
+    public Galaxy bindGalaxyToUser(int userId, int galaxyId) { //user change
         User user = userService.getUserById(userId);
-        user.addGalaxy(galaxyId);
+        Galaxy galaxy = galaxyService.getGalaxyById(galaxyId);
+        //user.addGalaxy(galaxy);
+        galaxy.addUser(user);
 
-        return userService.saveUser(user);
-        //update in db
-    }*/
-    @PostMapping("bindPlanetToGalaxy")
+        //return userService.saveUser(user);
+        return galaxyService.saveGalaxy(galaxy);
+    }
+    /*@PostMapping("/bindPlanetToGalaxy")
     Galaxy bindPlanetToGalaxy(@RequestParam int planetId, int galaxyId) {
         Galaxy galaxy = galaxyService.getGalaxyById(galaxyId);
         Planet planet = planetService.getPlanetById(planetId);
@@ -55,5 +53,5 @@ public class Binder {
         planet.asignGalaxy(galaxy);
 
         return galaxy;
-    }
+    }*/
 }

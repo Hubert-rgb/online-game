@@ -17,15 +17,13 @@ import java.sql.SQLException;
 @RestController
 @EnableJpaRepositories
 public class Main {
-    //TODO database managment
-    //TODO binding users, planets and galaxies properly
+    //TODO galaxies [userNum, gamaName, (30 days countdown)]
     //TODO points entity [userId, galaxyId, points]
     //TODO przenieść punkty usera na osobną tablicę user galaxy
+    //TODO tests
+    //TODO co to dto?
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         SpringApplication.run(Main.class, args);
         ConfigOperator configOperator = new ConfigOperator();
-
-        ListManager listManager = ListManager.getInstance();
-        //listManager.getDataFromDatabase();
     }
 }

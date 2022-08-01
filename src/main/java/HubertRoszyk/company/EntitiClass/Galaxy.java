@@ -1,5 +1,6 @@
 package HubertRoszyk.company.EntitiClass;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +10,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table
 public class Galaxy {
@@ -21,9 +21,21 @@ public class Galaxy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany(mappedBy = "galaxies")
+    @JsonIgnore
+    //@ManyToMany(mappedBy = "galaxies")
+    @ManyToMany
+    @JoinTable(
+            name = "userGalaxies",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "galaxyId")
+    )
     private Set<User> users = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "galaxy")
     private Set<Planet> enrolledPlanets = new HashSet<>();
+
+    public void addUser(User user) {
+        users.add(user);
+    }
 }

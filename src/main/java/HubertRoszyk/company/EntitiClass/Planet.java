@@ -17,8 +17,8 @@ public class Planet {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     @Column(name = "planetId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NonNull
     private int industryPointsMultiplier;

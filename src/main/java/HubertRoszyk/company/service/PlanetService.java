@@ -1,10 +1,12 @@
 package HubertRoszyk.company.service;
 
+import HubertRoszyk.company.ConfigOperator;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.repository.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,5 +38,23 @@ public class PlanetService {
         existingPlanet.setSciencePointsProduce(planet.getSciencePointsProduce());
 
         return repository.save(existingPlanet);
+    }
+
+    public List<Planet> getPlanetByGalaxy(int galaxyId) {
+        List<Planet> allPlanets = repository.findAll();
+
+        List<Planet> galaxyPlanets = new ArrayList<>();
+
+        for (Planet planet : allPlanets) {
+            if (planet.getGalaxy().getId() == galaxyId) {
+                galaxyPlanets.add(planet);
+            }
+        }
+        if (galaxyPlanets.size() != ConfigOperator.planetsNum) {
+            System.out.println("planeta się zgubiła");
+            return null;
+        } else {
+            return galaxyPlanets;
+        }
     }
 }
