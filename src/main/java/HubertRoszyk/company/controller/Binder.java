@@ -1,9 +1,8 @@
-package HubertRoszyk.company.binding;
+package HubertRoszyk.company.controller;
 
 import HubertRoszyk.company.EntitiClass.Galaxy;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.EntitiClass.User;
-import HubertRoszyk.company.ListManager;
 import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.UserService;
@@ -34,24 +33,13 @@ public class Binder {
 
         return planetService.savePlanet(planet);
     }
-
-   // @PostMapping("/bindGalaxyToUser")
     public Galaxy bindGalaxyToUser(int userId, int galaxyId) { //user change
         User user = userService.getUserById(userId);
         Galaxy galaxy = galaxyService.getGalaxyById(galaxyId);
         //user.addGalaxy(galaxy);
-        galaxy.addUser(user);
+        galaxy.addUser();
 
         //return userService.saveUser(user);
         return galaxyService.saveGalaxy(galaxy);
     }
-    /*@PostMapping("/bindPlanetToGalaxy")
-    Galaxy bindPlanetToGalaxy(@RequestParam int planetId, int galaxyId) {
-        Galaxy galaxy = galaxyService.getGalaxyById(galaxyId);
-        Planet planet = planetService.getPlanetById(planetId);
-
-        planet.asignGalaxy(galaxy);
-
-        return galaxy;
-    }*/
 }

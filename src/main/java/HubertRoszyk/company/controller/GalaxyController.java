@@ -1,13 +1,9 @@
 package HubertRoszyk.company.controller;
 
-import HubertRoszyk.company.EntitiClass.Galaxy;
-import HubertRoszyk.company.ConfigOperator;
-import HubertRoszyk.company.EntitiClass.Planet;
-import HubertRoszyk.company.EntitiClass.PlanetLocation;
-import HubertRoszyk.company.EntitiClass.User;
+import HubertRoszyk.company.EntitiClass.*;
+import HubertRoszyk.company.configuration.ConfigOperator;
 import HubertRoszyk.company.PlanetDataValidator;
 import HubertRoszyk.company.RandomDraw;
-import HubertRoszyk.company.binding.Binder;
 import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.UserService;
@@ -35,14 +31,14 @@ public class GalaxyController {
     Binder binder;
 
     @GetMapping("/connectToGalaxy")
-    public List<Planet> connectToGalaxy(@RequestParam int userId, int galaxyId) {
+    public Set<Planet> connectToGalaxy(@RequestParam int userId, int galaxyId) {
         User user = userService.getUserById(userId);
 
-        List<Planet> galaxyPlanets = planetService.getPlanetByGalaxy(galaxyId);
+        Set<Planet> galaxyPlanets = planetService.getPlanetByGalaxy(galaxyId);
 
         //nie wiem czy nie lepiej po prostu zawsze bindować
-        for (Galaxy galaxy : user.getGalaxies()) {
-            if (galaxy.getId() == galaxyId) {
+        for (Points points : user.getPoints()) {
+            if (points.getGalaxy().getId() == galaxyId) {
                 return galaxyPlanets;
             }
         }
@@ -51,8 +47,10 @@ public class GalaxyController {
     }
 
     @GetMapping("/createGalaxy")
-    public List<Planet> galaxyInit(){ //do przeanalizowania bo nie wygląda za ładnie
-        Galaxy galaxy = new Galaxy();
+    public List<Planet> galaxyInit(@RequestBody JSONObject request){ //do przeanalizowania bo nie wygląda za ładnie
+        String galaxyName = (String) request.get("galaxyName");
+
+        Galaxy galaxy = new Galaxy(0, galaxyName);
 
         List<Planet> planets = new ArrayList<>();
 

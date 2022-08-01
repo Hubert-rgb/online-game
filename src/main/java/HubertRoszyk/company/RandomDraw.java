@@ -21,7 +21,7 @@ public class RandomDraw {
         return size;
     }
     public static int industryPointsMultiplierDraw(int totalPoints) {
-        int industryPointsMultiplier =  random.nextInt(totalPoints - 1) + 1; //strasznie brzydko to wygląda
+        int industryPointsMultiplier =  random.nextInt(totalPoints - 1) + 1;
         return industryPointsMultiplier;
     }
 }

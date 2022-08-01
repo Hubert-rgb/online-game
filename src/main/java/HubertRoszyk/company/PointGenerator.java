@@ -1,7 +1,20 @@
 package HubertRoszyk.company;
 
-public class PointGenerator {
+import HubertRoszyk.company.EntitiClass.Points;
+import HubertRoszyk.company.EntitiClass.User;
+import HubertRoszyk.company.configuration.ConfigOperator;
+import HubertRoszyk.company.service.PointsService;
+import HubertRoszyk.company.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class PointGenerator {
+    @Autowired
+    PointsService pointsService;
     private static PointGenerator instance;
     public static PointGenerator getInstance(){
         if (instance == null){
@@ -9,28 +22,26 @@ public class PointGenerator {
         }
         return instance;
     }
-    /*public static void generatePoints() {
+    public void generatePoints() {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                ListManager listManager = ListManager.getInstance();
-                for (User user: listManager.users) {
+                List<Points> pointsList = pointsService.getPointsList();
+                for (Points points: pointsList) {
 
-                    int userIndustryPoints = user.getIndustryPoints();
-                    int userSciencePoints = user.getSciencePoints();
+                    int industryPoints = points.getIndustryPoints();
+                    int sciencePoints = points.getSciencePoints();
 
-                    userIndustryPoints += user.getIndustryPointsIncome();
-                    userSciencePoints += user.getSciencePointsIncome();
+                    industryPoints += points.getIndustryPointsIncome();
+                    sciencePoints += points.getSciencePointsIncome();
 
 
-                    user.setIndustryPoints(userIndustryPoints);
-                    user.setSciencePoints(userSciencePoints);
+                    points.setIndustryPoints(industryPoints);
+                    points.setSciencePoints(sciencePoints);
                 }
-                System.out.println(listManager.users.get(0).getIndustryPoints() + "i");
-                System.out.println(listManager.users.get(0).getSciencePoints() + "s");
             }
         };
         Timer timer = new Timer();
         timer.schedule(task, 0, ConfigOperator.period);
-    }*/
+    }
 }

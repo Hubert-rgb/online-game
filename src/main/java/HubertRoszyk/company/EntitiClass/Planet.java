@@ -28,7 +28,7 @@ public class Planet {
     private int size;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "galaxyId", referencedColumnName = "id")
+    @JoinColumn(name = "galaxyId", referencedColumnName = "galaxyId")
     private Galaxy galaxy; //przydałoby się coś rzeby nie dało się tego zmienić, może buildier pattern
 
     @NonNull

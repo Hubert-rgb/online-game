@@ -19,49 +19,19 @@ import java.util.Set;
 public class User {
 
     @Id
-    @NonNull
     @Column(name = "userId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    //private int industryPoints;
-    //private int sciencePoints;
     @NonNull
     private String name;
     @NonNull
     private String password;
 
-    @JsonIgnore //jak to działa?
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Planet> enrolledPlanets = new HashSet<>();
 
-
-    /*@ManyToMany()
-    @JoinTable (
-            name = "userGalaxies",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "galaxyId")
-    )*/
-    @ManyToMany(mappedBy = "users")
-    private Set<Galaxy> galaxies = new HashSet<>();
-    //private int industryPointsIncome;
-    //private int sciencePointsIncome;
-
-    /*public void getTotalIndustryIncome() {
-        ListManager listManager = ListManager.getInstance();
-        List<Integer> userPlanets = listManager.usersPlanetsHashMap.get(id);
-        if (userPlanets != null) {
-            for (int planetIndex: userPlanets) {
-                for (Planet planet : listManager.planets){
-                    if(planet.getId() == userPlanets.get(planetIndex - 1)){
-                        industryPointsIncome += planet.getIndustryPointsMultiplier() * planet.getIndustryPointsProduce();
-                        sciencePointsIncome += planet.getSciencePointsMultiplier() * planet.getSciencePointsProduce();
-                    }
-                }
-            }
-        }
-
-    }*/
-    public void addGalaxy(Galaxy galaxy) {
-        galaxies.add(galaxy);
-    }
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<Points> points = new HashSet<>();
 }

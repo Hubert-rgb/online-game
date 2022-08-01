@@ -2,6 +2,7 @@ package HubertRoszyk.company;
 
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.EntitiClass.PlanetLocation;
+import HubertRoszyk.company.configuration.ConfigOperator;
 
 import java.util.ArrayList;
 import java.util.List;

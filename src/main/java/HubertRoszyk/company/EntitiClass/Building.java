@@ -1,6 +1,6 @@
 package HubertRoszyk.company.EntitiClass;
 
-import HubertRoszyk.company.ConfigOperator;
+import HubertRoszyk.company.configuration.ConfigOperator;
 
 public class Building { // dane budynku, są zależmne od typu i poziomu
     public BuildingsType buildingsType;

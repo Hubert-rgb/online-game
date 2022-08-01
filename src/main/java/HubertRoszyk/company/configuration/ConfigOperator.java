@@ -1,4 +1,4 @@
-package HubertRoszyk.company;
+package HubertRoszyk.company.configuration;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
