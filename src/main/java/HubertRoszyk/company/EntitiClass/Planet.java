@@ -47,7 +47,6 @@ public class Planet {
     private User user;
 
     @Transient
-    @NonNull
     private PlanetLocation planetLocation;
     @Transient
     private List<Integer> buildingList;

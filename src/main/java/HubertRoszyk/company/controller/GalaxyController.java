@@ -69,7 +69,7 @@ public class GalaxyController {
             PlanetLocation planetLocation = RandomDraw.locationDraw();
             //validator
 
-            Planet planet = new Planet(industryPointsMultiplier, sciencePointsMultiplier, size, planetLocation.xLocation, planetLocation.yLocation, planetLocation);
+            Planet planet = new Planet(industryPointsMultiplier, sciencePointsMultiplier, size, planetLocation.xLocation, planetLocation.yLocation);
             planet.asignGalaxy(galaxy);
             planets.add(planet);
         }
