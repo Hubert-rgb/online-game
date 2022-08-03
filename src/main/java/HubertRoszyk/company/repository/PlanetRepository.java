@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -14,4 +15,10 @@ public interface PlanetRepository extends JpaRepository<Planet, Integer> {
     Set<Planet> getPlanetsByGalaxyId(
             @Param("galaxyId") Integer galaxyId
             );
+
+    @Query(value = "SELECT * FROM PLANET WHERE galaxy_Id = :galaxyId AND user_Id = :userId")
+    Set<Planet> findAllUserPlanetsInGalaxy(
+            @Param("userId") Integer userId,
+            @Param("galaxyId") Integer galaxyId
+    );
 }

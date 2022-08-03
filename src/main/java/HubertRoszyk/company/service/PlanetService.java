@@ -49,4 +49,8 @@ public class PlanetService {
     public Set<Planet> getPlanetByGalaxy(int galaxyId) {
         return repository.getPlanetsByGalaxyId(galaxyId);
     }
+
+    public Set<Planet> getPlanetsByUserIdAndGalaxyId(int userId, int galaxyId) {
+        return repository.findAllUserPlanetsInGalaxy(userId, galaxyId);
+    }
 }

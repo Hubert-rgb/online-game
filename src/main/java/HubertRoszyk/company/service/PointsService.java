@@ -16,9 +16,9 @@ public class PointsService {
     public List<Points> getPointsList() {
         return repository.findAll();
     }
-    public Set<Points> getPointsByUserId(int userId) {
+    /*public Set<Points> getPointsByUserId(int userId) {
         return repository.findPointsByUserId(userId);
-    }
+    }*/
     public Points savePoints(Points points) {
         return repository.save(points);
     }
@@ -28,5 +28,8 @@ public class PointsService {
     public void deleteAllPoints() {
         repository.deleteAll();
         System.out.println("usunięto wszystkie Punkty");
+    }
+    public Points getPointsByUserIdAndGalaxyId(int userId, int galaxyId) {
+        return repository.findPointsByUserIdAndGalaxyId(userId, galaxyId);
     }
 }

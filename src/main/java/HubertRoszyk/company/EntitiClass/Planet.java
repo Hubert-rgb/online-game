@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table
@@ -20,25 +19,18 @@ public class Planet {
     @Column(name = "planetId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NonNull
     private int industryPointsMultiplier;
-    @NonNull
     private int sciencePointsMultiplier;
-    @NonNull
     private int size;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "galaxyId", referencedColumnName = "galaxyId")
     private Galaxy galaxy; //przydałoby się coś rzeby nie dało się tego zmienić, może buildier pattern
 
-    @NonNull
     private int industryPointsProduce = 1;
-    @NonNull
     private int sciencePointsProduce = 1;
 
-    @NonNull
     private int planetLocationX;
-    @NonNull
     private int planetLocationY;
 
 
@@ -50,6 +42,17 @@ public class Planet {
     private PlanetLocation planetLocation;
     @Transient
     private List<Integer> buildingList;
+
+    public Planet(int industryPointsMultiplier, int sciencePointsMultiplier, int size, int xLocation, int yLocation) {
+        this.industryPointsMultiplier = industryPointsMultiplier;
+        this.sciencePointsMultiplier = sciencePointsMultiplier;
+        this.size = size;
+        this.planetLocationX = xLocation;
+        this.planetLocationY = yLocation;
+
+        PlanetLocation location = new PlanetLocation(xLocation, yLocation);
+        planetLocation = location;
+    }
 
     public void asignUser(User user) {
         this.user = user;

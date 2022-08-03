@@ -22,6 +22,8 @@ public class ConfigOperator {
         period = Integer.parseInt(configReader.readLine().split("=")[1]);
         levelCostMultiplier = Double.parseDouble(configReader.readLine().split("=")[1]);
         minDistanceBetweenPlanets = Integer.parseInt(configReader.readLine().split("=")[1]);
+
+        configReader.close();
         //System.out.println(websiteLink);
     }
 }

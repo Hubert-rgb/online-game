@@ -6,22 +6,29 @@ import HubertRoszyk.company.configuration.ConfigOperator;
 import HubertRoszyk.company.service.PointsService;
 import HubertRoszyk.company.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableMBeanExport;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+@Component
 public class PointGenerator {
     @Autowired
     PointsService pointsService;
-    private static PointGenerator instance;
+    /*private static PointGenerator instance;
     public static PointGenerator getInstance(){
         if (instance == null){
             instance = new PointGenerator();
         }
         return instance;
-    }
+    }*/
+    @EventListener(ApplicationReadyEvent.class)
     public void generatePoints() {
         TimerTask task = new TimerTask() {
             @Override
@@ -39,9 +46,11 @@ public class PointGenerator {
                     points.setIndustryPoints(industryPoints);
                     points.setSciencePoints(sciencePoints);
                 }
+                System.out.println("wygenerowano");
             }
         };
         Timer timer = new Timer();
+        System.out.println(ConfigOperator.period);
         timer.schedule(task, 0, ConfigOperator.period);
     }
 }

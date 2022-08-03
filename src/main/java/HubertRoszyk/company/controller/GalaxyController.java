@@ -97,7 +97,12 @@ public class GalaxyController {
     Set<Planet> getGalaxyById(@RequestBody JSONObject galaxyId) {
         int galaxyIdInt = (int) galaxyId.get("galaxyId");
         Galaxy galaxy = galaxyService.getGalaxyById(galaxyIdInt);
-        Set<Planet> planets = galaxy.getEnrolledPlanets();
+        Set<Planet> planets = null;
+        try {
+            planets = galaxy.getEnrolledPlanets();
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
 
         //return planets
         return planets;

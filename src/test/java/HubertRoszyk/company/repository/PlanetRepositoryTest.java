@@ -1,57 +1,50 @@
 package HubertRoszyk.company.repository;
 
-import HubertRoszyk.company.EntitiClass.Galaxy;
-import HubertRoszyk.company.EntitiClass.Planet;
-import HubertRoszyk.company.EntitiClass.PlanetLocation;
-import HubertRoszyk.company.EntitiClass.User;
-import HubertRoszyk.company.controller.GalaxyController;
+import HubertRoszyk.company.EntitiClass.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class PlanetRepositoryTest {
     @Autowired
-    private PlanetRepository planetRepository;
-
-    @Autowired
-    private GalaxyRepository galaxyRepository;
+    private PlanetRepository underTest;
 
     @Test
     void itShouldGetPlanetsByGalaxyId() {
         //given
-
         Planet planet = new Planet(
-            1,
-            2,
-            3,
-            1492,
-            267
+                2,
+                3,
+                4,
+                123,
+                1451
         );
-        Galaxy galaxy = new Galaxy(
-                0,
-                "wspaniała"
-        );
-        User user = new User(
-            "hubert",
-            "masło"
-        );
-
-        planet.asignGalaxy(galaxy);
-        planetRepository.save(planet);
+        underTest.save(planet);
         //when
-        Set<Planet> gotPlanet = planetRepository.getPlanetsByGalaxyId(galaxy.getId());
+        Planet savedPlanet = underTest.save(planet);
         //then
-        assertThat(gotPlanet)
-                .isNotEmpty()
-                .hasSize(1)
-                .contains(planet);
+        assertThat(savedPlanet).usingRecursiveComparison()
+                .ignoringFields("planetId").isEqualTo(planet);
+    }
+    @Test
+    void itShouldGetPlanetsByGalaxyId2() {
+        Planet planet = new Planet(
+                2,
+                3,
+                4,
+                123,
+                1451
+        );
+        underTest.save(planet);
+        //planetRepository.save(planet);
+        List<Planet> planets = underTest.findAllByGalaxyId(null);
+
+        assertThat(planets).contains(planet);
     }
 }

@@ -1,18 +1,24 @@
 package HubertRoszyk.company.EntitiClass;
 
+import HubertRoszyk.company.controller.PointsController;
+import HubertRoszyk.company.service.PlanetService;
+import HubertRoszyk.company.service.PointsService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Entity
 @Table
 public class Points {
@@ -36,25 +42,18 @@ public class Points {
     @JoinColumn(name = "galaxyId", referencedColumnName = "galaxyId")
     private Galaxy galaxy;
 
-    /*public void getTotalIndustryIncome() {
-        List<Planet> userPlanets = listManager.usersPlanetsHashMap.get(id);
-        if (userPlanets != null) {
-            for (int planetIndex: userPlanets) {
-                for (Planet planet : listManager.planets){
-                    if(planet.getId() == userPlanets.get(planetIndex - 1)){
-                        industryPointsIncome += planet.getIndustryPointsMultiplier() * planet.getIndustryPointsProduce();
-                        sciencePointsIncome += planet.getSciencePointsMultiplier() * planet.getSciencePointsProduce();
-                    }
-                }
-            }
-        }
+    public Points(User user, Galaxy galaxy) {
+        this.galaxy = galaxy;
+        this.user = user;
 
-    }*/
+        industryPoints = 0;
+        sciencePoints = 0;
+    }
 
-    public void assignUser(User user) {
+    /*public void assignUser(User user) {
         this.user = user;
     }
     public void assignGalaxy(Galaxy galaxy) {
         this.galaxy = galaxy;
-    }
+    }*/
 }
