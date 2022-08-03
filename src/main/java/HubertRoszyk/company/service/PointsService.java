@@ -1,6 +1,7 @@
 package HubertRoszyk.company.service;
 
 import HubertRoszyk.company.EntitiClass.Points;
+import HubertRoszyk.company.PointGenerator;
 import HubertRoszyk.company.repository.PointsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,9 @@ public class PointsService {
     }
     public Points getPointsByUserIdAndGalaxyId(int userId, int galaxyId) {
         return repository.findPointsByUserIdAndGalaxyId(userId, galaxyId);
+    }
+    public void updatePoints(Points points) {
+        repository.deleteById(points.getId());
+        repository.save(points);
     }
 }

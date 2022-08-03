@@ -36,6 +36,8 @@ public class Binder {
 
         planet.asignUser(user);
 
+        pointsController.getTotalIndustryIncome(userId, planet.getGalaxy().getId());
+
         return planetService.savePlanet(planet);
     }
     public Galaxy bindGalaxyToUser(int userId, int galaxyId) { //user change

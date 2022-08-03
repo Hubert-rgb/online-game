@@ -4,6 +4,7 @@ import HubertRoszyk.company.EntitiClass.Galaxy;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.EntitiClass.Points;
 import HubertRoszyk.company.EntitiClass.User;
+import HubertRoszyk.company.PointGenerator;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.PointsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,16 @@ public class PointsController {
     @Autowired
     private PlanetService planetService;
 
+    @Autowired
+    private PointGenerator pointGenerator;
+
     public void createPoints(User user, Galaxy galaxy) {
         Points points = new Points(user, galaxy);
         pointsService.savePoints(points);
 
         getTotalIndustryIncome(user.getId(), galaxy.getId());
+
+        pointGenerator.generatePoints();
     }
 
     public void getTotalIndustryIncome(int userId, int galaxyId) {
@@ -41,9 +47,9 @@ public class PointsController {
                 currentSciencePointsIncome += planet.getSciencePointsMultiplier() * planet.getSciencePointsProduce();
             }
         }
-        points.setIndustryPoints(currentIndustryPointsIncome);
-        points.setSciencePoints(currentSciencePointsIncome);
+        points.setIndustryPointsIncome(currentIndustryPointsIncome);
+        points.setSciencePointsIncome(currentSciencePointsIncome);
 
-        pointsService.savePoints(points);
+        pointsService.updatePoints(points);
     }
 }

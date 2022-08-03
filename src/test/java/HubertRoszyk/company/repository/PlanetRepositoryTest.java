@@ -4,6 +4,7 @@ import HubertRoszyk.company.EntitiClass.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,9 @@ class PlanetRepositoryTest {
     @Autowired
     private PlanetRepository underTest;
 
+    @Autowired
+    private TestEntityManager entityManager;
+
     @Test
     void itShouldGetPlanetsByGalaxyId() {
         //given
@@ -25,12 +29,15 @@ class PlanetRepositoryTest {
                 123,
                 1451
         );
-        underTest.save(planet);
+        Galaxy galaxy = new Galaxy();
+        planet.setGalaxy(galaxy);
+        entityManager.persist(galaxy);
+        entityManager.persist(planet);
+        entityManager.flush();
         //when
-        Planet savedPlanet = underTest.save(planet);
+        Set<Planet> savedPlanet = underTest.getPlanetsByGalaxyId(galaxy.getId());
         //then
-        assertThat(savedPlanet).usingRecursiveComparison()
-                .ignoringFields("planetId").isEqualTo(planet);
+        assertThat(savedPlanet).contains(planet);
     }
     @Test
     void itShouldGetPlanetsByGalaxyId2() {
@@ -43,7 +50,7 @@ class PlanetRepositoryTest {
         );
         underTest.save(planet);
         //planetRepository.save(planet);
-        List<Planet> planets = underTest.findAllByGalaxyId(null);
+        Set<Planet> planets = underTest.getPlanetsByGalaxyId(null);
 
         assertThat(planets).contains(planet);
     }

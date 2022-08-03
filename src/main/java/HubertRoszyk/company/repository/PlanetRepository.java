@@ -16,7 +16,7 @@ public interface PlanetRepository extends JpaRepository<Planet, Integer> {
             @Param("galaxyId") Integer galaxyId
             );
 
-    @Query(value = "SELECT * FROM PLANET WHERE galaxy_Id = :galaxyId AND user_Id = :userId")
+    @Query(value = "SELECT * FROM PLANET WHERE user_Id = :userId AND galaxy_Id = :galaxyId ", nativeQuery = true)
     Set<Planet> findAllUserPlanetsInGalaxy(
             @Param("userId") Integer userId,
             @Param("galaxyId") Integer galaxyId

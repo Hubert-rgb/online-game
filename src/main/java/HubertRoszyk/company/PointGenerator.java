@@ -28,12 +28,13 @@ public class PointGenerator {
         }
         return instance;
     }*/
-    @EventListener(ApplicationReadyEvent.class)
+    //@EventListener(ApplicationReadyEvent.class)
     public void generatePoints() {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 List<Points> pointsList = pointsService.getPointsList();
+                System.out.println(pointsList);
                 for (Points points: pointsList) {
 
                     int industryPoints = points.getIndustryPoints();
@@ -45,6 +46,7 @@ public class PointGenerator {
 
                     points.setIndustryPoints(industryPoints);
                     points.setSciencePoints(sciencePoints);
+                    pointsService.updatePoints(points);
                 }
                 System.out.println("wygenerowano");
             }
