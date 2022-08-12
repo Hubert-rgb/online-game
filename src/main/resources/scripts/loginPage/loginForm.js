@@ -69,5 +69,3 @@ function login(username, password){
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(data);
 }
-
-
