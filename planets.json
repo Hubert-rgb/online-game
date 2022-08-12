@@ -1,38 +1,50 @@
 [
     {
-        "name": "Hoth",
-        "industryPointsMultiplier": 2, 
-        "sciencePointsMultiplier": 1,
-        "size": 3,
-        "xCord": 10,
-        "yCord": 10, 
-        "owner": 1
-    },
-    {
-        "name": "Naboo",
-        "industryPointsMultiplier": 2, 
+        "id": 1,
+        "industryPointsMultiplier": 2,
         "sciencePointsMultiplier": 3,
         "size": 2,
-        "xCord": -10,
-        "yCord": 20, 
-        "owner": 2
+        "galaxyId":1,
+        "userId": 1,
+        "industryPointsProduce": 1,
+        "sciencePointsProduce": 2,
+        "xLocation": 100,
+        "yLocation": 100
     },
     {
-        "name": "Tatooine",
-        "industryPointsMultiplier": 3, 
-        "sciencePointsMultiplier": 1,
-        "size": 1,
-        "xCord": 40,
-        "yCord": 32, 
-        "owner": 3
-    },
-    {
-        "name": "Mustafar",
-        "industryPointsMultiplier": 3, 
-        "sciencePointsMultiplier": 1,
+        "id": 2,
+        "industryPointsMultiplier": 2,
+        "sciencePointsMultiplier": 3,
         "size": 2,
-        "xCord": 30,
-        "yCord": -39, 
-        "owner": 1
+        "galaxyId":1,
+        "userId": 1,
+        "industryPointsProduce": 1,
+        "sciencePointsProduce": 2,
+        "xLocation": 230,
+        "yLocation": 140
+    },
+    {
+        "id": 3,
+        "industryPointsMultiplier": 2,
+        "sciencePointsMultiplier": 3,
+        "size": 2,
+        "galaxyId":1,
+        "userId": 3,
+        "industryPointsProduce": 1,
+        "sciencePointsProduce": 2,
+        "xLocation": 10,
+        "yLocation": 310
+    },
+    {
+        "id": 4,
+        "industryPointsMultiplier": 2,
+        "sciencePointsMultiplier": 3,
+        "size": 2,
+        "galaxyId":1,
+        "userId": 2,
+        "industryPointsProduce": 1,
+        "sciencePointsProduce": 2,
+        "xLocation": 400,
+        "yLocation": 120
     }
 ]

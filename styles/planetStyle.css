@@ -1,24 +1,20 @@
-.planetsOutside {
+.planetOutside {
     cursor: pointer;
     border: 1px solid;
-    height: 20px;
-    width: 20px;
     background-color: red;
 }
 
-#p1 {
-    position: absolute;
-    background-color: blue;
+[data-size="1"]{
+    height: 20px;
+    width: 20px;
 }
-#p2 {
-    position: absolute;
-    background-color: green;
+
+[data-size="2"]{
+    height: 25px;
+    width: 25px;
 }
-#p3 {
-    position: absolute;
-    background-color: yellow;
-}
-#p4 {
-    position: absolute;
-    background-color: red;
+
+[data-size="3"]{
+    height: 30px;
+    width: 30px;
 }

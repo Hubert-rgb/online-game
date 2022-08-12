@@ -7,9 +7,10 @@
     <title>Index</title>
 
     <link rel="stylesheet" href="../styles/menu.css">
+    <script src="../scripts/menu.js" defer></script>
 </head>
 <body>
-    <header >
+    <header>
         Stellaris but better
         <button id="logOutButton" class="button">Log out</button>
     </header>
@@ -21,6 +22,13 @@
         <ul id="galaxyList">
         </ul>
     </div>
-    <script src="../scripts/menu.js"></script>
+    <div class="formBackground">
+        <form id="form" class="form">
+            <input id="galaxyName" type="text" placeholder="galaxy name" autocomplete="none" required></input>
+            <button id="submitButton" type="submit">Create new galaxy</button>
+            <span class="closeForm">&times;</span>
+        </form>
+    </div>
+    
 </body>
 </html>

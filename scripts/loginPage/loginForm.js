@@ -38,7 +38,7 @@ function login(){
 }
 */
 
-const myForm = document.getElementById('myFrom')
+const myForm = document.getElementById('myForm')
 myForm.addEventListener('submit', e => {
     e.preventDefault();
     const username = document.getElementById('username').value;
