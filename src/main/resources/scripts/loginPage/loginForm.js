@@ -38,6 +38,7 @@ function login(){
 }
 */
 
+
 const myForm = document.getElementById('myForm')
 myForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -50,13 +51,13 @@ myForm.addEventListener('submit', e => {
 function login(username, password){
     const data = JSON.stringify({
         "name": username,
-        "password": password
+        "password": password      
     });
-
+    
 
     const xhr = new XMLHttpRequest();
     //xhr.withCredentials = true;
-
+    
 
     xhr.addEventListener("readystatechange", function() {
       if(this.readyState === 4) {
