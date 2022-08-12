@@ -38,6 +38,7 @@ function login(){
 }
 */
 
+
 const myForm = document.getElementById('myForm')
 myForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -48,7 +49,12 @@ myForm.addEventListener('submit', e => {
 
 
 function login(username, password){
-    const data = JSON.stringify({'name' : username, 'password' : password})
+    const data = JSON.stringify({
+        "name": username,
+        "password": password      
+    });
+    
+
     const xhr = new XMLHttpRequest();
     //xhr.withCredentials = true;
     
@@ -56,12 +62,12 @@ function login(username, password){
     xhr.addEventListener("readystatechange", function() {
       if(this.readyState === 4) {
         console.log(this.responseText);
-        alert(xhr.responseText);
-      }
-    });
+      }});
 
     xhr.open("POST", "http://localhost:8080/loginUser", true);
     //xhr.withCredentials = true;
-    xhr.setRequestHeader("Content-Type", "application/JSON");
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(data);
 }
+
+

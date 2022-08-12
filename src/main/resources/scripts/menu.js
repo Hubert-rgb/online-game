@@ -60,7 +60,7 @@ function sendHttpRequest(method, url, data){
         xhr.responseType = 'json';
         
         if(data){
-        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.setRequestHeader('Content-Type', 'application/json');
         };
         
         xhr.onload = () =>{
@@ -79,51 +79,7 @@ function sendHttpRequest(method, url, data){
     return promise;
 };
 
-//---------------------------//
-//-----adding new galaxy-----//
-//---------------------------//
 
-const createNewGalaxyButton = document.querySelector('#newGalaxyButton');
-const formBackground = document.querySelector('.formBackground');
-const closeFrom = document.querySelector('.closeForm')
-createNewGalaxyButton.addEventListener('click', () =>{
-    formBackground.classList.toggle('backgroundActive');
-});
-closeFrom.addEventListener('click', () => {
-    formBackground.classList.toggle('backgroundActive');
-});
-
-const form = document.getElementById('form')
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    const galaxyName = document.getElementById('galaxyName').value;
-    sendHttpRequest('POST', 'http://localhost:8080/createGalaxy', {
-        galaxyName: galaxyName
-    })
-    .then(responseData => {
-        console.log(responseData)
-    })
-    .catch(err => {
-        console.log(err);
-    });
-    location.reload();
-});
-
-
-/* not needed (probably)
-function newGalaxy(galaxyName){
-    const data = `{"name": ${galaxyName}}`;
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener("readystatechange", () => {
-      if(this.readyState === 4) {
-        console.log(this.responseText);
-        alert(xhr.responseText);
-      }
-    });
-    xhr.open("POST", "http://localhost:8080/createGalaxy", true);
-    xhr.send(data);    
-};
-*/
 
 
 
@@ -179,14 +135,62 @@ async function galaxyList(){
         li.appendChild(btn);
         li.setAttribute('class', 'listItem');
         list.appendChild(li);
+    })};
+
+const list = document.getElementById('galaxyList');
+const newGalaxyButton = document.createElement('button');
+newGalaxyButton.setAttribute('id', 'newGalaxyButton');
+newGalaxyButton.setAttribute('class', 'button');
+newGalaxyButton.innerText = 'Create new galaxy';
+list.appendChild(newGalaxyButton);
+
+
+//---------------------------//
+//-----adding new galaxy-----//
+//---------------------------//
+
+
+const createNewGalaxyButton = document.querySelector('#newGalaxyButton');
+const formBackground = document.querySelector('.formBackground');
+const closeFrom = document.querySelector('.closeForm')
+console.log()
+createNewGalaxyButton.onclick = () => {
+    formBackground.classList.toggle('backgroundActive')};
+closeFrom.onclick = () => {
+    formBackground.classList.toggle('backgroundActive')};
+
+const form = document.getElementById('form')
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const galaxyName = document.getElementById('galaxyName').value;
+    sendHttpRequest('POST', 'http://localhost:8080/createGalaxy', {
+        galaxyName: galaxyName
+    })
+    .then(responseData => {
+        console.log(responseData)
+    })
+    .catch(err => {
+        console.log(err);
     });
-    
-    const newGalaxyButton = document.createElement('button');
-    newGalaxyButton.setAttribute('id', 'newGalaxyButton');
-    newGalaxyButton.setAttribute('class', 'button');
-    newGalaxyButton.innerText = 'Create new galaxy';
-    list.appendChild(newGalaxyButton);
+    location.reload();
+});
+
+
+/* not needed (probably)
+function newGalaxy(galaxyName){
+    const data = `{"name": ${galaxyName}}`;
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", () => {
+      if(this.readyState === 4) {
+        console.log(this.responseText);
+        alert(xhr.responseText);
+      }
+    });
+    xhr.open("POST", "http://localhost:8080/createGalaxy", true);
+    xhr.send(data);    
 };
+*/  
 
 //----------------------------------//
 // ----- Connecting to galaxy ----- //
@@ -225,9 +229,10 @@ async function connectToGalaxy(galaxy)
 
 
 
-
+/*
 const joinButton = document.querySelectorAll('joinButton')
 
 joinButton.forEach(addEventListener('click', () =>{
 
 }));
+*/
