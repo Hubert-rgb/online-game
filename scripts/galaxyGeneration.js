@@ -95,7 +95,6 @@ planetListJSON.forEach( gPlanet => {
   planet.setAttribute('data-science-points-multiplier', gPlanet.sciencePointsMultiplier);
   planet.setAttribute('data-industry-points-produce', gPlanet.industryPointsProduce);
   planet.setAttribute('data-science-points-produce', gPlanet.sciencePointsProduce);
-;
   
   const x = gPlanet.xLocation;
   const y = gPlanet.yLocation;
