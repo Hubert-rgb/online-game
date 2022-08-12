@@ -48,20 +48,23 @@ myForm.addEventListener('submit', e => {
 
 
 function login(username, password){
-    const data = JSON.stringify({'name' : username, 'password' : password})
+    const data = JSON.stringify({
+        "name": username,
+        "password": password
+    });
+
+
     const xhr = new XMLHttpRequest();
     //xhr.withCredentials = true;
-    
+
 
     xhr.addEventListener("readystatechange", function() {
       if(this.readyState === 4) {
         console.log(this.responseText);
-        alert(xhr.responseText);
-      }
-    });
+      }});
 
     xhr.open("POST", "http://localhost:8080/loginUser", true);
     //xhr.withCredentials = true;
-    xhr.setRequestHeader("Content-Type", "application/JSON");
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(data);
 }
