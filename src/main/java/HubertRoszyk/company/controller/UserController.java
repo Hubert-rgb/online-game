@@ -2,6 +2,7 @@ package HubertRoszyk.company.controller;
 
 import HubertRoszyk.company.EntitiClass.User;
 import HubertRoszyk.company.service.UserService;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,11 @@ import java.util.List;
 @Controller
 public class UserController {
     @PostMapping("/loginUser")
-    public User loginUser(@RequestParam String name, String password) {
+    public User loginUser(@RequestBody JSONObject jsonInput) {
+        String name = (String) jsonInput.get("name");
+        String password = (String) jsonInput.get("password");
+
+
         User currentUser = null;
 
         List<User> users = userService.getUsersList();

@@ -8,9 +8,11 @@ import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.PointsService;
 import HubertRoszyk.company.service.UserService;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +32,10 @@ public class Binder {
     PointsController pointsController;
 
     @PostMapping("/bindPlanetToUser")
-    Planet bindPlanetToUser(@RequestParam int userId, int planetId) {
+    Planet bindPlanetToUser(@RequestBody JSONObject jsonInput) {
+        int userId = (int) jsonInput.get("userId");
+        int planetId = (int) jsonInput.get("planetId");
+
         User user = userService.getUserById(userId);
         Planet planet = planetService.getPlanetById(planetId);
 

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Set;
@@ -31,16 +32,16 @@ class PlanetRepositoryTest {
         );
         Galaxy galaxy = new Galaxy();
         planet.setGalaxy(galaxy);
-        entityManager.persist(galaxy);
-        entityManager.persist(planet);
-        entityManager.flush();
+
+        underTest.save(planet);
         //when
-        Set<Planet> savedPlanet = underTest.getPlanetsByGalaxyId(galaxy.getId());
+        Set<Planet> gotPlanets = underTest.getPlanetsByGalaxyId(galaxy.getId());
         //then
-        assertThat(savedPlanet).contains(planet);
+        assertThat(gotPlanets).contains(planet);
     }
     @Test
-    void itShouldGetPlanetsByGalaxyId2() {
+    void itShouldFindAllUserPlanetsInGalaxy() {
+        //given
         Planet planet = new Planet(
                 2,
                 3,
@@ -48,10 +49,22 @@ class PlanetRepositoryTest {
                 123,
                 1451
         );
-        underTest.save(planet);
-        //planetRepository.save(planet);
-        Set<Planet> planets = underTest.getPlanetsByGalaxyId(null);
+        User user = new User();
+        Galaxy galaxy = new Galaxy();
 
-        assertThat(planets).contains(planet);
+        planet.setGalaxy(galaxy);
+        planet.setUser(user);
+
+        entityManager.persist(user);
+        entityManager.persist(galaxy);
+        entityManager.persist(planet);
+        entityManager.flush();
+
+        //underTest.save(planet);
+
+        //when
+        Set<Planet> gotPlanets = underTest.findAllUserPlanetsInGalaxy(user.getId(), galaxy.getId());
+        //then
+        assertThat(gotPlanets).contains(planet);
     }
 }

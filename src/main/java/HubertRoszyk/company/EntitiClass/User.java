@@ -15,16 +15,18 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table(name = "users") //user nie działą w h2
 public class User {
 
     @Id
     @Column(name = "userId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     @NonNull
+    @Column(name = "userName")
     private String name;
     @NonNull
+    @Column(name = "userPassword")
     private String password;
 
     @JsonIgnore

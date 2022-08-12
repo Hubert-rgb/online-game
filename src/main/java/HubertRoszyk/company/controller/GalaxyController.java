@@ -31,7 +31,10 @@ public class GalaxyController {
     Binder binder;
 
     @GetMapping("/connectToGalaxy")
-    public Set<Planet> connectToGalaxy(@RequestParam int userId, int galaxyId) {
+    public Set<Planet> connectToGalaxy(@RequestBody JSONObject jsonInput) {
+        int userId = (int) jsonInput.get("userId");
+        int galaxyId = (int) jsonInput.get("galaxyId");
+
         User user = userService.getUserById(userId);
 
         Set<Planet> galaxyPlanets = planetService.getPlanetByGalaxy(galaxyId);
