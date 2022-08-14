@@ -34,7 +34,7 @@ public class PointsService {
         return repository.findPointsByUserIdAndGalaxyId(userId, galaxyId);
     }
     public void updatePoints(Points points) {
-        repository.deleteById(points.getId());
+        //repository.deleteById(points.getId());
         repository.save(points);
     }
 }

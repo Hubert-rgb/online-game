@@ -3,6 +3,7 @@ package HubertRoszyk.company.EntitiClass;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,8 +41,9 @@ public class Planet {
 
     @Transient
     private PlanetLocation planetLocation;
-    @Transient
-    private List<Integer> buildingList;
+
+    @OneToMany(mappedBy = "planet")
+    private Set<Building> buildingList = new HashSet<>();
 
     public Planet(int industryPointsMultiplier, int sciencePointsMultiplier, int size, int xLocation, int yLocation) {
         this.industryPointsMultiplier = industryPointsMultiplier;

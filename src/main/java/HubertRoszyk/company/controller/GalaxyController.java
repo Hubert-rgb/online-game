@@ -7,6 +7,7 @@ import HubertRoszyk.company.RandomDraw;
 import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.UserService;
+import lombok.NonNull;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,9 @@ public class GalaxyController {
 
     @GetMapping("/connectToGalaxy")
     public Set<Planet> connectToGalaxy(@RequestBody JSONObject jsonInput) {
+        @NonNull
         int userId = (int) jsonInput.get("userId");
+        @NonNull
         int galaxyId = (int) jsonInput.get("galaxyId");
 
         User user = userService.getUserById(userId);
@@ -45,8 +48,12 @@ public class GalaxyController {
                 return galaxyPlanets;
             }
         }
-        binder.bindGalaxyToUser(userId, galaxyId);
-        return galaxyPlanets;
+        Galaxy galaxy = binder.bindGalaxyToUser(userId, galaxyId);
+        if (galaxy == null) {
+            return null;
+        } else {
+            return galaxyPlanets;
+        }
     }
 
     @GetMapping("/createGalaxy")

@@ -21,8 +21,6 @@ public class Main {
     //TODO getTotalIndustryIncome
     //TODO tests
     //TODO zabespieczenia na null
-    //TODO dlaczego pointsgenerator zmienia id?
-    //private static PointGenerator pointGenerator;
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         ConfigOperator configOperator = new ConfigOperator();
 

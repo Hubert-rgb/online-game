@@ -49,11 +49,12 @@ myForm.addEventListener('submit', e => {
 
 
 function login(username, password){
-
     const data = JSON.stringify({
         "name": username,
         "password": password      
     });
+    
+
     const xhr = new XMLHttpRequest();
     //xhr.withCredentials = true;
     
@@ -68,5 +69,3 @@ function login(username, password){
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(data);
 }
-
-

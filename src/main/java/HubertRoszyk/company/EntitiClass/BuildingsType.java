@@ -1,5 +1,7 @@
 package HubertRoszyk.company.EntitiClass;
 
+import lombok.Getter;
+import lombok.Setter;
 
 public enum BuildingsType {
     INDUSTRY_POINTS_FACTORY(10, 10),
@@ -7,8 +9,8 @@ public enum BuildingsType {
     DEFENCE(3, 15),
     ARMY_BARRACKS(3, 15);
 
-    final int levelNums,
-    buildingPrice;
+    final int levelNums;
+    public int buildingPrice;
     BuildingsType(int levelNums, int buildingPrice) {
         this.levelNums = levelNums;
         this.buildingPrice = buildingPrice;

@@ -37,8 +37,8 @@ public class PointGenerator {
                 System.out.println(pointsList);
                 for (Points points: pointsList) {
 
-                    int industryPoints = points.getIndustryPoints();
-                    int sciencePoints = points.getSciencePoints();
+                    double industryPoints = points.getIndustryPoints();
+                    double sciencePoints = points.getSciencePoints();
 
                     industryPoints += points.getIndustryPointsIncome();
                     sciencePoints += points.getSciencePointsIncome();

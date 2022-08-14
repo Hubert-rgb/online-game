@@ -27,7 +27,7 @@ public class PointsController {
         Points points = new Points(user, galaxy);
         pointsService.savePoints(points);
 
-        getTotalIndustryIncome(user.getId(), galaxy.getId());
+        //getTotalIndustryIncome(user.getId(), galaxy.getId());
 
         pointGenerator.generatePoints();
     }

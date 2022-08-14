@@ -1,19 +1,30 @@
 package HubertRoszyk.company.EntitiClass;
 
 import HubertRoszyk.company.configuration.ConfigOperator;
+import lombok.*;
 
+import javax.persistence.*;
+
+@AllArgsConstructor
+@RequiredArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Table
+@Entity
 public class Building { // dane budynku, są zależmne od typu i poziomu
-    public BuildingsType buildingsType;
-    public int buildingLevel,
-    id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Enumerated
+    @NonNull
+    private BuildingsType buildingsType;
+    @NonNull
+    private int buildingLevel;
+    private int buildingPrice;
 
-    public int buildingPrice;
-    public void gerBuildingPrice() {
-        buildingPrice = (int) (buildingsType.buildingPrice + ConfigOperator.levelCostMultiplier * buildingLevel);
-    }
-    public Building(int id, BuildingsType buildingsType, int buildingLevel) {
-        this.id = id;
-        this.buildingsType = buildingsType;
-        this.buildingLevel = buildingLevel;
-    }
+    @ManyToOne
+    @JoinColumn(name = "planetId", referencedColumnName = "planetId")
+    private Planet planet;
+
 }

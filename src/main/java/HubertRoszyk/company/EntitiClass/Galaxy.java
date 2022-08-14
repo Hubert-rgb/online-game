@@ -17,7 +17,7 @@ import java.util.Set;
 public class Galaxy {
     //TODO 30 day countdown
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "galaxyId")
     private int id;
     @NonNull

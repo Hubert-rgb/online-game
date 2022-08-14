@@ -20,7 +20,7 @@ public class User {
 
     @Id
     @Column(name = "userId")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NonNull
     @Column(name = "userName")

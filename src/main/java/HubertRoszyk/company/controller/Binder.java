@@ -8,6 +8,7 @@ import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.PointsService;
 import HubertRoszyk.company.service.UserService;
+import lombok.NonNull;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,21 +40,29 @@ public class Binder {
         User user = userService.getUserById(userId);
         Planet planet = planetService.getPlanetById(planetId);
 
-        planet.asignUser(user);
+        if (planet == null || user == null) {
+            return null;
+        } else {
+            planet.asignUser(user);
 
-        pointsController.getTotalIndustryIncome(userId, planet.getGalaxy().getId());
+            planetService.savePlanet(planet); //najpierw trzeba zapisać planetę usera a potem szukać jej punkty
+            pointsController.getTotalIndustryIncome(userId, planet.getGalaxy().getId());
 
-        return planetService.savePlanet(planet);
+            return planet;
+        }
     }
-    public Galaxy bindGalaxyToUser(int userId, int galaxyId) { //user change
+    public Galaxy bindGalaxyToUser(int userId, int galaxyId) {
         User user = userService.getUserById(userId);
         Galaxy galaxy = galaxyService.getGalaxyById(galaxyId);
-        //user.addGalaxy(galaxy);
-        galaxy.addUser();
 
-        pointsController.createPoints(user, galaxy);
+        if (user == null || galaxy == null) {
+            return null;
+        } else {
+            galaxy.addUser();
 
-        //return userService.saveUser(user);
-        return galaxyService.saveGalaxy(galaxy);
+            pointsController.createPoints(user, galaxy);
+
+            return galaxyService.saveGalaxy(galaxy);
+        }
     }
 }
