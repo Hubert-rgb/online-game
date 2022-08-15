@@ -1,7 +1,7 @@
 package HubertRoszyk.company.controller;
 
 import HubertRoszyk.company.EntitiClass.*;
-import HubertRoszyk.company.Strategy.*;
+import HubertRoszyk.company.Strategy.UpdatePointsProduceStrategy.*;
 import HubertRoszyk.company.StringToBuildingsTypeConverter;
 import HubertRoszyk.company.configuration.ConfigOperator;
 import HubertRoszyk.company.service.BuildingService;
@@ -76,7 +76,20 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         System.out.println("building Price = " + buildingPrice);
         System.out.println("Points = " + gotIndustryPoints);
 
-        if (gotIndustryPoints >= buildingPrice && building.getBuildingLevel() < building.getBuildingType().getLevelNums() && building.getPlanet().getSize() > building.getPlanet().getBuildingList().size() + 2) {
+        boolean isEnoughPoints;
+        boolean isNotOnMaximumLevel;
+        boolean isEnoughSpaceOnPlanet;
+
+        isEnoughPoints = gotIndustryPoints >= buildingPrice;
+        isNotOnMaximumLevel = building.getBuildingLevel() < building.getBuildingType().getLevelNums();
+
+        if(setBuildingLevel > 1) {
+            isEnoughSpaceOnPlanet = true;
+        } else {
+            isEnoughSpaceOnPlanet = building.getPlanet().getSize() + 2 > building.getPlanet().getBuildingList().size();
+        }
+
+        if (isEnoughPoints && isNotOnMaximumLevel  && isEnoughSpaceOnPlanet) {
             double setIndustryPoints = gotIndustryPoints - buildingPrice;
             points.setIndustryPoints(setIndustryPoints);
 
@@ -86,14 +99,13 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
             pointsService.savePoints(points);
             buildingService.saveBuilding(building);
             return "upgraded";
-        } else if (gotIndustryPoints < buildingPrice) {
-            return "not enough points";
-        } else if (building.getBuildingLevel() >= building.getBuildingType().getLevelNums()) {
+        } else if (!isNotOnMaximumLevel) {
             return "maximal level";
-        } else if (building.getPlanet().getSize() <= building.getPlanet().getBuildingList().size()){
-            return "not enough size";
+        } else if (!isEnoughSpaceOnPlanet){
+            return "not enough space";
+        } else {
+            return "not enough points";
         }
-        return null;
     }
      /*public void updatePlanetIndustryPoints(Building building) {
         Planet planet = planetService.getPlanetById(building.getPlanet().getId());

@@ -1,4 +1,4 @@
-package HubertRoszyk.company.Strategy;
+package HubertRoszyk.company.Strategy.UpdatePointsProduceStrategy;
 
 import HubertRoszyk.company.EntitiClass.Building;
 

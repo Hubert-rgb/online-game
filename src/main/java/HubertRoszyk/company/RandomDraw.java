@@ -1,6 +1,7 @@
 package HubertRoszyk.company;
 
 import HubertRoszyk.company.EntitiClass.PlanetLocation;
+import HubertRoszyk.company.EntitiClass.PlanetType;
 
 import java.util.Random;
 
@@ -15,9 +16,9 @@ public class RandomDraw {
         PlanetLocation planetLocation = new PlanetLocation(xLocation, yLocation);
         return planetLocation;
     }
-    public static int sizeDraw() {
+    public static int sizeDraw(PlanetType planetType) {
         int size;
-        size = random.nextInt(3); //do config
+        size = random.nextInt(planetType.getMaximalSize()); //do config
         return size;
     }
     public static int industryPointsMultiplierDraw(int totalPoints) {

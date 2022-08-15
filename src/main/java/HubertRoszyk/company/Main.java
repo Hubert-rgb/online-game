@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.sql.SQLException;
 
-
+//management
 @SpringBootApplication
 @RestController
 @EnableJpaRepositories
@@ -21,9 +21,7 @@ public class Main {
     //TODO tests
     //TODO zabespieczenia na null
 
-    //TODO początkowe planety i nowe lepsze które później można podbić
-    //TODO wybieranie ilości graczy tworząc grę
-    //TODO długi if na strategy + factory pattern
+    //TODO building controller bool
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         ConfigOperator configOperator = new ConfigOperator();
 

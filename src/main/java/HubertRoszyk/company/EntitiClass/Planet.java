@@ -3,9 +3,7 @@ package HubertRoszyk.company.EntitiClass;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -20,10 +18,13 @@ public class Planet {
     @Column(name = "planetId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Enumerated
+    private PlanetType planetType;
     private int industryPointsMultiplier;
     private int sciencePointsMultiplier;
     private int defencePointsMultiplier = 1;
     private int attackPointsMultiplier = 1;
+
     private int size;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -49,12 +50,13 @@ public class Planet {
     @OneToMany(mappedBy = "planet")
     private Set<Building> buildingList = new HashSet<>();
 
-    public Planet(int industryPointsMultiplier, int sciencePointsMultiplier, int size, int xLocation, int yLocation) {
+    public Planet(PlanetType planetType, int industryPointsMultiplier, int sciencePointsMultiplier, int size, int xLocation, int yLocation) {
         this.industryPointsMultiplier = industryPointsMultiplier;
         this.sciencePointsMultiplier = sciencePointsMultiplier;
-        this.size = size;
         this.planetLocationX = xLocation;
         this.planetLocationY = yLocation;
+        this.size = size;
+        this.planetType = planetType;
 
         PlanetLocation location = new PlanetLocation(xLocation, yLocation);
         planetLocation = location;

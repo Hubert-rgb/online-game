@@ -1,7 +1,6 @@
 package HubertRoszyk.company.controller;
 
 import HubertRoszyk.company.EntitiClass.*;
-import HubertRoszyk.company.configuration.ConfigOperator;
 import HubertRoszyk.company.Validator;
 import HubertRoszyk.company.RandomDraw;
 import HubertRoszyk.company.service.GalaxyService;
@@ -10,6 +9,7 @@ import HubertRoszyk.company.service.UserService;
 import lombok.NonNull;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class GalaxyController {
     Binder binder;
 
     @GetMapping("/connectToGalaxy")
-    public Set<Planet> connectToGalaxy(@RequestBody JSONObject jsonInput) {
+    public Set<Planet> connectToGalaxy(@RequestHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN) @RequestBody JSONObject jsonInput) {
         @NonNull
         int userId = (int) jsonInput.get("userId");
         @NonNull
@@ -57,20 +57,35 @@ public class GalaxyController {
     }
 
     @GetMapping("/createGalaxy")
-    public List<Planet> galaxyInit(@RequestBody JSONObject request){ //do przeanalizowania bo nie wygląda za ładnie
-        String galaxyName = (String) request.get("galaxyName");
+    public List<Planet> galaxyInit(@RequestBody JSONObject jsonInput){ //do przeanalizowania bo nie wygląda za ładnie
+        int maximalUserNumber = (int) jsonInput.get("maximalUserNumber");
+        String galaxyName = (String) jsonInput.get("galaxyName");
 
-        Galaxy galaxy = new Galaxy(0, galaxyName);
+        Galaxy galaxy = new Galaxy(maximalUserNumber, galaxyName);
+        galaxyService.saveGalaxy(galaxy);
 
         List<Planet> planets = new ArrayList<>();
 
-        int planetsNum = ConfigOperator.planetsNum;
-        int randomVariablesSum = ConfigOperator.randomVariablesSum;
+        //później można tworzyć galaktyki nie posiadające każdego typu planet
+        for (PlanetType planetType : PlanetType.values()) {
+            planets.addAll(createPlanet(planetType, galaxy));
+        }
+
+        List<Planet> validatedPlanets = Validator.validatePlanetPositionInGalaxy(planets);
+        planetService.savePlanetsList(validatedPlanets);
+
+        return validatedPlanets;
+    }
+    public List<Planet> createPlanet(PlanetType planetType, Galaxy galaxy) {
+        List<Planet> planets = new ArrayList<>();
+
+        int planetsNum = galaxy.getMaximalUserNumber() + 1;
+        int randomVariablesSum = planetType.getRandomVariablesSum();
 
         for(int i = 0; i < planetsNum; i++){
-
-            int size = RandomDraw.sizeDraw(); //nie wiem czy tego inaczej nie zrobić
+            int size = RandomDraw.sizeDraw(planetType);
             size++;
+
             int localRandomVariablesSum = randomVariablesSum - size;
 
             int industryPointsMultiplier = RandomDraw.industryPointsMultiplierDraw(localRandomVariablesSum); //te dwie linijki coś bym zmienił
@@ -79,16 +94,11 @@ public class GalaxyController {
             PlanetLocation planetLocation = RandomDraw.locationDraw();
             //validator
 
-            Planet planet = new Planet(industryPointsMultiplier, sciencePointsMultiplier, size, planetLocation.xLocation, planetLocation.yLocation);
+            Planet planet = new Planet(planetType,industryPointsMultiplier, sciencePointsMultiplier, size, planetLocation.xLocation, planetLocation.yLocation);
             planet.asignGalaxy(galaxy);
             planets.add(planet);
         }
-        List<Planet> validatedPlanets = Validator.validatePlanetPositionInGalaxy(planets);
-
-        planetService.savePlanetsList(validatedPlanets);
-        galaxyService.saveGalaxy(galaxy);
-
-        return validatedPlanets;
+        return planets;
     }
 
     @GetMapping("/getPlanets")

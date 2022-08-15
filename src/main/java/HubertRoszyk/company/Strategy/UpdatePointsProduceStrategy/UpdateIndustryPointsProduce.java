@@ -1,9 +1,8 @@
-package HubertRoszyk.company.Strategy;
+package HubertRoszyk.company.Strategy.UpdatePointsProduceStrategy;
 
 import HubertRoszyk.company.EntitiClass.Building;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.service.PlanetService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class UpdateIndustryPointsProduce implements UpdatePointsProduceStrategy {
     //@Autowired

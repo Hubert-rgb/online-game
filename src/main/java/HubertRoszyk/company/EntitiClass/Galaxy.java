@@ -20,8 +20,9 @@ public class Galaxy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "galaxyId")
     private int id;
+    private int userNumber = 0;
     @NonNull
-    private int userNumber;
+    private int maximalUserNumber;
     @NonNull
     private String galaxyName;
 

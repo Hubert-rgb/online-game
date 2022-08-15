@@ -2,6 +2,7 @@ package HubertRoszyk.company.controller;
 
 import HubertRoszyk.company.EntitiClass.User;
 import HubertRoszyk.company.service.UserService;
+import HubertRoszyk.company.wrongDataException;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ public class UserController {
             if(user.getName().equals(name) && user.getPassword().equals(password)) {
                 currentUser = user;
                 return currentUser;
+            } else if (user.getName().equals(name)) {
+                throw new wrongDataException();
             }
         }
 

@@ -1,14 +1,13 @@
-package HubertRoszyk.company.Strategy;
+package HubertRoszyk.company.Strategy.UpdatePointsProduceStrategy;
 
 import HubertRoszyk.company.EntitiClass.Building;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.service.PlanetService;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public class UpdateAttackPointsProduce implements UpdatePointsProduceStrategy {
+public class UpdateDefencePointsProduce implements UpdatePointsProduceStrategy {
     PlanetService planetService;
 
-    public UpdateAttackPointsProduce(PlanetService planetService) {
+    public UpdateDefencePointsProduce(PlanetService planetService) {
         this.planetService = planetService;
     }
 
@@ -16,11 +15,11 @@ public class UpdateAttackPointsProduce implements UpdatePointsProduceStrategy {
     public void update(Building building) {
         Planet planet = planetService.getPlanetById(building.getPlanet().getId());
 
-        int gotAttackPoints = planet.getAttackPointsProduce();
+        int gotDefencePoints = planet.getDefencePointsProduce();
         int producesPoints = building.getBuildingType().getPointsProduces();
 
-        int setAttackPoints = gotAttackPoints + producesPoints;
-        planet.setAttackPointsProduce(setAttackPoints);
+        int setDefencePoints = gotDefencePoints + producesPoints;
+        planet.setDefencePointsProduce(setDefencePoints);
 
         planetService.savePlanet(planet);
     }
