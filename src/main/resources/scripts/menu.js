@@ -24,16 +24,18 @@ const galaxyListJSON = [
 */
 
 
-const auth = new Auth();
+const authorisation = new Authorisation();
 
 window.onload = displayUsername();
 window.onload = galaxyList();
 
 // ----- log out button (Now: exiting the page , InF: will log out) ----- //
-const logOutButton = document.getElementById('logOutButton');
-logOutButton.addEventListener('click', () => {
-    auth.logOut();
-});
+
+const logOutButton = document.querySelector('#logOutButton');
+logOutButton.onclick = () => {
+    authorisation.logOut();
+};
+
 //
 
 //--------------------------//
@@ -57,11 +59,15 @@ function sendHttpRequest(method, url, data){
 };
 */
 
+//------------------------//
+//-----XMLHttpRequest-----//
+//------------------------//
+
 function sendHttpRequest(method, url, data){
     const promise = new Promise((resolve, reject) => {
         
         const xhr = new XMLHttpRequest();
-        xhr.open(method, url,);
+        xhr.open(method, url, true);
         xhr.responseType = 'json';
         
         if(data){
@@ -79,7 +85,7 @@ function sendHttpRequest(method, url, data){
 
         xhr.onerror = () => {
             reject(xhr.response);
-        }
+        };
     });
     return promise;
 };
@@ -167,7 +173,6 @@ list.appendChild(newGalaxyButton);
 const createNewGalaxyButton = document.querySelector('#newGalaxyButton');
 const formBackground = document.querySelector('.formBackground');
 const closeFrom = document.querySelector('.closeForm')
-console.log()
 createNewGalaxyButton.onclick = () => {
     formBackground.classList.toggle('backgroundActive')};
 closeFrom.onclick = () => {
@@ -181,13 +186,13 @@ form.addEventListener('submit', e => {
     sendHttpRequest('POST', 'http://localhost:8080/createGalaxy', {
         galaxyName: galaxyName
     })
-    .then(responseData => {
-        console.log(responseData)
+    .then(()=> {
+        //location.reload();
     })
     .catch(err => {
         console.log(err);
     });
-    location.reload();
+    
 });
 
 
