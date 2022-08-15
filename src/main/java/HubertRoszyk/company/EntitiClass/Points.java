@@ -30,9 +30,13 @@ public class Points {
 
     private double industryPoints;
     private double sciencePoints;
+    private double defencePoints;
+    private double attackPoints;
 
     private double industryPointsIncome;
     private double sciencePointsIncome;
+    private double defencePointsIncome;
+    private double attackPointsIncome;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "userId")

@@ -1,13 +1,18 @@
 package HubertRoszyk.company;
 
+import HubertRoszyk.company.EntitiClass.Building;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.EntitiClass.PlanetLocation;
+import HubertRoszyk.company.EntitiClass.Points;
 import HubertRoszyk.company.configuration.ConfigOperator;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanetDataValidator {
+@Component
+public class Validator {
     public static List<Planet> validatePlanetPositionInGalaxy(List<Planet> galaxy) { //może być mało wydajne przez wielokrotne powtarzanie i rekurencję
         List<Planet> validatedGalaxy = new ArrayList<>();
         validatedGalaxy.add(galaxy.get(0));
@@ -43,4 +48,21 @@ public class PlanetDataValidator {
             return currentPlanetLocation;
         }
     }
+    /*public Boolean enoughPointsCheck(Building building, Points points){
+        double buildingPrice = building.getBuildingPrice();
+        double gotIndustryPoints = points.getIndustryPoints();
+
+        if(gotIndustryPoints >= buildingPrice ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public Boolean upgradedLevelCheck(Building building, Points points) {
+        if(building.getBuildingLevel() < building.getBuildingsType().getLevelNums()) {
+            return true;
+        } else {
+            return false;
+        }
+    }*/
 }

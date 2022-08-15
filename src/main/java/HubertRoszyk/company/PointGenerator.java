@@ -36,16 +36,22 @@ public class PointGenerator {
                 List<Points> pointsList = pointsService.getPointsList();
                 System.out.println(pointsList);
                 for (Points points: pointsList) {
-
-                    double industryPoints = points.getIndustryPoints();
-                    double sciencePoints = points.getSciencePoints();
-
-                    industryPoints += points.getIndustryPointsIncome();
-                    sciencePoints += points.getSciencePointsIncome();
+                    double gotIndustryPoints = points.getIndustryPoints();
+                    double gotSciencePoints = points.getSciencePoints();
+                    double gotDefencePoints = points.getDefencePoints();
+                    double gotAttackPoints = points.getAttackPoints();
 
 
-                    points.setIndustryPoints(industryPoints);
-                    points.setSciencePoints(sciencePoints);
+                    double setIndustryPoints = gotIndustryPoints + points.getIndustryPointsIncome();
+                    double setSciencePoints = gotSciencePoints + points.getSciencePointsIncome();
+                    double setDefencePoints = gotDefencePoints + points.getDefencePointsIncome();
+                    double setAttackPoints = gotAttackPoints + points.getAttackPointsIncome();
+
+                    points.setIndustryPoints(setIndustryPoints);
+                    points.setSciencePoints(setSciencePoints);
+                    points.setDefencePoints(setDefencePoints);
+                    points.setAttackPoints(setAttackPoints);
+
                     pointsService.updatePoints(points);
                 }
                 System.out.println("wygenerowano");

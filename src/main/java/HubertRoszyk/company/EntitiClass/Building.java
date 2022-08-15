@@ -1,6 +1,5 @@
 package HubertRoszyk.company.EntitiClass;
 
-import HubertRoszyk.company.configuration.ConfigOperator;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,12 +17,12 @@ public class Building { // dane budynku, są zależmne od typu i poziomu
     private int id;
     @Enumerated
     @NonNull
-    private BuildingsType buildingsType;
-    @NonNull
-    private int buildingLevel;
+    private BuildingType buildingType;
+    private int buildingLevel = 0;
     private int buildingPrice;
 
     @ManyToOne
+    @NonNull
     @JoinColumn(name = "planetId", referencedColumnName = "planetId")
     private Planet planet;
 

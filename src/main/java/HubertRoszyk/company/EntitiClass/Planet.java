@@ -22,6 +22,8 @@ public class Planet {
     private int id;
     private int industryPointsMultiplier;
     private int sciencePointsMultiplier;
+    private int defencePointsMultiplier = 1;
+    private int attackPointsMultiplier = 1;
     private int size;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -29,7 +31,9 @@ public class Planet {
     private Galaxy galaxy; //przydałoby się coś rzeby nie dało się tego zmienić, może buildier pattern
 
     private int industryPointsProduce = 1;
-    private int sciencePointsProduce = 1;
+    private int sciencePointsProduce = 0;
+    private int defencePointsProduce = 0;
+    private int attackPointsProduce = 0;
 
     private int planetLocationX;
     private int planetLocationY;

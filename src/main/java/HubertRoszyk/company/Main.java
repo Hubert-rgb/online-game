@@ -18,9 +18,12 @@ import java.sql.SQLException;
 @RestController
 @EnableJpaRepositories
 public class Main {
-    //TODO getTotalIndustryIncome
     //TODO tests
     //TODO zabespieczenia na null
+
+    //TODO początkowe planety i nowe lepsze które później można podbić
+    //TODO wybieranie ilości graczy tworząc grę
+    //TODO długi if na strategy + factory pattern
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         ConfigOperator configOperator = new ConfigOperator();
 

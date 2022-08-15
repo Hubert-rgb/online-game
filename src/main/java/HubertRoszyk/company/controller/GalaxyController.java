@@ -2,7 +2,7 @@ package HubertRoszyk.company.controller;
 
 import HubertRoszyk.company.EntitiClass.*;
 import HubertRoszyk.company.configuration.ConfigOperator;
-import HubertRoszyk.company.PlanetDataValidator;
+import HubertRoszyk.company.Validator;
 import HubertRoszyk.company.RandomDraw;
 import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
@@ -83,7 +83,7 @@ public class GalaxyController {
             planet.asignGalaxy(galaxy);
             planets.add(planet);
         }
-        List<Planet> validatedPlanets = PlanetDataValidator.validatePlanetPositionInGalaxy(planets);
+        List<Planet> validatedPlanets = Validator.validatePlanetPositionInGalaxy(planets);
 
         planetService.savePlanetsList(validatedPlanets);
         galaxyService.saveGalaxy(galaxy);
