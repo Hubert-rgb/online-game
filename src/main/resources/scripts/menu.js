@@ -21,13 +21,18 @@ const galaxyListJSON = [
         "players": 8 
     }
 ]
-/**/
+*/
+
+
+const auth = new Auth();
+
+window.onload = displayUsername();
 window.onload = galaxyList();
 
 // ----- log out button (Now: exiting the page , InF: will log out) ----- //
 const logOutButton = document.getElementById('logOutButton');
 logOutButton.addEventListener('click', () => {
-    window.open('login.html', '_self');
+    auth.logOut();
 });
 //
 
@@ -81,9 +86,18 @@ function sendHttpRequest(method, url, data){
 
 
 
-
-
 //
+
+//-------------------------//
+//-----display username----//
+//-------------------------//
+
+function displayUsername(){
+    const displayUsername = document.getElementById('displayUsername');
+    displayUsername.innerText = `Hello ${localStorage.getItem('username')}`;
+}
+//
+
 
 //-----------------------------------------//
 //-----generating the list of galaxies-----//
