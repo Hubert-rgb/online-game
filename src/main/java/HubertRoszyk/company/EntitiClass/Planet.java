@@ -1,6 +1,8 @@
 package HubertRoszyk.company.EntitiClass;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -47,8 +49,13 @@ public class Planet {
     @Transient
     private PlanetLocation planetLocation;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "planet")
     private Set<Building> buildingList = new HashSet<>();
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "planet")
+    private ArmyPoints armyPoints;
 
     public Planet(PlanetType planetType, int industryPointsMultiplier, int sciencePointsMultiplier, int size, int xLocation, int yLocation) {
         this.industryPointsMultiplier = industryPointsMultiplier;

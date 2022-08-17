@@ -2,12 +2,14 @@ package HubertRoszyk.company.Strategy.UpdatePointsProduceStrategy;
 
 import HubertRoszyk.company.EntitiClass.Building;
 import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.controller.FactoryPointsController;
 import HubertRoszyk.company.service.PlanetService;
 
 public class UpdateSciencePointsProduce implements UpdatePointsProduceStrategy {
     PlanetService planetService;
+    FactoryPointsController factoryPointsController;
 
-    public UpdateSciencePointsProduce(PlanetService planetService) {
+    public UpdateSciencePointsProduce(PlanetService planetService, FactoryPointsController factoryPointsController) {
         this.planetService = planetService;
     }
 
@@ -22,5 +24,7 @@ public class UpdateSciencePointsProduce implements UpdatePointsProduceStrategy {
         planet.setSciencePointsProduce(setSciencePoints);
 
         planetService.savePlanet(planet);
+
+        factoryPointsController.getTotalSciencePointsIncome(building.getPlanet().getUser().getId(), building.getPlanet().getGalaxy().getId());
     }
 }

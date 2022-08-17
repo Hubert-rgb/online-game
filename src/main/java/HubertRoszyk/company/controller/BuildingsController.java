@@ -6,12 +6,15 @@ import HubertRoszyk.company.StringToBuildingsTypeConverter;
 import HubertRoszyk.company.configuration.ConfigOperator;
 import HubertRoszyk.company.service.BuildingService;
 import HubertRoszyk.company.service.PlanetService;
-import HubertRoszyk.company.service.PointsService;
+import HubertRoszyk.company.service.FactoryPointsService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class BuildingsController { //dodaje, updatuje i usuwa budynki
@@ -24,16 +27,19 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
     PlanetService planetService;
 
     @Autowired
-    PointsController pointsController;
+    FactoryPointsController factoryPointsController;
 
     @Autowired
-    PointsService pointsService;
+    ArmyPointsController armyPointsController;
+
+    @Autowired
+    FactoryPointsService factoryPointsService;
 
     @Autowired
     StringToBuildingsTypeConverter converter;
 
     @PostMapping("/addBuilding")
-    public String addBuilding(@RequestBody JSONObject jsonInput) {
+    public String addBuilding(@RequestBody JSONObject jsonInput) { //exception not string
         int planetId = (int) jsonInput.get("planetId");
         int userId = (int) jsonInput.get("userId");
         String buildingsTypeString = (String) jsonInput.get("buildingType");
@@ -42,12 +48,13 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
 
         BuildingType buildingType = converter.convert(buildingsTypeString);
 
+        System.out.println(buildingType);
+
         Planet planet = planetService.getPlanetById(planetId);
-        Points points = pointsService.getPointsByUserIdAndGalaxyId(userId, planet.getGalaxy().getId());
 
         Building building = new Building(buildingType, planet);
 
-        return upgradeBuildingsLevelData(building, points);
+        return upgradeBuildingsLevelData(building);
     }
     @PostMapping("/upgradeBuilding")
     public String upgradeBuilding(@RequestBody JSONObject jsonInput) {
@@ -55,23 +62,24 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         int buildingId = (int) jsonInput.get("buildingId");
 
         Building building = buildingService.getBuildingById(buildingId);
-        Points points = pointsService.getPointsByUserIdAndGalaxyId(userId, building.getPlanet().getGalaxy().getId());
 
-        return upgradeBuildingsLevelData(building, points);
+        return upgradeBuildingsLevelData(building);
     }
     public double getBuildingPrice(Building building) {
         int buildingTypePrice = building.getBuildingType().getBuildingPrice();
         double costMultiplier = ConfigOperator.levelCostMultiplier * building.getBuildingLevel();
         return buildingTypePrice * costMultiplier;
     }
-    public String upgradeBuildingsLevelData(Building building, Points points) {
+    public String upgradeBuildingsLevelData(Building building) {
+        FactoryPoints factoryPoints = factoryPointsService.getPointsByUserIdAndGalaxyId(building.getPlanet().getUser().getId(), building.getPlanet().getGalaxy().getId());
+
         int gotBuildingLevel = building.getBuildingLevel();
         int setBuildingLevel = gotBuildingLevel + 1;
 
         building.setBuildingLevel(setBuildingLevel);
 
         double buildingPrice = getBuildingPrice(building);
-        double gotIndustryPoints = points.getIndustryPoints();
+        double gotIndustryPoints = factoryPoints.getIndustryPoints();
 
         System.out.println("building Price = " + buildingPrice);
         System.out.println("Points = " + gotIndustryPoints);
@@ -91,12 +99,11 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
 
         if (isEnoughPoints && isNotOnMaximumLevel  && isEnoughSpaceOnPlanet) {
             double setIndustryPoints = gotIndustryPoints - buildingPrice;
-            points.setIndustryPoints(setIndustryPoints);
+            factoryPoints.setIndustryPoints(setIndustryPoints);
 
             updatePointsIncome(building);
-            pointsController.getTotalIndustryIncome(points.getUser().getId(), building.getPlanet().getGalaxy().getId());
 
-            pointsService.savePoints(points);
+            factoryPointsService.savePoints(factoryPoints);
             buildingService.saveBuilding(building);
             return "upgraded";
         } else if (!isNotOnMaximumLevel) {
@@ -107,26 +114,21 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
             return "not enough points";
         }
     }
-     /*public void updatePlanetIndustryPoints(Building building) {
-        Planet planet = planetService.getPlanetById(building.getPlanet().getId());
-
-        int gotIndustryPoints = planet.getIndustryPointsProduce();
-        int producesPoints = building.getBuildingsType().getPointsProduces();
-
-        int setIndustryPoints = gotIndustryPoints + producesPoints;
-        planet.setIndustryPointsProduce(setIndustryPoints);
-
-         planetService.savePlanet(planet);
-     }*/
     public void updatePointsIncome(Building building) {
         UpdatePointsProduceContext context = new UpdatePointsProduceContext();
 
         switch (building.getBuildingType()) {
-            case INDUSTRY_POINTS_FACTORY -> context.setStrategy(new UpdateIndustryPointsProduce(planetService));
-            case SCIENCE_POINTS_FACTORY -> context.setStrategy(new UpdateSciencePointsProduce(planetService));
-            case DEFENCE -> context.setStrategy(new UpdateDefencePointsProduce(planetService));
-            case ARMY_BARRACKS -> context.setStrategy(new UpdateAttackPointsProduce(planetService));
+            case INDUSTRY -> context.setStrategy(new UpdateIndustryPointsProduce(planetService, factoryPointsController));
+            case SCIENCE -> context.setStrategy(new UpdateSciencePointsProduce(planetService, factoryPointsController));
+            case DEFENCE -> context.setStrategy(new UpdateDefencePointsProduce(planetService, armyPointsController));
+            case ATTACK -> context.setStrategy(new UpdateAttackPointsProduce(planetService, armyPointsController));
         }
         context.executeStrategy(building);
+    }
+
+    @GetMapping("/getBuildingList")
+    public List<Building> getBuildingListOnPlanet(@RequestBody JSONObject jsonInput) {
+        int planetId = (int) jsonInput.get("planetId");
+        return buildingService.getBuildingsByPlanetId(planetId);
     }
 }

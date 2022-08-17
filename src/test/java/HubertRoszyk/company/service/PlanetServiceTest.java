@@ -2,6 +2,7 @@ package HubertRoszyk.company.service;
 
 import HubertRoszyk.company.EntitiClass.Galaxy;
 import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.EntitiClass.PlanetType;
 import HubertRoszyk.company.repository.PlanetRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -33,6 +34,7 @@ class PlanetServiceTest {
     void shouldSavePlanet() {
         //given
         Planet planet = new Planet(
+                PlanetType.SMALL,
                 1,
                 2,
                 3,
@@ -53,6 +55,7 @@ class PlanetServiceTest {
     void shouldSavePlanetsList() {
         //given
         Planet planet = new Planet(
+                PlanetType.SMALL,
                 1,
                 2,
                 3,
@@ -60,6 +63,7 @@ class PlanetServiceTest {
                 267
         );
         Planet planet2 = new Planet(
+                PlanetType.SMALL,
                 2,
                 2,
                 2,
@@ -82,6 +86,7 @@ class PlanetServiceTest {
     void shouldGetPlanetsList() {
         //given
         Planet planet = new Planet(
+                PlanetType.SMALL,
                 1,
                 2,
                 3,
@@ -89,6 +94,7 @@ class PlanetServiceTest {
                 267
         );
         Planet planet2 = new Planet(
+                PlanetType.SMALL,
                 2,
                 2,
                 2,
@@ -108,6 +114,7 @@ class PlanetServiceTest {
     void shouldGetPlanetById() {
         //given
         Planet planet = new Planet(
+                PlanetType.SMALL,
                 1,
                 2,
                 3,
@@ -138,6 +145,7 @@ class PlanetServiceTest {
     void shouldGetPlanetByGalaxy() {
         //given
         Planet planet = new Planet(
+                PlanetType.SMALL,
                 1,
                 2,
                 3,
@@ -154,6 +162,6 @@ class PlanetServiceTest {
         Set<Planet> gotPlanets = underTest.getPlanetByGalaxy(galaxy.getId());
 
         //then
-        assertThat(gotPlanets).isEqualTo(planet);
+        assertThat(gotPlanets).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(planet);
     }
 }

@@ -2,7 +2,6 @@ package HubertRoszyk.company.EntitiClass;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -42,7 +41,7 @@ public class Galaxy {
 
     @JsonIgnore
     @OneToMany(mappedBy = "galaxy")
-    private Set<Points> enrolledPoits = new HashSet<>();
+    private Set<FactoryPoints> enrolledPoits = new HashSet<>();
 
     public void addUser() {
         //users.add(user);

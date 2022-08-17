@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
 @RestController
 @Controller
 public class UserController {
+    @CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
     @PostMapping("/loginUser")
     public User loginUser(@RequestBody JSONObject jsonInput) {
         String name = (String) jsonInput.get("name");
         String password = (String) jsonInput.get("password");
 
 
-        User currentUser = null;
+        User currentUser;
 
         List<User> users = userService.getUsersList();
 

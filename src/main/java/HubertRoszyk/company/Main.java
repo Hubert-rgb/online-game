@@ -19,9 +19,12 @@ import java.sql.SQLException;
 @EnableJpaRepositories
 public class Main {
     //TODO tests
-    //TODO zabespieczenia na null
 
-    //TODO building controller bool
+    //TODO combat
+    //TODO compare attack and defence points, and defence 2*attack = 1*defence
+    //TODO random value 0.8 - 1.2 to multiply attack points
+    //TODO substrate points
+
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         ConfigOperator configOperator = new ConfigOperator();
 

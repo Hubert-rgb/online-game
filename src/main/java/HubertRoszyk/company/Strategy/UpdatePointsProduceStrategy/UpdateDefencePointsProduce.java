@@ -2,13 +2,16 @@ package HubertRoszyk.company.Strategy.UpdatePointsProduceStrategy;
 
 import HubertRoszyk.company.EntitiClass.Building;
 import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.controller.ArmyPointsController;
 import HubertRoszyk.company.service.PlanetService;
 
 public class UpdateDefencePointsProduce implements UpdatePointsProduceStrategy {
     PlanetService planetService;
+    ArmyPointsController armyPointsController;
 
-    public UpdateDefencePointsProduce(PlanetService planetService) {
+    public UpdateDefencePointsProduce(PlanetService planetService, ArmyPointsController armyPointsController) {
         this.planetService = planetService;
+        this.armyPointsController = armyPointsController;
     }
 
     @Override
@@ -22,5 +25,7 @@ public class UpdateDefencePointsProduce implements UpdatePointsProduceStrategy {
         planet.setDefencePointsProduce(setDefencePoints);
 
         planetService.savePlanet(planet);
+
+        armyPointsController.getTotalDefenceIncome(building.getPlanet().getId());
     }
 }

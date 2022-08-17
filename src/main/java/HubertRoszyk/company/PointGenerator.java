@@ -1,26 +1,24 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.EntitiClass.Points;
-import HubertRoszyk.company.EntitiClass.User;
+import HubertRoszyk.company.EntitiClass.ArmyPoints;
+import HubertRoszyk.company.EntitiClass.FactoryPoints;
 import HubertRoszyk.company.configuration.ConfigOperator;
-import HubertRoszyk.company.service.PointsService;
-import HubertRoszyk.company.service.UserService;
+import HubertRoszyk.company.service.ArmyPointsService;
+import HubertRoszyk.company.service.FactoryPointsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.EnableMBeanExport;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
 @Component
 public class PointGenerator {
     @Autowired
-    PointsService pointsService;
+    FactoryPointsService factoryPointsService;
+
+    @Autowired
+    ArmyPointsService armyPointsService;
     /*private static PointGenerator instance;
     public static PointGenerator getInstance(){
         if (instance == null){
@@ -33,26 +31,31 @@ public class PointGenerator {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                List<Points> pointsList = pointsService.getPointsList();
-                System.out.println(pointsList);
-                for (Points points: pointsList) {
-                    double gotIndustryPoints = points.getIndustryPoints();
-                    double gotSciencePoints = points.getSciencePoints();
-                    double gotDefencePoints = points.getDefencePoints();
-                    double gotAttackPoints = points.getAttackPoints();
+                List<FactoryPoints> factoryPointsList = factoryPointsService.getPointsList();
+                List<ArmyPoints> armyPointsList = armyPointsService.getArmyPointsList();
+                for (FactoryPoints factoryPoints : factoryPointsList) {
+                    double gotIndustryPoints = factoryPoints.getIndustryPoints();
+                    double gotSciencePoints = factoryPoints.getSciencePoints();
 
+                    double setIndustryPoints = gotIndustryPoints + factoryPoints.getIndustryPointsIncome();
+                    double setSciencePoints = gotSciencePoints + factoryPoints.getSciencePointsIncome();
 
-                    double setIndustryPoints = gotIndustryPoints + points.getIndustryPointsIncome();
-                    double setSciencePoints = gotSciencePoints + points.getSciencePointsIncome();
-                    double setDefencePoints = gotDefencePoints + points.getDefencePointsIncome();
-                    double setAttackPoints = gotAttackPoints + points.getAttackPointsIncome();
+                    factoryPoints.setIndustryPoints(setIndustryPoints);
+                    factoryPoints.setSciencePoints(setSciencePoints);
 
-                    points.setIndustryPoints(setIndustryPoints);
-                    points.setSciencePoints(setSciencePoints);
-                    points.setDefencePoints(setDefencePoints);
-                    points.setAttackPoints(setAttackPoints);
+                    factoryPointsService.updatePoints(factoryPoints);
+                }
+                for (ArmyPoints armyPoints : armyPointsList) {
+                    double gotDefencePoints = armyPoints.getDefencePoints();
+                    double gotAttackPoints = armyPoints.getAttackPoints();
 
-                    pointsService.updatePoints(points);
+                    double setDefencePoints = gotDefencePoints + armyPoints.getDefencePointsIncome();
+                    double setAttackPoints = gotAttackPoints + armyPoints.getAttackPointsIncome();
+
+                    armyPoints.setDefencePoints(setDefencePoints);
+                    armyPoints.setAttackPoints(setAttackPoints);
+
+                    armyPointsService.saveArmyPoints(armyPoints);
                 }
                 System.out.println("wygenerowano");
             }

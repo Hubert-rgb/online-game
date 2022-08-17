@@ -3,6 +3,7 @@ package HubertRoszyk.company.controller;
 import HubertRoszyk.company.EntitiClass.*;
 import HubertRoszyk.company.Validator;
 import HubertRoszyk.company.RandomDraw;
+import HubertRoszyk.company.service.ArmyPointsService;
 import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.UserService;
@@ -29,10 +30,14 @@ public class GalaxyController {
     UserService userService;
 
     @Autowired
+    ArmyPointsService armyPointsService;
+
+    @Autowired
     Binder binder;
 
+    @CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
     @GetMapping("/connectToGalaxy")
-    public Set<Planet> connectToGalaxy(@RequestHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN) @RequestBody JSONObject jsonInput) {
+    public Set<Planet> connectToGalaxy(/*@RequestHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)*/ @RequestBody JSONObject jsonInput) {
         @NonNull
         int userId = (int) jsonInput.get("userId");
         @NonNull
@@ -43,8 +48,8 @@ public class GalaxyController {
         Set<Planet> galaxyPlanets = planetService.getPlanetByGalaxy(galaxyId);
 
         //nie wiem czy nie lepiej po prostu zawsze bindować
-        for (Points points : user.getPoints()) {
-            if (points.getGalaxy().getId() == galaxyId) {
+        for (FactoryPoints factoryPoints : user.getPoints()) {
+            if (factoryPoints.getGalaxy().getId() == galaxyId) {
                 return galaxyPlanets;
             }
         }
@@ -56,8 +61,9 @@ public class GalaxyController {
         }
     }
 
+    @CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
     @GetMapping("/createGalaxy")
-    public List<Planet> galaxyInit(@RequestBody JSONObject jsonInput){ //do przeanalizowania bo nie wygląda za ładnie
+    public List<Planet> galaxyInit(/*@RequestHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)*/ @RequestBody JSONObject jsonInput){ //do przeanalizowania bo nie wygląda za ładnie
         int maximalUserNumber = (int) jsonInput.get("maximalUserNumber");
         String galaxyName = (String) jsonInput.get("galaxyName");
 
@@ -95,6 +101,10 @@ public class GalaxyController {
             //validator
 
             Planet planet = new Planet(planetType,industryPointsMultiplier, sciencePointsMultiplier, size, planetLocation.xLocation, planetLocation.yLocation);
+            ArmyPoints armyPoints = new ArmyPoints(planet);
+
+            armyPointsService.saveArmyPoints(armyPoints);
+
             planet.asignGalaxy(galaxy);
             planets.add(planet);
         }

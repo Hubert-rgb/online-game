@@ -21,7 +21,7 @@ public class Building { // dane budynku, są zależmne od typu i poziomu
     private int buildingLevel = 0;
     private int buildingPrice;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @NonNull
     @JoinColumn(name = "planetId", referencedColumnName = "planetId")
     private Planet planet;

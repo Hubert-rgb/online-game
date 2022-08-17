@@ -2,13 +2,10 @@ package HubertRoszyk.company.controller;
 
 import HubertRoszyk.company.EntitiClass.Galaxy;
 import HubertRoszyk.company.EntitiClass.Planet;
-import HubertRoszyk.company.EntitiClass.Points;
 import HubertRoszyk.company.EntitiClass.User;
 import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
-import HubertRoszyk.company.service.PointsService;
 import HubertRoszyk.company.service.UserService;
-import lombok.NonNull;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +25,7 @@ public class Binder {
     GalaxyService galaxyService;
 
     @Autowired
-    PointsController pointsController;
+    FactoryPointsController factoryPointsController;
 
     @PostMapping("/bindPlanetToUser")
     Planet bindPlanetToUser(@RequestBody JSONObject jsonInput) {
@@ -44,7 +41,7 @@ public class Binder {
             planet.asignUser(user);
 
             planetService.savePlanet(planet); //najpierw trzeba zapisać planetę usera a potem szukać jej punkty
-            pointsController.getTotalIndustryIncome(userId, planet.getGalaxy().getId());
+            factoryPointsController.getTotalIndustryPointsIncome(userId, planet.getGalaxy().getId());
 
             return planet;
         }
@@ -58,7 +55,7 @@ public class Binder {
         } else {
             galaxy.addUser();
 
-            pointsController.createPoints(user, galaxy);
+            factoryPointsController.createFactoryPoints(user, galaxy);
 
             return galaxyService.saveGalaxy(galaxy);
         }

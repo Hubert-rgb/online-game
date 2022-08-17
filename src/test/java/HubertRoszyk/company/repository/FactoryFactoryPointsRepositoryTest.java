@@ -1,7 +1,7 @@
 package HubertRoszyk.company.repository;
 
 import HubertRoszyk.company.EntitiClass.Galaxy;
-import HubertRoszyk.company.EntitiClass.Points;
+import HubertRoszyk.company.EntitiClass.FactoryPoints;
 import HubertRoszyk.company.EntitiClass.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,9 @@ import java.util.Set;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @DataJpaTest
-class PointsRepositoryTest {
+class FactoryFactoryPointsRepositoryTest {
     @Autowired
-    PointsRepository pointsRepository;
+    FactoryPointsRepository factoryPointsRepository;
 
     @Test
     void itShouldFindPointsByUserId() {
@@ -22,14 +22,14 @@ class PointsRepositoryTest {
         User user = new User();
         Galaxy galaxy = new Galaxy();
 
-        Points points = new Points(user, galaxy);
+        FactoryPoints factoryPoints = new FactoryPoints(user, galaxy);
 
-        pointsRepository.save(points);
+        factoryPointsRepository.save(factoryPoints);
 
         //when
-        Set<Points> gotPoints = pointsRepository.findPointsByUserId(user.getId());
+        Set<FactoryPoints> gotPoints = factoryPointsRepository.findPointsByUserId(user.getId());
         //then
-        assertThat(gotPoints).contains(points);
+        assertThat(gotPoints).contains(factoryPoints);
     }
     @Test
     void itShouldFindPointsByUserIdAndGalaxyId() {
@@ -37,14 +37,14 @@ class PointsRepositoryTest {
         User user = new User();
         Galaxy galaxy = new Galaxy();
 
-        Points points = new Points(user, galaxy);
+        FactoryPoints factoryPoints = new FactoryPoints(user, galaxy);
 
-        pointsRepository.save(points);
+        factoryPointsRepository.save(factoryPoints);
 
         //when
-        Points gotPoints = pointsRepository.findPointsByUserIdAndGalaxyId(user.getId(), galaxy.getId());
+        FactoryPoints gotFactoryPoints = factoryPointsRepository.findPointsByUserIdAndGalaxyId(user.getId(), galaxy.getId());
 
         //then
-        assertThat(gotPoints).isEqualTo(points);
+        assertThat(gotFactoryPoints).isEqualTo(factoryPoints);
     }
 }

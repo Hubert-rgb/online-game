@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -35,5 +33,5 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private Set<Points> points = new HashSet<>();
+    private Set<FactoryPoints> points = new HashSet<>();
 }

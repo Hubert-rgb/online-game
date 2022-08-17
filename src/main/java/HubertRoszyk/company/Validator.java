@@ -1,12 +1,9 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.EntitiClass.Building;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.EntitiClass.PlanetLocation;
-import HubertRoszyk.company.EntitiClass.Points;
 import HubertRoszyk.company.configuration.ConfigOperator;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.List;

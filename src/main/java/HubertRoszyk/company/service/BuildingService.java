@@ -14,6 +14,10 @@ public class BuildingService {
     @Autowired
     BuildingRepository repository;
 
+    public BuildingService(BuildingRepository buildingRepository) {
+        repository = buildingRepository;
+    }
+
     public Building saveBuilding(Building building) {
         return repository.save(building);
     }
@@ -29,5 +33,8 @@ public class BuildingService {
     public void deleteBuilding() {
         repository.deleteAll();
         System.out.println("All Buildings deleted");
+    }
+    public List<Building> getBuildingsByPlanetId(int planetId) {
+        return repository.findAllBuildingsByPlanetId(planetId);
     }
 }

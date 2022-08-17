@@ -22,6 +22,7 @@ class PlanetRepositoryTest {
     void itShouldGetPlanetsByGalaxyId() {
         //given
         Planet planet = new Planet(
+                PlanetType.SMALL,
                 2,
                 3,
                 4,
@@ -41,6 +42,7 @@ class PlanetRepositoryTest {
     void itShouldFindAllUserPlanetsInGalaxy() {
         //given
         Planet planet = new Planet(
+                PlanetType.SMALL,
                 2,
                 3,
                 4,
