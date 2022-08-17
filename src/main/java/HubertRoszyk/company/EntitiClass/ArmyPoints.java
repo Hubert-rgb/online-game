@@ -3,7 +3,6 @@ package HubertRoszyk.company.EntitiClass;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 @Getter
@@ -17,10 +16,10 @@ public class ArmyPoints {
     @Column(name = "armyPointsId")
     private int id;
 
-    private double defencePoints;
+    private double defensePoints;
     private double attackPoints;
 
-    private double defencePointsIncome;
+    private double defensePointsIncome;
     private double attackPointsIncome;
 
 
@@ -31,10 +30,10 @@ public class ArmyPoints {
     public ArmyPoints(Planet planet) {
         this.planet = planet;
 
-        defencePoints = planet.getPlanetType().getDefaultDefencePoints();
+        defensePoints = planet.getPlanetType().getDefaultDefencePoints();
         attackPoints = 0;
 
-        defencePointsIncome = 0;
+        defensePointsIncome = 0;
         attackPointsIncome = 0;
     }
 

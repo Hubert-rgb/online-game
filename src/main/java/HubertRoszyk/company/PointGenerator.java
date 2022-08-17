@@ -46,13 +46,13 @@ public class PointGenerator {
                     factoryPointsService.updatePoints(factoryPoints);
                 }
                 for (ArmyPoints armyPoints : armyPointsList) {
-                    double gotDefencePoints = armyPoints.getDefencePoints();
+                    double gotDefencePoints = armyPoints.getDefensePoints();
                     double gotAttackPoints = armyPoints.getAttackPoints();
 
-                    double setDefencePoints = gotDefencePoints + armyPoints.getDefencePointsIncome();
+                    double setDefencePoints = gotDefencePoints + armyPoints.getDefensePointsIncome();
                     double setAttackPoints = gotAttackPoints + armyPoints.getAttackPointsIncome();
 
-                    armyPoints.setDefencePoints(setDefencePoints);
+                    armyPoints.setDefensePoints(setDefencePoints);
                     armyPoints.setAttackPoints(setAttackPoints);
 
                     armyPointsService.saveArmyPoints(armyPoints);

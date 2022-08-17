@@ -22,6 +22,6 @@ class StringToBuildingTypeConverterTest {
         //when
         BuildingType buildingType = underTest.convert(stringValue);
         //then
-        assertThat(buildingType).isEqualTo(BuildingType.DEFENCE);
+        assertThat(buildingType).isEqualTo(BuildingType.DEFENSE);
     }
 }

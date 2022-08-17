@@ -120,7 +120,7 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         switch (building.getBuildingType()) {
             case INDUSTRY -> context.setStrategy(new UpdateIndustryPointsProduce(planetService, factoryPointsController));
             case SCIENCE -> context.setStrategy(new UpdateSciencePointsProduce(planetService, factoryPointsController));
-            case DEFENCE -> context.setStrategy(new UpdateDefencePointsProduce(planetService, armyPointsController));
+            case DEFENSE -> context.setStrategy(new UpdateDefensePointsProduce(planetService, armyPointsController));
             case ATTACK -> context.setStrategy(new UpdateAttackPointsProduce(planetService, armyPointsController));
         }
         context.executeStrategy(building);

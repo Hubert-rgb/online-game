@@ -3,12 +3,9 @@ package HubertRoszyk.company.controller;
 import HubertRoszyk.company.EntitiClass.*;
 import HubertRoszyk.company.PointGenerator;
 import HubertRoszyk.company.service.ArmyPointsService;
-import HubertRoszyk.company.service.FactoryPointsService;
 import HubertRoszyk.company.service.PlanetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import java.util.Set;
 
 @Controller
 public class ArmyPointsController {
@@ -33,9 +30,9 @@ public class ArmyPointsController {
 
         Planet planet = planetService.getPlanetById(planetId);
 
-        int planetDefenceIncome = planet.getDefencePointsProduce() * planet.getDefencePointsMultiplier();
+        int planetDefenseIncome = planet.getDefensePointsProduce() * planet.getDefencePointsMultiplier();
 
-        armyPoints.setDefencePointsIncome(planetDefenceIncome);
+        armyPoints.setDefensePointsIncome(planetDefenseIncome);
 
         armyPointsService.saveArmyPoints(armyPoints);
     }

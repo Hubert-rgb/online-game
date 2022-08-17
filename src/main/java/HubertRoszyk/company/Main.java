@@ -20,11 +20,18 @@ import java.sql.SQLException;
 public class Main {
     //TODO tests
 
-    //TODO combat
-    //TODO compare attack and defence points, and defence 2*attack = 1*defence
-    //TODO random value 0.8 - 1.2 to multiply attack points
-    //TODO substrate points
 
+
+    //TODO combat
+    //DONE compare attack and defence points, and defence 2*attack = 1*defence
+    //DONE TODO random value 0.8 - 1.2 to multiply attack points
+    //TODO assign user may be broken
+    //DONE TODO substrate points
+    //DONE TODO change planet user
+    //DONE TODO add points if its the same user's planet
+    //TODO get points
+
+    //TODO zabespieczenie na budowanie na nieswoich planetach i na atak z nieswojej
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         ConfigOperator configOperator = new ConfigOperator();
 

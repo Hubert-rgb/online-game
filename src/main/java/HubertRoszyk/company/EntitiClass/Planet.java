@@ -2,7 +2,6 @@ package HubertRoszyk.company.EntitiClass;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -35,7 +34,7 @@ public class Planet {
 
     private int industryPointsProduce = 1;
     private int sciencePointsProduce = 0;
-    private int defencePointsProduce = 0;
+    private int defensePointsProduce = 0;
     private int attackPointsProduce = 0;
 
     private int planetLocationX;

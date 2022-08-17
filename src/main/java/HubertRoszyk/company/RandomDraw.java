@@ -25,4 +25,9 @@ public class RandomDraw {
         int industryPointsMultiplier =  random.nextInt(totalPoints - 1) + 1;
         return industryPointsMultiplier;
     }
+    public static double battleMultiplierDraw() {
+        double battleMultiplierInt = random.nextInt(4) + 8; //range 8 - 11
+        double battleMultiplier = battleMultiplierInt / 10;
+        return battleMultiplier;
+    }
 }
