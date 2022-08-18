@@ -11,7 +11,8 @@ public class ConfigOperator {
             randomVariablesSum,
             planetsSizes,
             period,
-            minDistanceBetweenPlanets;
+            minDistanceBetweenPlanets,
+            speed;
     public static double levelCostMultiplier;
     public ConfigOperator() throws IOException {
         BufferedReader configReader = new BufferedReader(new FileReader("config.cfg"));
@@ -22,6 +23,7 @@ public class ConfigOperator {
         period = Integer.parseInt(configReader.readLine().split("=")[1]);
         levelCostMultiplier = Double.parseDouble(configReader.readLine().split("=")[1]);
         minDistanceBetweenPlanets = Integer.parseInt(configReader.readLine().split("=")[1]);
+        speed = Integer.parseInt(configReader.readLine().split("=")[1]);
 
         configReader.close();
         //System.out.println(websiteLink);

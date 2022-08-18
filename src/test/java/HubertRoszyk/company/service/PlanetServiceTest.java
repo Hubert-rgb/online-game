@@ -159,7 +159,7 @@ class PlanetServiceTest {
         underTest.savePlanet(planet);
 
         //when
-        Set<Planet> gotPlanets = underTest.getPlanetByGalaxy(galaxy.getId());
+        Set<Planet> gotPlanets = underTest.getPlanetsByGalaxy(galaxy.getId());
 
         //then
         assertThat(gotPlanets).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(planet);

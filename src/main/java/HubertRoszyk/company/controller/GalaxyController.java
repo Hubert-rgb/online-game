@@ -10,7 +10,6 @@ import HubertRoszyk.company.service.UserService;
 import lombok.NonNull;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class GalaxyController {
 
         User user = userService.getUserById(userId);
 
-        Set<Planet> galaxyPlanets = planetService.getPlanetByGalaxy(galaxyId);
+        Set<Planet> galaxyPlanets = planetService.getPlanetsByGalaxy(galaxyId);
 
         //nie wiem czy nie lepiej po prostu zawsze bindować
         for (FactoryPoints factoryPoints : user.getPoints()) {

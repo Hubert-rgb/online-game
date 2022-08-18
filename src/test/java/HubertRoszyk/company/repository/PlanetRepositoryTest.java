@@ -67,4 +67,24 @@ class PlanetRepositoryTest {
         //then
         assertThat(gotPlanets).contains(planet);
     }
+    @Test
+    public void shouldFindAllPlanetsByUserId() {
+        //given
+        Planet planet = new Planet(
+                PlanetType.SMALL,
+                2,
+                3,
+                4,
+                123,
+                1451
+        );
+        User user = new User();
+        planet.asignUser(user);
+
+        underTest.save(planet);
+        //when
+        Set<Planet> gotPlanets = underTest.findAllPlanetsByUserId(user.getId());
+        //then
+        assertThat(gotPlanets).contains(planet);
+    }
 }

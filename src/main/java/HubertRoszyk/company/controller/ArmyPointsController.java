@@ -4,10 +4,16 @@ import HubertRoszyk.company.EntitiClass.*;
 import HubertRoszyk.company.PointGenerator;
 import HubertRoszyk.company.service.ArmyPointsService;
 import HubertRoszyk.company.service.PlanetService;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller
+@RestController
 public class ArmyPointsController {
     @Autowired
     private ArmyPointsService armyPointsService;
@@ -18,11 +24,12 @@ public class ArmyPointsController {
     @Autowired
     private PointGenerator pointGenerator;
 
-    public void createArmyPoints(Planet planet) {
-        ArmyPoints armyPoints = new ArmyPoints(planet);
-        armyPointsService.saveArmyPoints(armyPoints);
+    @GetMapping("/getArmyPoints")
+    public ArmyPoints getArmyPoints(@RequestBody JSONObject jsonInput) {
+        int planetId = (int) jsonInput.get("planetId");
+        ArmyPoints armyPoints = armyPointsService.getArmyPointsByPlanetId(planetId);
 
-        pointGenerator.generatePoints();
+        return armyPoints;
     }
 
     public void getTotalDefenceIncome(int planetId) {

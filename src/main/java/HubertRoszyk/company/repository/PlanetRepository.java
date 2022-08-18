@@ -21,4 +21,8 @@ public interface PlanetRepository extends JpaRepository<Planet, Integer> {
             @Param("userId") Integer userId,
             @Param("galaxyId") Integer galaxyId
     );
+    @Query(value = "SELECT * FROM PLANET WHERE user_Id = :userId", nativeQuery = true)
+    Set<Planet> findAllPlanetsByUserId(
+            @Param("userId") Integer planetId
+    );
 }

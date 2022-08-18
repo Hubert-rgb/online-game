@@ -1,12 +1,10 @@
 package HubertRoszyk.company.service;
 
-import HubertRoszyk.company.configuration.ConfigOperator;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.repository.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -46,11 +44,14 @@ public class PlanetService {
     }
 
     //to w repository trzeba zrobić
-    public Set<Planet> getPlanetByGalaxy(int galaxyId) {
+    public Set<Planet> getPlanetsByGalaxy(int galaxyId) {
         return repository.getPlanetsByGalaxyId(galaxyId);
     }
 
     public Set<Planet> getPlanetsByUserIdAndGalaxyId(int userId, int galaxyId) {
         return repository.findAllUserPlanetsInGalaxy(userId, galaxyId);
+    }
+    public Set<Planet> getPlanetsByUserId(int userId) {
+        return repository.findAllPlanetsByUserId(userId);
     }
 }

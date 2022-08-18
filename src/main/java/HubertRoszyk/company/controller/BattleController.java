@@ -3,6 +3,7 @@ package HubertRoszyk.company.controller;
 import HubertRoszyk.company.EntitiClass.ArmyPoints;
 import HubertRoszyk.company.EntitiClass.Planet;
 import HubertRoszyk.company.RandomDraw;
+import HubertRoszyk.company.configuration.ConfigOperator;
 import HubertRoszyk.company.service.ArmyPointsService;
 import HubertRoszyk.company.service.PlanetService;
 import org.json.simple.JSONObject;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 @RestController
 public class BattleController {
@@ -21,11 +25,10 @@ public class BattleController {
 
     @PostMapping("/battle")
     public String armyMovement(@RequestBody JSONObject jsonInput) {
+        int userId = (int) jsonInput.get("userId");
         int attackPlanetId = (int) jsonInput.get("attackPlanetId");
         int defensePlanetId = (int) jsonInput.get("defensePlanetId");
 
-        Planet attackPlanet = planetService.getPlanetById(attackPlanetId);
-        Planet defensePlanet = planetService.getPlanetById(defensePlanetId);
 
         /*ArmyPoints attackArmyPoints = armyPointsService.getArmyPointsByPlanetId(attackPlanetId);
         ArmyPoints defenseArmyPoints = armyPointsService.getArmyPointsByPlanetId(defensePlanetId);
@@ -33,10 +36,21 @@ public class BattleController {
         double attackPoints = attackArmyPoints.getAttackPoints();
         double defensePoints = defenseArmyPoints.getDefensePoints();*/
 
-        if (attackPlanet.getUser().equals(defensePlanet.getUser())) {
-            return changeArmyPlanet(attackPlanetId, defensePlanetId);
+        return sendArmy(userId, attackPlanetId, defensePlanetId);
+    }
+
+    public String executeArmyMovement(int userId, int attackPlanetId, int defensePlanetId) {
+        Planet attackPlanet = planetService.getPlanetById(attackPlanetId);
+        Planet defensePlanet = planetService.getPlanetById(defensePlanetId);
+
+        if (attackPlanet.getUser().getId() == userId) {
+            if (attackPlanet.getUser().equals(defensePlanet.getUser())) {
+                return changeArmyPlanet(attackPlanetId, defensePlanetId);
+            } else {
+                return battle(attackPlanetId, defensePlanetId);
+            }
         } else {
-            return battle(attackPlanetId, defensePlanetId);
+            return "not your planet";
         }
     }
 
@@ -99,5 +113,32 @@ public class BattleController {
 
             return  "attack lost";
         }
+    }
+    public String sendArmy(int userId, int attackPlanetId, int defensePlanetId) {
+        Planet attackPlanet = planetService.getPlanetById(attackPlanetId);
+        Planet defensePlanet = planetService.getPlanetById(defensePlanetId);
+
+        int distanceX = attackPlanet.getPlanetLocationX() - defensePlanet.getPlanetLocationX();
+        int distanceY = attackPlanet.getPlanetLocationY() - defensePlanet.getPlanetLocationY();
+
+        double distance = ((distanceX * distanceX) + (distanceY * distanceY)) ^ (1 / 2);
+        int speed = ConfigOperator.speed;
+        long time = (long) (distance / speed);
+
+        final String[] output = new String[1];
+
+        Timer timer = new Timer();
+        timer.schedule(
+                new TimerTask() {
+                    @Override
+                    public void run() {
+                        output[0] = executeArmyMovement(userId, attackPlanetId, defensePlanetId);
+                        timer.cancel();
+                    }
+                },
+                (time * 3600)
+        );
+
+        return output[0];
     }
 }

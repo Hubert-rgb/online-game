@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class BuildingsController { //dodaje, updatuje i usuwa budynki
@@ -51,10 +52,15 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         System.out.println(buildingType);
 
         Planet planet = planetService.getPlanetById(planetId);
+        Set<Planet> usersPlanets = planetService.getPlanetsByUserId(userId);
 
-        Building building = new Building(buildingType, planet);
+        if (usersPlanets.contains(planet)) {
+            Building building = new Building(buildingType, planet);
 
-        return upgradeBuildingsLevelData(building);
+            return upgradeBuildingsLevelData(building);
+        } else {
+            return "not your planet";
+        }
     }
     @PostMapping("/upgradeBuilding")
     public String upgradeBuilding(@RequestBody JSONObject jsonInput) {
@@ -62,8 +68,13 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         int buildingId = (int) jsonInput.get("buildingId");
 
         Building building = buildingService.getBuildingById(buildingId);
+        Set<Planet> planets = planetService.getPlanetsByUserId(userId);
 
-        return upgradeBuildingsLevelData(building);
+        if (planets.contains(building.getPlanet())) {
+            return upgradeBuildingsLevelData(building);
+        } else {
+            return "not your planet";
+        }
     }
     public double getBuildingPrice(Building building) {
         int buildingTypePrice = building.getBuildingType().getBuildingPrice();
@@ -97,7 +108,7 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
             isEnoughSpaceOnPlanet = building.getPlanet().getSize() + 2 > building.getPlanet().getBuildingList().size();
         }
 
-        if (isEnoughPoints && isNotOnMaximumLevel  && isEnoughSpaceOnPlanet) {
+        if (isEnoughPoints && isNotOnMaximumLevel  && isEnoughSpaceOnPlanet) {  //strategy
             double setIndustryPoints = gotIndustryPoints - buildingPrice;
             factoryPoints.setIndustryPoints(setIndustryPoints);
 
