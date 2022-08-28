@@ -1,0 +1,8 @@
+TODO:
+    1. createGalaxy (e403)
+    2. planetInside
+    3. CSS
+
+
+Q:
+    1. Czy getPlanets zwraca wszystkie planety czy mam wysyłać id galaktyki i będzie zwracać tylko planety z konkretnym galaxyId?

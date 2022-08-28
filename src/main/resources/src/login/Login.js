@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState} from "react";
 import useAuth from "../hooks/useAuth";
-import {Link, useNavigate,useLocation} from "react-router-dom";
+import {useNavigate,useLocation} from "react-router-dom";
 import Axios from "axios";
 
 
@@ -39,8 +39,7 @@ export default function Login() {
                 'Access-Control-Allow-Methods': 'POST',
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Content-Type': 'application/json'},
-                
+                'Content-Type': 'application/json'},                
             });
         console.log(response.data);
         setAuth({user, password});
@@ -53,13 +52,10 @@ export default function Login() {
       } else{
         setErrorMessage('failed')
       }
-    }
-
-    
+    }    
   }
 
     return (
-
     <section>
         <p ref={errorRef} className={errorMessage ? "errmsg" : "offscreen"} aria-live="assertive">{errorMessage}</p>
         <h1>Sign In</h1>
