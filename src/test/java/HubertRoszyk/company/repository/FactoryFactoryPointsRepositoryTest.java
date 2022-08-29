@@ -1,8 +1,8 @@
 package HubertRoszyk.company.repository;
 
-import HubertRoszyk.company.EntitiClass.Galaxy;
-import HubertRoszyk.company.EntitiClass.FactoryPoints;
-import HubertRoszyk.company.EntitiClass.User;
+import HubertRoszyk.company.entiti_class.Galaxy;
+import HubertRoszyk.company.entiti_class.FactoryPoints;
+import HubertRoszyk.company.entiti_class.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

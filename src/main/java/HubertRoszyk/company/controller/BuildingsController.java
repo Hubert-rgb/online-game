@@ -1,9 +1,9 @@
 package HubertRoszyk.company.controller;
 
-import HubertRoszyk.company.EntitiClass.*;
-import HubertRoszyk.company.Strategy.UpdatePointsProduceStrategy.*;
+import HubertRoszyk.company.entiti_class.*;
+import HubertRoszyk.company.Strategy.update_points_produce_strategy.*;
 import HubertRoszyk.company.StringToBuildingsTypeConverter;
-import HubertRoszyk.company.configuration.ConfigOperator;
+import HubertRoszyk.company.configuration.GameProperties;
 import HubertRoszyk.company.service.BuildingService;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.FactoryPointsService;
@@ -38,6 +38,9 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
 
     @Autowired
     StringToBuildingsTypeConverter converter;
+
+    @Autowired
+    GameProperties gameProperties;
 
     @PostMapping("/addBuilding")
     public String addBuilding(@RequestBody JSONObject jsonInput) { //exception not string
@@ -78,7 +81,7 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
     }
     public double getBuildingPrice(Building building) {
         int buildingTypePrice = building.getBuildingType().getBuildingPrice();
-        double costMultiplier = ConfigOperator.levelCostMultiplier * building.getBuildingLevel();
+        double costMultiplier = gameProperties.getLevelCostMultiplier() * building.getBuildingLevel();
         return buildingTypePrice * costMultiplier;
     }
     public String upgradeBuildingsLevelData(Building building) {

@@ -1,6 +1,6 @@
 package HubertRoszyk.company.service;
 
-import HubertRoszyk.company.EntitiClass.Galaxy;
+import HubertRoszyk.company.entiti_class.Galaxy;
 import HubertRoszyk.company.repository.GalaxyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

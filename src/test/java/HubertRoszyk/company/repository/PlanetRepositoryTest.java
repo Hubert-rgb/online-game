@@ -1,6 +1,6 @@
 package HubertRoszyk.company.repository;
 
-import HubertRoszyk.company.EntitiClass.*;
+import HubertRoszyk.company.entiti_class.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -83,7 +83,7 @@ class PlanetRepositoryTest {
 
         underTest.save(planet);
         //when
-        Set<Planet> gotPlanets = underTest.findAllPlanetsByUserId(user.getId());
+        Set<Planet> gotPlanets = underTest.findByUserId(user.getId());
         //then
         assertThat(gotPlanets).contains(planet);
     }

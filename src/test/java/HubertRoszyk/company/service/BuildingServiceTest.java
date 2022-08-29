@@ -1,8 +1,8 @@
 package HubertRoszyk.company.service;
 
-import HubertRoszyk.company.EntitiClass.Building;
-import HubertRoszyk.company.EntitiClass.BuildingType;
-import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.entiti_class.Building;
+import HubertRoszyk.company.entiti_class.BuildingType;
+import HubertRoszyk.company.entiti_class.Planet;
 import HubertRoszyk.company.repository.BuildingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

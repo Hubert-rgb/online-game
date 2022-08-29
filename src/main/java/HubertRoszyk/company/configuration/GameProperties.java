@@ -1,20 +1,35 @@
 package HubertRoszyk.company.configuration;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ConfigOperator {
-    public static int galaxyNum;
-    public static String websiteLink;
-    public static int planetsNum,
-            randomVariablesSum,
-            planetsSizes,
-            period,
-            minDistanceBetweenPlanets,
-            speed;
-    public static double levelCostMultiplier;
-    public ConfigOperator() throws IOException {
+@Getter
+@Setter
+@Configuration
+@PropertySource("game.properties")
+public class GameProperties {
+    private int galaxyNum;
+
+    private String websiteLink;
+
+    private int planetsNum;
+    private int randomVariablesSum;
+    private int planetsSizes;
+    private int period;
+    private int minDistanceBetweenPlanets;
+    private int speed;
+
+    private double levelCostMultiplier;
+
+
+
+    /*public GameProperties() throws IOException {
         BufferedReader configReader = new BufferedReader(new FileReader("config.cfg"));
         websiteLink = configReader.readLine().split("=")[1];
         planetsNum = Integer.parseInt(configReader.readLine().split("=")[1]);
@@ -27,5 +42,5 @@ public class ConfigOperator {
 
         configReader.close();
         //System.out.println(websiteLink);
-    }
+    }*/
 }

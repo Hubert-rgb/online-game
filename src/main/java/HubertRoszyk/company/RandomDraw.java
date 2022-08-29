@@ -1,7 +1,7 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.EntitiClass.PlanetLocation;
-import HubertRoszyk.company.EntitiClass.PlanetType;
+import HubertRoszyk.company.entiti_class.PlanetLocation;
+import HubertRoszyk.company.entiti_class.PlanetType;
 
 import java.util.Random;
 

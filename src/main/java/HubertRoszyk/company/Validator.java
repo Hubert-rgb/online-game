@@ -1,8 +1,9 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.EntitiClass.Planet;
-import HubertRoszyk.company.EntitiClass.PlanetLocation;
-import HubertRoszyk.company.configuration.ConfigOperator;
+import HubertRoszyk.company.entiti_class.Planet;
+import HubertRoszyk.company.entiti_class.PlanetLocation;
+import HubertRoszyk.company.configuration.GameProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,7 +11,10 @@ import java.util.List;
 
 @Component
 public class Validator {
-    public static List<Planet> validatePlanetPositionInGalaxy(List<Planet> galaxy) { //może być mało wydajne przez wielokrotne powtarzanie i rekurencję
+    @Autowired
+    GameProperties gameProperties;
+
+    public List<Planet> validatePlanetPositionInGalaxy(List<Planet> galaxy) { //może być mało wydajne przez wielokrotne powtarzanie i rekurencję
         List<Planet> validatedGalaxy = new ArrayList<>();
         validatedGalaxy.add(galaxy.get(0));
 
@@ -31,10 +35,10 @@ public class Validator {
         }
         return validatedGalaxy;
     }
-    private static PlanetLocation validatePlanetPosition(PlanetLocation previousPlanetLocation, PlanetLocation currentPlanetLocation) {
+    private  PlanetLocation validatePlanetPosition(PlanetLocation previousPlanetLocation, PlanetLocation currentPlanetLocation) {
         final double distance = Math.sqrt(Math.multiplyExact((previousPlanetLocation.xLocation - currentPlanetLocation.xLocation), 2) + Math.multiplyExact((previousPlanetLocation.yLocation - currentPlanetLocation.yLocation), 2));
 
-        if (distance < ConfigOperator.minDistanceBetweenPlanets) {
+        if (distance < gameProperties.getMinDistanceBetweenPlanets()) {
 
             PlanetLocation planetLocation = RandomDraw.locationDraw();
             validatePlanetPosition(previousPlanetLocation, planetLocation);

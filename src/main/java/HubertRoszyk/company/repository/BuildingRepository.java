@@ -1,6 +1,6 @@
 package HubertRoszyk.company.repository;
 
-import HubertRoszyk.company.EntitiClass.Building;
+import HubertRoszyk.company.entiti_class.Building;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

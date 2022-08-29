@@ -1,8 +1,8 @@
 package HubertRoszyk.company.service;
 
-import HubertRoszyk.company.EntitiClass.Galaxy;
-import HubertRoszyk.company.EntitiClass.Planet;
-import HubertRoszyk.company.EntitiClass.PlanetType;
+import HubertRoszyk.company.entiti_class.Galaxy;
+import HubertRoszyk.company.entiti_class.Planet;
+import HubertRoszyk.company.entiti_class.PlanetType;
 import HubertRoszyk.company.repository.PlanetRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

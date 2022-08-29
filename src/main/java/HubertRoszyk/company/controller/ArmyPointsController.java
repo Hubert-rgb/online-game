@@ -1,12 +1,11 @@
 package HubertRoszyk.company.controller;
 
-import HubertRoszyk.company.EntitiClass.*;
+import HubertRoszyk.company.entiti_class.*;
 import HubertRoszyk.company.PointGenerator;
 import HubertRoszyk.company.service.ArmyPointsService;
 import HubertRoszyk.company.service.PlanetService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;

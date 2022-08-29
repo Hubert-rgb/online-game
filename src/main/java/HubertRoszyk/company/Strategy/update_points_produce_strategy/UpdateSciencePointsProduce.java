@@ -1,7 +1,7 @@
-package HubertRoszyk.company.Strategy.UpdatePointsProduceStrategy;
+package HubertRoszyk.company.Strategy.update_points_produce_strategy;
 
-import HubertRoszyk.company.EntitiClass.Building;
-import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.entiti_class.Building;
+import HubertRoszyk.company.entiti_class.Planet;
 import HubertRoszyk.company.controller.FactoryPointsController;
 import HubertRoszyk.company.service.PlanetService;
 

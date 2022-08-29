@@ -1,6 +1,6 @@
 package HubertRoszyk.company.service;
 
-import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.entiti_class.Planet;
 import HubertRoszyk.company.repository.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +52,6 @@ public class PlanetService {
         return repository.findAllUserPlanetsInGalaxy(userId, galaxyId);
     }
     public Set<Planet> getPlanetsByUserId(int userId) {
-        return repository.findAllPlanetsByUserId(userId);
+        return repository.findByUserId(userId);
     }
 }

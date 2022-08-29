@@ -1,9 +1,9 @@
 package HubertRoszyk.company.controller;
 
-import HubertRoszyk.company.EntitiClass.ArmyPoints;
-import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.entiti_class.ArmyPoints;
+import HubertRoszyk.company.entiti_class.Planet;
 import HubertRoszyk.company.RandomDraw;
-import HubertRoszyk.company.configuration.ConfigOperator;
+import HubertRoszyk.company.configuration.GameProperties;
 import HubertRoszyk.company.service.ArmyPointsService;
 import HubertRoszyk.company.service.PlanetService;
 import org.json.simple.JSONObject;
@@ -22,6 +22,9 @@ public class BattleController {
 
     @Autowired
     ArmyPointsService armyPointsService;
+
+    @Autowired
+    GameProperties gameProperties;
 
     @PostMapping("/battle")
     public String armyMovement(@RequestBody JSONObject jsonInput) {
@@ -122,10 +125,10 @@ public class BattleController {
         int distanceY = attackPlanet.getPlanetLocationY() - defensePlanet.getPlanetLocationY();
 
         double distance = ((distanceX * distanceX) + (distanceY * distanceY)) ^ (1 / 2);
-        int speed = ConfigOperator.speed;
+        int speed = gameProperties.getSpeed();
         long time = (long) (distance / speed);
 
-        final String[] output = new String[1];
+        final String[] output = new String[1]; //nie wiem jak to dziala
 
         Timer timer = new Timer();
         timer.schedule(

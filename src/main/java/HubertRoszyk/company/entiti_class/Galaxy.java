@@ -1,4 +1,4 @@
-package HubertRoszyk.company.EntitiClass;
+package HubertRoszyk.company.entiti_class;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

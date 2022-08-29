@@ -1,8 +1,8 @@
 package HubertRoszyk.company;
 
-import HubertRoszyk.company.EntitiClass.ArmyPoints;
-import HubertRoszyk.company.EntitiClass.FactoryPoints;
-import HubertRoszyk.company.configuration.ConfigOperator;
+import HubertRoszyk.company.entiti_class.ArmyPoints;
+import HubertRoszyk.company.entiti_class.FactoryPoints;
+import HubertRoszyk.company.configuration.GameProperties;
 import HubertRoszyk.company.service.ArmyPointsService;
 import HubertRoszyk.company.service.FactoryPointsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,9 @@ public class PointGenerator {
 
     @Autowired
     ArmyPointsService armyPointsService;
+
+    @Autowired
+    GameProperties gameProperties;
     /*private static PointGenerator instance;
     public static PointGenerator getInstance(){
         if (instance == null){
@@ -61,7 +64,7 @@ public class PointGenerator {
             }
         };
         Timer timer = new Timer();
-        System.out.println(ConfigOperator.period);
-        timer.schedule(task, 0, ConfigOperator.period);
+        System.out.println(gameProperties.getPeriod());
+        timer.schedule(task, 0, gameProperties.getPeriod());
     }
 }

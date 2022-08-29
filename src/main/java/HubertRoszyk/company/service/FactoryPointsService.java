@@ -1,6 +1,6 @@
 package HubertRoszyk.company.service;
 
-import HubertRoszyk.company.EntitiClass.FactoryPoints;
+import HubertRoszyk.company.entiti_class.FactoryPoints;
 import HubertRoszyk.company.repository.FactoryPointsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

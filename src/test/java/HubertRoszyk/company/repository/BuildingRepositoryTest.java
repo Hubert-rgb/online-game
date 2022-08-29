@@ -1,8 +1,8 @@
 package HubertRoszyk.company.repository;
 
-import HubertRoszyk.company.EntitiClass.Building;
-import HubertRoszyk.company.EntitiClass.BuildingType;
-import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.entiti_class.Building;
+import HubertRoszyk.company.entiti_class.BuildingType;
+import HubertRoszyk.company.entiti_class.Planet;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

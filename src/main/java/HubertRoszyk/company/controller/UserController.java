@@ -1,20 +1,16 @@
 package HubertRoszyk.company.controller;
 
-import HubertRoszyk.company.EntitiClass.User;
+import HubertRoszyk.company.entiti_class.User;
 import HubertRoszyk.company.service.UserService;
 import HubertRoszyk.company.wrongDataException;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@Controller
 public class UserController {
-    @CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
     @PostMapping("/loginUser")
     public User loginUser(@RequestBody JSONObject jsonInput) {
         String name = (String) jsonInput.get("name");

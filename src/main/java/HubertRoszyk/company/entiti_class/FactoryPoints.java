@@ -1,4 +1,4 @@
-package HubertRoszyk.company.EntitiClass;
+package HubertRoszyk.company.entiti_class;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

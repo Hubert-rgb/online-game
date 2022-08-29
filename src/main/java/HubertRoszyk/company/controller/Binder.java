@@ -1,8 +1,8 @@
 package HubertRoszyk.company.controller;
 
-import HubertRoszyk.company.EntitiClass.Galaxy;
-import HubertRoszyk.company.EntitiClass.Planet;
-import HubertRoszyk.company.EntitiClass.User;
+import HubertRoszyk.company.entiti_class.Galaxy;
+import HubertRoszyk.company.entiti_class.Planet;
+import HubertRoszyk.company.entiti_class.User;
 import HubertRoszyk.company.service.GalaxyService;
 import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.UserService;

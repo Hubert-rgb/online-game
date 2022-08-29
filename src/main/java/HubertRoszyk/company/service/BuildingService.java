@@ -1,9 +1,7 @@
 package HubertRoszyk.company.service;
 
-import HubertRoszyk.company.EntitiClass.Building;
-import HubertRoszyk.company.EntitiClass.Planet;
+import HubertRoszyk.company.entiti_class.Building;
 import HubertRoszyk.company.repository.BuildingRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,15 +1,13 @@
 package HubertRoszyk.company.repository;
 
-import HubertRoszyk.company.EntitiClass.ArmyPoints;
-import HubertRoszyk.company.EntitiClass.Planet;
-import HubertRoszyk.company.EntitiClass.PlanetType;
+import HubertRoszyk.company.entiti_class.ArmyPoints;
+import HubertRoszyk.company.entiti_class.Planet;
+import HubertRoszyk.company.entiti_class.PlanetType;
 import org.junit.jupiter.api.Test;
-import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class ArmyPointsRepositoryTest {

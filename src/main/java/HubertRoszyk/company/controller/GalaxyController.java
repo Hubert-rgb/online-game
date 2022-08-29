@@ -1,6 +1,6 @@
 package HubertRoszyk.company.controller;
 
-import HubertRoszyk.company.EntitiClass.*;
+import HubertRoszyk.company.entiti_class.*;
 import HubertRoszyk.company.Validator;
 import HubertRoszyk.company.RandomDraw;
 import HubertRoszyk.company.service.ArmyPointsService;
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
 @RestController
 public class GalaxyController {
     @Autowired
@@ -33,6 +32,9 @@ public class GalaxyController {
 
     @Autowired
     Binder binder;
+
+    @Autowired
+    Validator validator;
 
     @CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
     @GetMapping("/connectToGalaxy")
@@ -76,7 +78,7 @@ public class GalaxyController {
             planets.addAll(createPlanet(planetType, galaxy));
         }
 
-        List<Planet> validatedPlanets = Validator.validatePlanetPositionInGalaxy(planets);
+        List<Planet> validatedPlanets = validator.validatePlanetPositionInGalaxy(planets);
         planetService.savePlanetsList(validatedPlanets);
 
         return validatedPlanets;

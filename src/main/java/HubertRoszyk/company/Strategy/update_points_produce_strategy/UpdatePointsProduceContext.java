@@ -1,6 +1,6 @@
-package HubertRoszyk.company.Strategy.UpdatePointsProduceStrategy;
+package HubertRoszyk.company.Strategy.update_points_produce_strategy;
 
-import HubertRoszyk.company.EntitiClass.Building;
+import HubertRoszyk.company.entiti_class.Building;
 
 public class UpdatePointsProduceContext {
     private UpdatePointsProduceStrategy strategy;
