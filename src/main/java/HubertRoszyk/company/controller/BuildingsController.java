@@ -57,13 +57,9 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         Planet planet = planetService.getPlanetById(planetId);
         Set<Planet> usersPlanets = planetService.getPlanetsByUserId(userId);
 
-        if (usersPlanets.contains(planet)) {
-            Building building = new Building(buildingType, planet);
+        Building building = new Building(buildingType, planet);
 
-            return upgradeBuildingsLevelData(building);
-        } else {
-            return "not your planet";
-        }
+        return upgradeBuildingsLevelData(building, usersPlanets);
     }
     @PostMapping("/upgradeBuilding")
     public String upgradeBuilding(@RequestBody JSONObject jsonInput) {
@@ -73,18 +69,14 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         Building building = buildingService.getBuildingById(buildingId);
         Set<Planet> planets = planetService.getPlanetsByUserId(userId);
 
-        if (planets.contains(building.getPlanet())) {
-            return upgradeBuildingsLevelData(building);
-        } else {
-            return "not your planet";
-        }
+        return upgradeBuildingsLevelData(building, planets);
     }
     public double getBuildingPrice(Building building) {
         int buildingTypePrice = building.getBuildingType().getBuildingPrice();
         double costMultiplier = gameProperties.getLevelCostMultiplier() * building.getBuildingLevel();
         return buildingTypePrice * costMultiplier;
     }
-    public String upgradeBuildingsLevelData(Building building) {
+    public String upgradeBuildingsLevelData(Building building, Set<Planet> planets) {
         FactoryPoints factoryPoints = factoryPointsService.getPointsByUserIdAndGalaxyId(building.getPlanet().getUser().getId(), building.getPlanet().getGalaxy().getId());
 
         int gotBuildingLevel = building.getBuildingLevel();
@@ -101,6 +93,7 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         boolean isEnoughPoints;
         boolean isNotOnMaximumLevel;
         boolean isEnoughSpaceOnPlanet;
+        boolean isUsersPlanet;
 
         isEnoughPoints = gotIndustryPoints >= buildingPrice;
         isNotOnMaximumLevel = building.getBuildingLevel() < building.getBuildingType().getLevelNums();
@@ -111,7 +104,9 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
             isEnoughSpaceOnPlanet = building.getPlanet().getSize() + 2 > building.getPlanet().getBuildingList().size();
         }
 
-        if (isEnoughPoints && isNotOnMaximumLevel  && isEnoughSpaceOnPlanet) {  //strategy
+        isUsersPlanet = planets.contains(building.getPlanet());
+
+        if (isEnoughPoints && isNotOnMaximumLevel  && isEnoughSpaceOnPlanet && isUsersPlanet) {  //strategy
             double setIndustryPoints = gotIndustryPoints - buildingPrice;
             factoryPoints.setIndustryPoints(setIndustryPoints);
 
@@ -124,6 +119,8 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
             return "maximal level";
         } else if (!isEnoughSpaceOnPlanet){
             return "not enough space";
+        } else if (!isUsersPlanet) {
+            return "it's not your planet";
         } else {
             return "not enough points";
         }

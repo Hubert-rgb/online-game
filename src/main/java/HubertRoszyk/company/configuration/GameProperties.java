@@ -2,8 +2,12 @@ package HubertRoszyk.company.configuration;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.annotation.AccessType;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,33 +18,26 @@ import java.io.IOException;
 @Configuration
 @PropertySource("game.properties")
 public class GameProperties {
-    private int galaxyNum;
+   /* @Value("${galaxyNum}")
+    private int galaxyNum;*/
 
+    @Value("${websiteLink}")
     private String websiteLink;
 
+    @Value("${planetsNum}")
     private int planetsNum;
+    @Value("${randomVariablesSum}")
     private int randomVariablesSum;
+    @Value("${planetsSizes}")
     private int planetsSizes;
+    @Value("${period}")
     private int period;
+    @Value("${minDistanceBetweenPlanets}")
     private int minDistanceBetweenPlanets;
+    @Value("${speed}")
     private int speed;
 
+    @Value("${levelCostMultiplier}")
     private double levelCostMultiplier;
 
-
-
-    /*public GameProperties() throws IOException {
-        BufferedReader configReader = new BufferedReader(new FileReader("config.cfg"));
-        websiteLink = configReader.readLine().split("=")[1];
-        planetsNum = Integer.parseInt(configReader.readLine().split("=")[1]);
-        randomVariablesSum = Integer.parseInt(configReader.readLine().split("=")[1]);
-        planetsSizes = Integer.parseInt(configReader.readLine().split("=")[1]);
-        period = Integer.parseInt(configReader.readLine().split("=")[1]);
-        levelCostMultiplier = Double.parseDouble(configReader.readLine().split("=")[1]);
-        minDistanceBetweenPlanets = Integer.parseInt(configReader.readLine().split("=")[1]);
-        speed = Integer.parseInt(configReader.readLine().split("=")[1]);
-
-        configReader.close();
-        //System.out.println(websiteLink);
-    }*/
 }

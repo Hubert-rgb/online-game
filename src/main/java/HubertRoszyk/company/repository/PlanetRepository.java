@@ -9,18 +9,10 @@ import java.util.Set;
 
 @Repository
 public interface PlanetRepository extends JpaRepository<Planet, Integer> {
-    //@Query(value = "SELECT * FROM PLANET WHERE galaxy_Id = :galaxyId", nativeQuery = true)
-    Set<Planet> getPlanetsByGalaxyId(
-            @Param("galaxyId") Integer galaxyId
-            );
-
-    //@Query(value = "SELECT * FROM PLANET WHERE user_Id = :userId AND galaxy_Id = :galaxyId ", nativeQuery = true)
-    Set<Planet> findAllUserPlanetsInGalaxy(
-            @Param("userId") Integer userId,
-            @Param("galaxyId") Integer galaxyId
+    Set<Planet> findByGalaxyId(int galaxyId);
+    Set<Planet> findByUserIdAndGalaxyId(
+            int userId,
+            int galaxyId
     );
-    //@Query(value = "SELECT * FROM PLANET WHERE user_Id = :userId", nativeQuery = true)
-    Set<Planet> findByUserId(int planetId
-            //@Param("userId") Integer planetId
-    );
+    Set<Planet> findByUserId(int planetId);
 }

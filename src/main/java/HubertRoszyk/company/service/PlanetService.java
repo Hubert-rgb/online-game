@@ -45,11 +45,11 @@ public class PlanetService {
 
     //to w repository trzeba zrobić
     public Set<Planet> getPlanetsByGalaxy(int galaxyId) {
-        return repository.getPlanetsByGalaxyId(galaxyId);
+        return repository.findByGalaxyId(galaxyId);
     }
 
     public Set<Planet> getPlanetsByUserIdAndGalaxyId(int userId, int galaxyId) {
-        return repository.findAllUserPlanetsInGalaxy(userId, galaxyId);
+        return repository.findByUserIdAndGalaxyId(userId, galaxyId);
     }
     public Set<Planet> getPlanetsByUserId(int userId) {
         return repository.findByUserId(userId);

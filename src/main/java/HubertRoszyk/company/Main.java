@@ -34,6 +34,12 @@ public class Main {
     //TODO rest api naming
     //TODO repository function naming
     //TODO JACSON
+
+    /** code debuging*/
+    //TODO connecting to galaxy, user not asign (raz nie działało)
+    //TODO time task return from battle manager
+    //TODO CORS may not work properly
+    //TODO
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         GameProperties configOperator = new GameProperties();
 

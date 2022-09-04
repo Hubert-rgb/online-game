@@ -34,7 +34,7 @@ class PlanetRepositoryTest {
 
         underTest.save(planet);
         //when
-        Set<Planet> gotPlanets = underTest.getPlanetsByGalaxyId(galaxy.getId());
+        Set<Planet> gotPlanets = underTest.findByGalaxyId(galaxy.getId());
         //then
         assertThat(gotPlanets).contains(planet);
     }
@@ -63,7 +63,7 @@ class PlanetRepositoryTest {
         //underTest.save(planet);
 
         //when
-        Set<Planet> gotPlanets = underTest.findAllUserPlanetsInGalaxy(user.getId(), galaxy.getId());
+        Set<Planet> gotPlanets = underTest.findByUserIdAndGalaxyId(user.getId(), galaxy.getId());
         //then
         assertThat(gotPlanets).contains(planet);
     }

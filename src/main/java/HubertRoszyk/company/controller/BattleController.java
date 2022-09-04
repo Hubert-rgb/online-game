@@ -46,7 +46,7 @@ public class BattleController {
         Planet attackPlanet = planetService.getPlanetById(attackPlanetId);
         Planet defensePlanet = planetService.getPlanetById(defensePlanetId);
 
-        if (attackPlanet.getUser().getId() == userId) {
+        if (attackPlanet.getUser().getId() == userId || attackPlanet.getUser() == null) {
             if (attackPlanet.getUser().equals(defensePlanet.getUser())) {
                 return changeArmyPlanet(attackPlanetId, defensePlanetId);
             } else {
@@ -130,16 +130,20 @@ public class BattleController {
 
         final String[] output = new String[1]; //nie wiem jak to dziala
 
+        System.out.println(time);
+
         Timer timer = new Timer();
         timer.schedule(
                 new TimerTask() {
                     @Override
                     public void run() {
+                        System.out.println("army moves");
                         output[0] = executeArmyMovement(userId, attackPlanetId, defensePlanetId);
-                        timer.cancel();
+                        System.out.println("army moved");
+                        //timer.cancel();
                     }
                 },
-                (time * 3600)
+                (time * 1)
         );
 
         return output[0];
