@@ -77,52 +77,56 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         return buildingTypePrice * costMultiplier;
     }
     public String upgradeBuildingsLevelData(Building building, Set<Planet> planets) {
-        FactoryPoints factoryPoints = factoryPointsService.getPointsByUserIdAndGalaxyId(building.getPlanet().getUser().getId(), building.getPlanet().getGalaxy().getId());
-
-        int gotBuildingLevel = building.getBuildingLevel();
-        int setBuildingLevel = gotBuildingLevel + 1;
-
-        building.setBuildingLevel(setBuildingLevel);
-
-        double buildingPrice = getBuildingPrice(building);
-        double gotIndustryPoints = factoryPoints.getIndustryPoints();
-
-        System.out.println("building Price = " + buildingPrice);
-        System.out.println("Points = " + gotIndustryPoints);
-
-        boolean isEnoughPoints;
-        boolean isNotOnMaximumLevel;
-        boolean isEnoughSpaceOnPlanet;
         boolean isUsersPlanet;
-
-        isEnoughPoints = gotIndustryPoints >= buildingPrice;
-        isNotOnMaximumLevel = building.getBuildingLevel() < building.getBuildingType().getLevelNums();
-
-        if(setBuildingLevel > 1) {
-            isEnoughSpaceOnPlanet = true;
-        } else {
-            isEnoughSpaceOnPlanet = building.getPlanet().getSize() + 2 > building.getPlanet().getBuildingList().size();
-        }
-
         isUsersPlanet = planets.contains(building.getPlanet());
 
-        if (isEnoughPoints && isNotOnMaximumLevel  && isEnoughSpaceOnPlanet && isUsersPlanet) {  //strategy
-            double setIndustryPoints = gotIndustryPoints - buildingPrice;
-            factoryPoints.setIndustryPoints(setIndustryPoints);
+        if (isUsersPlanet) {
+            FactoryPoints factoryPoints = factoryPointsService.getPointsByUserIdAndGalaxyId(building.getPlanet().getUser().getId(), building.getPlanet().getGalaxy().getId());
 
-            updatePointsIncome(building);
+            int gotBuildingLevel = building.getBuildingLevel();
+            int setBuildingLevel = gotBuildingLevel + 1;
 
-            factoryPointsService.savePoints(factoryPoints);
-            buildingService.saveBuilding(building);
-            return "upgraded";
-        } else if (!isNotOnMaximumLevel) {
-            return "maximal level";
-        } else if (!isEnoughSpaceOnPlanet){
-            return "not enough space";
-        } else if (!isUsersPlanet) {
-            return "it's not your planet";
+            building.setBuildingLevel(setBuildingLevel);
+
+            double buildingPrice = getBuildingPrice(building);
+            double gotIndustryPoints = factoryPoints.getIndustryPoints();
+
+            System.out.println("building Price = " + buildingPrice);
+            System.out.println("Points = " + gotIndustryPoints);
+
+            boolean isEnoughPoints;
+            boolean isNotOnMaximumLevel;
+            boolean isEnoughSpaceOnPlanet;
+
+            isEnoughPoints = gotIndustryPoints >= buildingPrice;
+            isNotOnMaximumLevel = building.getBuildingLevel() < building.getBuildingType().getLevelNums();
+
+            if(setBuildingLevel > 1) {
+                isEnoughSpaceOnPlanet = true;
+            } else {
+                isEnoughSpaceOnPlanet = building.getPlanet().getSize() + 2 > building.getPlanet().getBuildingList().size();
+            }
+
+
+
+            if (isEnoughPoints && isNotOnMaximumLevel  && isEnoughSpaceOnPlanet) {  //strategy
+                double setIndustryPoints = gotIndustryPoints - buildingPrice;
+                factoryPoints.setIndustryPoints(setIndustryPoints);
+
+                updatePointsIncome(building);
+
+                factoryPointsService.savePoints(factoryPoints);
+                buildingService.saveBuilding(building);
+                return "upgraded";
+            } else if (!isNotOnMaximumLevel) {
+                return "maximal level";
+            } else if (!isEnoughSpaceOnPlanet){
+                return "not enough space";
+            }  else {
+                return "not enough points";
+            }
         } else {
-            return "not enough points";
+            return "it's not your planet";
         }
     }
     public void updatePointsIncome(Building building) {

@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
+
     @PostMapping("/loginUser")
     public User loginUser(@RequestBody JSONObject jsonInput) {
         String name = (String) jsonInput.get("name");
