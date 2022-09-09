@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState} from "react";
 import useAuth from "../hooks/useAuth";
 import {useNavigate,useLocation} from "react-router-dom";
 import Axios from "axios";
+import styles from './loginStyles.module.css';
+import '../styles.css';
 
 
 export default function Login() {
@@ -39,7 +41,7 @@ export default function Login() {
                 'Access-Control-Allow-Methods': 'POST',
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Content-Type': 'application/json'},                
+                'Content-Type': 'application/json'}                
             });
         console.log(response.data);
         setAuth({user, password});
@@ -56,14 +58,15 @@ export default function Login() {
   }
 
     return (
-    <section>
+    <section className={styles.body}>
         <p ref={errorRef} className={errorMessage ? "errmsg" : "offscreen"} aria-live="assertive">{errorMessage}</p>
-        <h1>Sign In</h1>
-        <form>
+        <h1 className={styles.heading}>Sign In</h1>
+        <form id={styles.form}>
             <label htmlFor="username">Username:</label>
-            <input 
+            <input             
             type="text" 
             id="username"
+            className={styles.input}
             ref={userRef}
             autoComplete="off"
             onChange={(e) => setUser(e.target.value)}
@@ -74,12 +77,13 @@ export default function Login() {
             <input 
             type="password" 
             id="password"
+            className={styles.input}
             autoComplete="off"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
             />
-            <button onClick = {handleSubmit}>Sign In</button>
+            <button onClick = {handleSubmit} className={styles.submitButton}>Sign In</button>
         </form>
     </section>
   )

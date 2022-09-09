@@ -1,37 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import Axios from 'axios';
-
+import React, {useState} from 'react';
+import GeneratePlanets from './GeneratePlanets';
+import Modal from '../Modal';
+import PlanetInside from './PlanetInside';
 
 export default function Galaxy() {
     
-    const [planets, setPlanets] = useState([]);
-
-    useEffect(() => { 
-        console.log('ok');
-        Axios.get('http://localhost:8080/getPlanets')
-        .then( response => {
-            console.log(response.data);
-            setPlanets(response.data);            
-        })}, []);
+    const [isOpen, setIsOpen] = useState(false);    
 
     return (
-        <>
-        {planets.map((planet) => (
-            <div 
-            key = {planet.id} 
-            item = {planet.id}
-            data-xlocation = {planet.xLocation}
-            data-ylocation = {planet.yLocation}
-            data-size = {planet.size}
-            data-user-id = {planet.userId}
-            data-industry-points-multiplier = {planet.industryPointsMultiplier}
-            data-science-points-multiplier = {planet.sciencePointsMultiplier}
-            data-industry-points-produce = {planet.industryPointsProduce}
-            data-science-points-produce = {planet.sciencePointsProduce}
-            >
-            {planet.id}
-            </div>
-        ))}
+        <>        
+        <GeneratePlanets/>
+        <button onClick={()=>setIsOpen(true)}>testowy</button>
+        <Modal open={isOpen} onClose={()=>setIsOpen(false)}>
+            <PlanetInside/>
+        </Modal>
         </>
   )
 }
