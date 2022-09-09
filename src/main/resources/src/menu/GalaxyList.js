@@ -5,7 +5,7 @@ import styles from './menuStyles.module.css';
 
 export default function GalaxyList() {
     const [galaxyList, setGalaxyList] = useState([])
-
+    
     useEffect(() => { 
         console.log('ok');
         Axios.get('http://localhost:8080/getGalaxies')
@@ -19,7 +19,7 @@ return (
     <ul id={styles.galaxyList}>
     {galaxyList.map((galaxy) => (        
             <li key={galaxy.id} item={galaxy.id} className={styles.listItem}>
-                <Link to={`/galaxy/${galaxy.id}`}>
+                <Link to = {`/galaxy/${galaxy.id}`} state={{galaxyId:galaxy.id}}>
                     {galaxy.galaxyName}
                 </Link>
             </li>        

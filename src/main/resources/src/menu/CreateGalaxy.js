@@ -19,7 +19,7 @@ export default function CreateGalaxy() {
 
     
         try{
-          const response = await Axios.get('http://localhost:8080/createGalaxy', 
+          const response = await Axios.post('http://localhost:8080/createGalaxy', 
           JSON.stringify({maximalUserNumber:maximalUserNumber, galaxyName:galaxyName}),
           {
           headers: 

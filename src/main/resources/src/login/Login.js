@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState} from "react";
-import useAuth from "../hooks/useAuth";
-import {useNavigate,useLocation} from "react-router-dom";
-import Axios from "axios";
+import React, { useEffect, useRef, useState} from 'react';
+import useAuth from '../hooks/useAuth';
+import {useNavigate,useLocation} from 'react-router-dom';
+import Axios from 'axios';
 import styles from './loginStyles.module.css';
 import '../styles.css';
 
@@ -41,7 +41,8 @@ export default function Login() {
                 'Access-Control-Allow-Methods': 'POST',
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Content-Type': 'application/json'}                
+                'Content-Type': 'application/json'
+              }                
             });
         console.log(response.data);
         setAuth({user, password});
