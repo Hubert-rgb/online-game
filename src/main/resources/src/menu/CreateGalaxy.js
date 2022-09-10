@@ -15,11 +15,9 @@ export default function CreateGalaxy() {
         const galaxyName = document.getElementById('galaxyName').value;
         
         if (!galaxyName) return null
-
-
     
         try{
-          const response = await Axios.post('http://localhost:8080/createGalaxy', 
+          const response = await Axios.post('http://localhost:8080/galaxy-controller/galaxies', 
           JSON.stringify({maximalUserNumber:maximalUserNumber, galaxyName:galaxyName}),
           {
           headers: 
@@ -35,6 +33,8 @@ export default function CreateGalaxy() {
         } catch { 
           console.log(JSON.stringify({maximalUserNumber:maximalUserNumber, galaxyName:galaxyName}));
         }
+
+        
     };
       
   return (

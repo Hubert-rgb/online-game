@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState} from 'react';
 import useAuth from '../hooks/useAuth';
-import {useNavigate,useLocation} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import Axios from 'axios';
 import styles from './loginStyles.module.css';
 import '../styles.css';
@@ -32,7 +32,7 @@ export default function Login() {
     e.preventDefault();
 
     try{
-        const response = await Axios.post('http://localhost:8080/loginUser',
+        const response = await Axios.post('http://localhost:8080/user-controller/users',
             JSON.stringify({name:user, password:password}),
             {
               headers: 
@@ -44,8 +44,9 @@ export default function Login() {
                 'Content-Type': 'application/json'
               }                
             });
+        const id = response.data.id;
         console.log(response.data);
-        setAuth({user, password});
+        setAuth({id, user, password});
         setUser('');
         setPassword('');
         navigate(from, {replace: true});

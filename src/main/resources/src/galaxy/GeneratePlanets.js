@@ -1,20 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
-export default function GeneratePlanets(props) {
-    const location = useLocation();
+export default function GeneratePlanets() {
+
+    const {auth} = useAuth();
     const [planets, setPlanets] = useState([]);
-    
-    useEffect((galaxyId) => { 
+    const {galaxyId}=useParams();
+    useEffect(() => { 
         async function fetchData() {
         console.log('ok');
-        console.log(location, " useLocation Hook");
-        console.log(location.state.data.galaxyId)
+        console.log(auth.id);
+        console.log(galaxyId);
+        
         try{
-            const response = await Axios.get('http://localhost:8080/connectToGalaxy',
-            JSON.stringify({userId: 1, galaxyId:location.state.data.galaxyId}), 
+            const response = await Axios.get(`http://localhost:8080/galaxy-controller/users/${auth.id}/galaxies/${{galaxyId}}`, 
             {
                 headers: 
               {
@@ -30,11 +31,10 @@ export default function GeneratePlanets(props) {
 
             
         } catch (err) {
-
         }};
-
+        
         fetchData(galaxyId);
-                   
+                  
     }, []);
 
 
