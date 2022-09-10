@@ -33,6 +33,6 @@ public class BuildingService {
         System.out.println("All Buildings deleted");
     }
     public List<Building> getBuildingsByPlanetId(int planetId) {
-        return repository.findAllBuildingsByPlanetId(planetId);
+        return repository.findBuildingByPlanetId(planetId);
     }
 }

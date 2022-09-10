@@ -29,7 +29,7 @@ public class FactoryPointsService {
         System.out.println("usunięto wszystkie Punkty");
     }
     public FactoryPoints getPointsByUserIdAndGalaxyId(int userId, int galaxyId) {
-        return repository.findPointsByUserIdAndGalaxyId(userId, galaxyId);
+        return repository.findFactory_PointsByUserIdAndGalaxyId(userId, galaxyId);
     }
     public void updatePoints(FactoryPoints factoryPoints) {
         //repository.deleteById(points.getId());

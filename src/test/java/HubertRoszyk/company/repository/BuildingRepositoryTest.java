@@ -24,7 +24,7 @@ class BuildingRepositoryTest {
 
         underTest.save(building);
         //when
-        List<Building> gotBuilding = underTest.findAllBuildingsByPlanetId(planet.getId());
+        List<Building> gotBuilding = underTest.findBuildingByPlanetId(planet.getId());
 
         //then
         assertThat(gotBuilding).contains(building);

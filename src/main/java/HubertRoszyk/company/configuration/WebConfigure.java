@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class WebConfigure implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/*").allowedOrigins("http://127.0.0.1:3000/").allowedHeaders("*");
+        registry.addMapping("/*").allowedOrigins("http://192.168.8.105:3000/").allowedHeaders("*");
         //WebMvcConfigurer.super.addCorsMappings(registry);
         System.out.println("cors");
     }

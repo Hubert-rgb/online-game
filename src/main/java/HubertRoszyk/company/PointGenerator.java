@@ -60,7 +60,7 @@ public class PointGenerator {
 
                     armyPointsService.saveArmyPoints(armyPoints);
                 }
-                System.out.println("wygenerowano");
+               // System.out.println("wygenerowano");
             }
         };
         Timer timer = new Timer();

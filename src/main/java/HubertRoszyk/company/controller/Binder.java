@@ -27,10 +27,8 @@ public class Binder {
     @Autowired
     FactoryPointsController factoryPointsController;
 
-    @PostMapping("/bindPlanetToUser")
-    Planet bindPlanetToUser(@RequestBody JSONObject jsonInput) {
-        int userId = (int) jsonInput.get("userId");
-        int planetId = (int) jsonInput.get("planetId");
+    @PostMapping("/binder/user/{userId}/planet/{planetId}")
+    Planet bindPlanetToUser(@PathVariable int userId, @PathVariable int planetId) {
 
         User user = userService.getUserById(userId);
         Planet planet = planetService.getPlanetById(planetId);

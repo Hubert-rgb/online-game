@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    @PostMapping("/loginUser")
+    @PostMapping("/user-controller/users")
     public User loginUser(@RequestBody JSONObject jsonInput) {
         String name = (String) jsonInput.get("name");
         String password = (String) jsonInput.get("password");

@@ -19,7 +19,7 @@ public class Building { // dane budynku, są zależmne od typu i poziomu
     @NonNull
     private BuildingType buildingType;
     private int buildingLevel = 0;
-    private int buildingPrice;
+    //private int buildingPrice;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @NonNull

@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +24,8 @@ public class ArmyPointsController {
     @Autowired
     private PointGenerator pointGenerator;
 
-    @GetMapping("/getArmyPoints")
-    public ArmyPoints getArmyPoints(@RequestBody JSONObject jsonInput) {
-        int planetId = (int) jsonInput.get("planetId");
+    @GetMapping("/army-points-controller/planets/{planetId}")
+    public ArmyPoints getArmyPoints(@PathVariable int planetId) {
         ArmyPoints armyPoints = armyPointsService.getArmyPointsByPlanetId(planetId);
 
         return armyPoints;

@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -36,13 +37,10 @@ public class GalaxyController {
     @Autowired
     Validator validator;
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
-    @GetMapping("/connectToGalaxy")
-    public Set<Planet> connectToGalaxy(/*@RequestHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)*/ @RequestBody JSONObject jsonInput) {
-        @NonNull
-        int userId = (int) jsonInput.get("userId");
-        @NonNull
-        int galaxyId = (int) jsonInput.get("galaxyId");
+    //@CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
+
+    @GetMapping("/galaxy-controller/users/{userId}/galaxies/{galaxyId}")
+    public Set<Planet> connectToGalaxy(@PathVariable("userId") int userId, @PathVariable("galaxyId") int galaxyId) {
 
         User user = userService.getUserById(userId);
 
@@ -63,8 +61,9 @@ public class GalaxyController {
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500/", allowedHeaders = "*")
-    @GetMapping("/createGalaxy")
+    @PostMapping("/galaxy-controller/galaxies")
     public List<Planet> galaxyInit(/*@RequestHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)*/ @RequestBody JSONObject jsonInput){ //do przeanalizowania bo nie wygląda za ładnie
+        //json to galaxy with jackson
         int maximalUserNumber = (int) jsonInput.get("maximalUserNumber");
         String galaxyName = (String) jsonInput.get("galaxyName");
 
@@ -112,22 +111,22 @@ public class GalaxyController {
         return planets;
     }
 
-    @GetMapping("/getPlanets")
+    /*@GetMapping("/getPlanets")
     public List<Planet> getPlanets() {
         List<Planet> planets = planetService.getPlanetsList();
 
 
         return planets;
-    }
-    @GetMapping("/getGalaxies")
+    }*/
+    @GetMapping("/galaxy-controller/galaxies")
     public List<Galaxy> getGalaxies() {
         List<Galaxy> galaxies = galaxyService.getAllGalaxies();
         return galaxies;
     }
-    @GetMapping("/getGalaxyById")
-    Set<Planet> getGalaxyById(@RequestBody JSONObject galaxyId) {
-        int galaxyIdInt = (int) galaxyId.get("galaxyId");
-        Galaxy galaxy = galaxyService.getGalaxyById(galaxyIdInt);
+    @GetMapping("/galaxy-controller/galaxies/{galaxyId}")
+    Set<Planet> getGalaxyById(/*@RequestBody JSONObject galaxyId*/ @PathVariable int galaxyId) {
+        //int galaxyIdInt = (int) galaxyId.get("galaxyId");
+        Galaxy galaxy = galaxyService.getGalaxyById(galaxyId);
         Set<Planet> planets = null;
         try {
             planets = galaxy.getEnrolledPlanets();

@@ -34,4 +34,8 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<FactoryPoints> points = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<Battle> battles = new HashSet<>();
 }

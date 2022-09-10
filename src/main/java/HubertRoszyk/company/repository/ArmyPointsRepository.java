@@ -8,8 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArmyPointsRepository extends JpaRepository<ArmyPoints, Integer> {
-    @Query(value = "SELECT * FROM ARMY_POINTS WHERE planet_Id = :planetId", nativeQuery = true)
-    public ArmyPoints findArmyPointsByPlanetId(
-            @Param("planetId") Integer planetId
-    );
+    public ArmyPoints findArmyPointsByPlanetId(int planetId);
 }

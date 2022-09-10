@@ -9,10 +9,7 @@ import HubertRoszyk.company.service.PlanetService;
 import HubertRoszyk.company.service.FactoryPointsService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -42,7 +39,7 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
     @Autowired
     GameProperties gameProperties;
 
-    @PostMapping("/addBuilding")
+    @PostMapping("/building-controller/buildings")
     public String addBuilding(@RequestBody JSONObject jsonInput) { //exception not string
         int planetId = (int) jsonInput.get("planetId");
         int userId = (int) jsonInput.get("userId");
@@ -55,32 +52,30 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         System.out.println(buildingType);
 
         Planet planet = planetService.getPlanetById(planetId);
-        Set<Planet> usersPlanets = planetService.getPlanetsByUserId(userId);
+        //Set<Planet> usersPlanets = planetService.getPlanetsByUserId(userId);
 
         Building building = new Building(buildingType, planet);
 
-        return upgradeBuildingsLevelData(building, usersPlanets);
+        return upgradeBuildingsLevelData(building/*, usersPlanets*/);
     }
-    @PostMapping("/upgradeBuilding")
-    public String upgradeBuilding(@RequestBody JSONObject jsonInput) {
-        int userId = (int) jsonInput.get("userId");
-        int buildingId = (int) jsonInput.get("buildingId");
+    @PutMapping("/building-controller/buildings/{buildingId}")
+    public String upgradeBuilding(@PathVariable int buildingId) {
 
         Building building = buildingService.getBuildingById(buildingId);
-        Set<Planet> planets = planetService.getPlanetsByUserId(userId);
+       // Set<Planet> planets = planetService.getPlanetsByUserId(userId);
 
-        return upgradeBuildingsLevelData(building, planets);
+        return upgradeBuildingsLevelData(building);
     }
     public double getBuildingPrice(Building building) {
         int buildingTypePrice = building.getBuildingType().getBuildingPrice();
         double costMultiplier = gameProperties.getLevelCostMultiplier() * building.getBuildingLevel();
         return buildingTypePrice * costMultiplier;
     }
-    public String upgradeBuildingsLevelData(Building building, Set<Planet> planets) {
+    public String upgradeBuildingsLevelData(Building building) {
         boolean isUsersPlanet;
-        isUsersPlanet = planets.contains(building.getPlanet());
+        //isUsersPlanet = planets.contains(building.getPlanet());
 
-        if (isUsersPlanet) {
+        //if (isUsersPlanet) {
             FactoryPoints factoryPoints = factoryPointsService.getPointsByUserIdAndGalaxyId(building.getPlanet().getUser().getId(), building.getPlanet().getGalaxy().getId());
 
             int gotBuildingLevel = building.getBuildingLevel();
@@ -125,9 +120,9 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
             }  else {
                 return "not enough points";
             }
-        } else {
+        /*} else {
             return "it's not your planet";
-        }
+        }*/
     }
     public void updatePointsIncome(Building building) {
         UpdatePointsProduceContext context = new UpdatePointsProduceContext();
@@ -141,9 +136,8 @@ public class BuildingsController { //dodaje, updatuje i usuwa budynki
         context.executeStrategy(building);
     }
 
-    @GetMapping("/getBuildingList")
-    public List<Building> getBuildingListOnPlanet(@RequestBody JSONObject jsonInput) {
-        int planetId = (int) jsonInput.get("planetId");
+    @GetMapping("/building-controller/buildings/planets/{planetId}")
+    public List<Building> getBuildingListOnPlanet(@PathVariable int planetId) {
         return buildingService.getBuildingsByPlanetId(planetId);
     }
 }

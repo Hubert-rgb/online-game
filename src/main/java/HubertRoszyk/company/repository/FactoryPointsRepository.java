@@ -10,14 +10,7 @@ import java.util.Set;
 
 @Repository
 public interface FactoryPointsRepository extends JpaRepository<FactoryPoints, Integer> {
-    @Query(value = "SELECT * FROM FACTORY_POINTS WHERE user_Id = :userId", nativeQuery = true)
-    Set<FactoryPoints> findPointsByUserId(
-            @Param("userId") Integer userId
-    );
-    //List<Points> findPointsByUserIdAndGalaxyId(Integer galaxyId, Integer userId);
-    @Query(value = "SELECT * FROM FACTORY_POINTS WHERE galaxy_Id = :galaxyId AND user_Id = :userId", nativeQuery = true)
-    FactoryPoints findPointsByUserIdAndGalaxyId(
-            @Param("userId") Integer userId,
-            @Param("galaxyId") Integer galaxyId
-    );
+    Set<FactoryPoints> findFactory_PointsByUserId(int userId);
+
+    FactoryPoints findFactory_PointsByUserIdAndGalaxyId(int userId, int galaxyId);
 }

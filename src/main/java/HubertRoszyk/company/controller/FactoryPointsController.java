@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,11 +30,8 @@ public class FactoryPointsController {
     @Autowired
     private PointGenerator pointGenerator;
 
-    @GetMapping("/getFactoryPoints")
-    public FactoryPoints getFactoryPoints(@RequestBody JSONObject jsonInput) {
-        int userId = (int) jsonInput.get("userId");
-        int galaxyId = (int) jsonInput.get("galaxyId");
-
+    @GetMapping("/factory-points-controller/users/{userId}/galaxies/{galaxyId}")
+    public FactoryPoints getFactoryPoints(@PathVariable int userId, @PathVariable int galaxyId) {
         FactoryPoints factoryPoints = factoryPointsService.getPointsByUserIdAndGalaxyId(userId, galaxyId);
         return factoryPoints;
     }

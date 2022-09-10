@@ -27,7 +27,7 @@ class FactoryFactoryPointsRepositoryTest {
         factoryPointsRepository.save(factoryPoints);
 
         //when
-        Set<FactoryPoints> gotPoints = factoryPointsRepository.findPointsByUserId(user.getId());
+        Set<FactoryPoints> gotPoints = factoryPointsRepository.findFactory_PointsByUserId(user.getId());
         //then
         assertThat(gotPoints).contains(factoryPoints);
     }
@@ -42,7 +42,7 @@ class FactoryFactoryPointsRepositoryTest {
         factoryPointsRepository.save(factoryPoints);
 
         //when
-        FactoryPoints gotFactoryPoints = factoryPointsRepository.findPointsByUserIdAndGalaxyId(user.getId(), galaxy.getId());
+        FactoryPoints gotFactoryPoints = factoryPointsRepository.findFactory_PointsByUserIdAndGalaxyId(user.getId(), galaxy.getId());
 
         //then
         assertThat(gotFactoryPoints).isEqualTo(factoryPoints);
