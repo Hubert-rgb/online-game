@@ -17,7 +17,7 @@ export default function CreateGalaxy() {
         if (!galaxyName) return null
     
         try{
-          const response = await Axios.post('http://localhost:8080/galaxy-controller/galaxies', 
+          const response = await Axios.post('/galaxy-controller/galaxies', 
           JSON.stringify({maximalUserNumber:maximalUserNumber, galaxyName:galaxyName}),
           {
           headers: 

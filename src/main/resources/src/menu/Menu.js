@@ -7,6 +7,7 @@ import styles from './menuStyles.module.css';
 export default function Menu() {
 
   const [isOpen, setIsOpen] = useState(false);
+  
 
   return( 
   <>

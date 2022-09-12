@@ -3,11 +3,10 @@ import Axios from 'axios';
 import { useParams } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
-export default function GeneratePlanets() {
+export default function GeneratePlanets(galaxyId) {
 
     const {auth} = useAuth();
     const [planets, setPlanets] = useState([]);
-    const {galaxyId}=useParams();
     useEffect(() => { 
         async function fetchData() {
         console.log('ok');
@@ -15,7 +14,7 @@ export default function GeneratePlanets() {
         console.log(galaxyId);
         
         try{
-            const response = await Axios.get(`http://localhost:8080/galaxy-controller/users/${auth.id}/galaxies/${{galaxyId}}`, 
+            const response = await Axios.get(`/galaxy-controller/users/${auth.id}/galaxies/${{galaxyId}}`, 
             {
                 headers: 
               {

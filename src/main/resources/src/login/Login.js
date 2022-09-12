@@ -32,8 +32,13 @@ export default function Login() {
     e.preventDefault();
 
     try{
-        const response = await Axios.post('http://localhost:8080/user-controller/users',
-            JSON.stringify({name:user, password:password}),
+        const response = await Axios.post('/user-controller/users',
+            JSON.stringify(
+              {
+                name:user, 
+                password:password
+              }
+              ),
             {
               headers: 
               {
@@ -42,7 +47,7 @@ export default function Login() {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
                 'Content-Type': 'application/json'
-              }                
+              }
             });
         const id = response.data.id;
         console.log(response.data);
@@ -51,11 +56,7 @@ export default function Login() {
         setPassword('');
         navigate(from, {replace: true});
     } catch (err) {
-      if (!err.response){
-        setErrorMessage('no server response')
-      } else{
-        setErrorMessage('failed')
-      }
+      console.log(err);
     }    
   }
 
