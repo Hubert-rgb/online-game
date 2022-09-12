@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
-
+    @CrossOrigin(origins = "http://192.168.8.105:3000/", allowedHeaders = "*")
     @PostMapping("/user-controller/users")
     public User loginUser(@RequestBody JSONObject jsonInput) {
         String name = (String) jsonInput.get("name");
