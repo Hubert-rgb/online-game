@@ -1,0 +1,34 @@
+#newGalaxyButton{
+    width: 150px;
+    height: 35px;
+    display: block;
+    margin: 5px;
+    border-radius: 5px;
+    background: darkcyan;
+    border: none;
+    color: #fff;
+    padding: 5px;
+    transition: .5s;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+#galaxyList{
+    border: 5px solid darkcyan;
+    align-items: center;
+    list-style: none;
+    text-decoration: none;
+    color:#fff;
+    display: flex;
+    flex-direction: column;
+    padding-inline-start:0;
+    border-radius: 5px;
+}
+
+.listItem {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+}
