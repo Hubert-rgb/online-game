@@ -4,13 +4,9 @@ import {Link} from 'react-router-dom';
 import styles from './menuStyles.module.css';
 
 export default function GalaxyList() {
-    const [galaxyList, setGalaxyList] = useState([])
     
-    const [galaxyId, setGalaxyId] = useState();
+    const [galaxyList, setGalaxyList] = useState([])    
 
-    const getGalaxyId = (id) =>{
-        setGalaxyId(id)
-    }
 
     useEffect(() => { 
         console.log('ok');
@@ -24,14 +20,13 @@ export default function GalaxyList() {
           
 return (
     <ul id={styles.galaxyList}>
-    {galaxyList.map((galaxy) => {        
-        getGalaxyId(galaxy.id);
+    {galaxyList.map((galaxy) => (       
             <li key={galaxy.id} item={galaxy.id} className={styles.listItem}>
-                <Link to = {`/galaxy/${galaxy.id}`} state={galaxyId}>
+                <Link to = {`/galaxy/${galaxy.id}`}>
                     {galaxy.galaxyName}
                 </Link>
             </li>        
-    })}
+    ))}
     </ul>
   )
 };
