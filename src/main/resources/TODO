@@ -1,8 +1,12 @@
 TODO:
-    1. createGalaxy (e403)
-    2. planetInside
-    3. CSS
+    1. planety
+    2. CSS
+        a) planety
+        b) GUI
+    3. dołączanie do galaktyk stworzonych przez innych graczy
+    4. createGalaxy powinno od razu nadpisywać galaxyList
+    5. poprawić auth, żeby nie wywalało przy odświerzaniu strony
 
 
 Q:
-    1. Czy getPlanets zwraca wszystkie planety czy mam wysyłać id galaktyki i będzie zwracać tylko planety z konkretnym galaxyId?
+    1. 

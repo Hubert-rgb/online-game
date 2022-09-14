@@ -1,0 +1,20 @@
+.planetOutside {
+    cursor: pointer;
+    border: 1px solid;
+    background-color: red;
+}
+
+[data-size="1"]{
+    height: 20px;
+    width: 20px;
+}
+
+[data-size="2"]{
+    height: 25px;
+    width: 25px;
+}
+
+[data-size="3"]{
+    height: 30px;
+    width: 30px;
+}
